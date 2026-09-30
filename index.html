@@ -1,387 +1,3739 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KVORA Automation | Google Apps Script & Dashboard Systems</title>
-  <style>
-    /* DYNAMIC COLOR SYSTEM & RESET */
-    :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(18, 24, 38, 0.75);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --accent-cyan: #06b6d4;
-      --accent-purple: #8b5cf6;
-      --accent-pink: #ec4899;
-      --accent-green: #10b981;
-      --accent-blue: #3b82f6;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; min-height: 100vh; background-image: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 50%), radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.1), transparent 50%); }
+<title>KVORA Automation | Business Automation & Dashboard Systems</title>
 
-    /* STICKY HEADER & NAVIGATION */
-    header { background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 1000; padding: 1rem 1.5rem; }
-    .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-    @media(min-width: 768px) { .header-container { flex-direction: row; justify-content: space-between; } }
+<style>
+:root{
+  --bg:#07090f;
+  --sidebar:#0b0f18;
+  --card:#111722;
+  --card2:#151c29;
+  --border:rgba(255,255,255,.09);
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --cyan:#22d3ee;
+  --purple:#8b5cf6;
+  --pink:#ec4899;
+  --green:#10b981;
+  --blue:#3b82f6;
+  --red:#fb7185;
+}
 
-    .brand { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
 
-    nav { display: flex; gap: 0.4rem; background: rgba(15, 23, 42, 0.9); padding: 0.35rem; border-radius: 12px; border: 1px solid var(--card-border); overflow-x: auto; max-width: 100%; }
-    .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.55rem 1.1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; whitespace-nowrap; }
-    .nav-btn.active { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
-    .nav-btn:hover:not(.active) { color: white; background: rgba(255, 255, 255, 0.05); }
+body{
+  background:
+    radial-gradient(circle at 70% 0%,rgba(139,92,246,.13),transparent 35%),
+    radial-gradient(circle at 100% 80%,rgba(34,211,238,.08),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
 
-    /* LAYOUT CONTAINERS */
-    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
-    .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
-    .tab-content.active { display: block; }
+/* ================= SIDEBAR ================= */
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:245px;
+  background:rgba(11,15,24,.96);
+  border-right:1px solid var(--border);
+  padding:25px 15px;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+}
 
-    /* HERO SECTION */
-    .hero { text-align: center; padding: 4rem 1.5rem; background: rgba(18, 24, 38, 0.5); backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.25); box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 2.5rem; position: relative; overflow: hidden; }
-    .hero h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 1rem; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
-    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 680px; margin: 0 auto 2rem auto; }
+.logo{
+  padding:5px 12px 30px;
+}
 
-    /* BUTTONS */
-    .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.25s ease; border: none; }
-    .btn-primary { background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); color: white; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5); }
-    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--card-border); }
+.logo-main{
+  font-size:1.35rem;
+  font-weight:950;
+  letter-spacing:1.5px;
+  background:linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--purple),
+    var(--pink)
+  );
+  -webkit-background-clip:text;
+  color:transparent;
+}
 
-    /* CARDS & GRID SYSTEM */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px); transition: all 0.3s ease; }
-    .card:hover { border-color: var(--accent-cyan); box-shadow: 0 8px 30px rgba(6, 182, 212, 0.15); transform: translateY(-3px); }
+.logo-sub{
+  font-size:.65rem;
+  color:var(--muted);
+  margin-top:4px;
+  letter-spacing:.8px;
+}
 
-    .card-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
-    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
-    .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.3); }
-    .badge-green { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+.sidebar-title{
+  font-size:.65rem;
+  color:#64748b;
+  font-weight:800;
+  letter-spacing:1px;
+  margin:15px 12px 8px;
+  text-transform:uppercase;
+}
 
-    .card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; color: white; }
-    .card p { color: var(--text-muted); font-size: 0.92rem; }
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
 
-    /* DASHBOARD SLOTS */
-    .dash-slot { background: rgba(15, 23, 42, 0.8); border: 1px dashed var(--accent-purple); border-radius: 16px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); }
-    .dash-slot h4 { color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .dash-slot p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:12px 13px;
+  border-radius:11px;
+  text-align:left;
+  font-size:.86rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s;
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
 
-    /* TOOL BOX STYLING */
-    .tool-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; }
-    .tool-box h3 { color: var(--accent-cyan); margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
-    .form-group { margin-bottom: 1.2rem; text-align: left; }
-    .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(7, 9, 14, 0.8); border: 1px solid var(--card-border); border-radius: 8px; color: white; font-size: 0.95rem; outline: none; }
+.nav-btn:hover{
+  color:white;
+  background:rgba(255,255,255,.055);
+}
 
-    /* PRINT INVOICE STYLES */
-    @media print {
-      body * { visibility: hidden; }
-      #printable-invoice, #printable-invoice * { visibility: visible; }
-      #printable-invoice { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; padding: 20px; }
-    }
+.nav-btn.active{
+  color:white;
+  background:linear-gradient(
+    135deg,
+    rgba(59,130,246,.9),
+    rgba(139,92,246,.9)
+  );
+  box-shadow:0 7px 25px rgba(99,102,241,.2);
+}
 
-    footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--card-border); color: var(--text-muted); margin-top: 4rem; font-size: 0.85rem; }
-  </style>
+.nav-icon{
+  width:25px;
+  text-align:center;
+  font-size:1.05rem;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+  padding:15px 10px;
+  border-top:1px solid var(--border);
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#94a3b8;
+  font-size:.72rem;
+}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--green);
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  margin-left:245px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:65px;
+  border-bottom:1px solid var(--border);
+  background:rgba(7,9,15,.75);
+  backdrop-filter:blur(18px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  position:sticky;
+  top:0;
+  z-index:900;
+}
+
+.top-title{
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.top-badge{
+  border:1px solid rgba(34,211,238,.2);
+  background:rgba(34,211,238,.06);
+  color:#67e8f9;
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:.7rem;
+  font-weight:800;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:35px;
+}
+
+.tab{
+  display:none;
+  animation:fade .3s ease;
+}
+
+.tab.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(139,92,246,.25);
+  border-radius:28px;
+  padding:80px 35px;
+  text-align:center;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,23,34,.95),
+      rgba(9,13,21,.8)
+    );
+  box-shadow:0 25px 80px rgba(0,0,0,.35);
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  background:rgba(139,92,246,.12);
+  filter:blur(70px);
+  top:-160px;
+  right:-100px;
+}
+
+.eyebrow{
+  display:inline-block;
+  color:#67e8f9;
+  background:rgba(34,211,238,.07);
+  border:1px solid rgba(34,211,238,.2);
+  border-radius:999px;
+  padding:6px 13px;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.8px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:clamp(2.3rem,5vw,4.5rem);
+  line-height:1.03;
+  letter-spacing:-2px;
+  max-width:900px;
+  margin:auto;
+  background:linear-gradient(
+    100deg,
+    #fff,
+    #cbd5e1,
+    #8b5cf6
+  );
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:720px;
+  margin:22px auto;
+  color:var(--muted);
+  font-size:1rem;
+}
+
+.actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 17px;
+  font-weight:800;
+  font-size:.82rem;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.primary{
+  color:white;
+  background:linear-gradient(
+    135deg,
+    var(--pink),
+    var(--purple)
+  );
+  box-shadow:0 8px 25px rgba(236,72,153,.2);
+}
+
+.secondary{
+  color:white;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+}
+
+.whatsapp{
+  background:#25D366;
+  color:#021b0c;
+}
+
+.mail{
+  background:#2563eb;
+  color:white;
+}
+
+.green{
+  background:var(--green);
+  color:#032015;
+}
+
+/* ================= CARDS ================= */
+
+.section-title{
+  text-align:center;
+  margin:45px 0 22px;
+}
+
+.section-title h2{
+  font-size:1.8rem;
+}
+
+.section-title p{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-top:5px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(270px,1fr));
+  gap:17px;
+}
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,23,34,.95),
+      rgba(11,16,25,.85)
+    );
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:22px;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(34,211,238,.35);
+}
+
+.icon{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  background:rgba(139,92,246,.12);
+  display:grid;
+  place-items:center;
+  font-size:1.3rem;
+  margin-bottom:14px;
+}
+
+.card h3{
+  margin-bottom:7px;
+  font-size:1.05rem;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:.87rem;
+}
+
+.badge{
+  display:inline-block;
+  color:#67e8f9;
+  background:rgba(34,211,238,.07);
+  border:1px solid rgba(34,211,238,.18);
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:.65rem;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+
+.stat{
+  text-align:center;
+  padding:17px;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+.stat strong{
+  display:block;
+  font-size:1.35rem;
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:.7rem;
+}
+
+/* ================= DASHBOARDS ================= */
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(330px,1fr));
+  gap:20px;
+}
+
+.dashboard{
+  background:#0c111a;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.dashboard:hover{
+  transform:translateY(-4px);
+  border-color:rgba(139,92,246,.4);
+}
+
+.preview{
+  height:200px;
+  padding:13px;
+  background:#101621;
+}
+
+.browser{
+  height:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#080d15;
+  overflow:hidden;
+}
+
+.browser-top{
+  height:25px;
+  background:#151c28;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  gap:5px;
+  align-items:center;
+  padding-left:9px;
+}
+
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#64748b;
+}
+
+.mock{
+  padding:11px;
+}
+
+.mock-head{
+  display:flex;
+  justify-content:space-between;
+  color:#cbd5e1;
+  font-size:8px;
+  margin-bottom:9px;
+}
+
+.mock-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+
+.mock-card{
+  height:43px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  padding:5px;
+  font-size:7px;
+  color:#64748b;
+}
+
+.mock-card b{
+  display:block;
+  color:white;
+  font-size:10px;
+}
+
+.chart{
+  height:70px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  margin-top:7px;
+  padding:8px;
+  display:flex;
+  align-items:end;
+  gap:5px;
+}
+
+.bar{
+  flex:1;
+  border-radius:2px 2px 0 0;
+  background:linear-gradient(
+    to top,
+    var(--purple),
+    var(--cyan)
+  );
+}
+
+.dashboard-info{
+  padding:18px;
+}
+
+.dashboard-info h3{
+  font-size:1rem;
+}
+
+.dashboard-info p{
+  color:var(--muted);
+  font-size:.82rem;
+  margin:5px 0 13px;
+}
+
+/* ================= TOOLS ================= */
+
+.tool{
+  background:
+    linear-gradient(
+      145deg,
+      #111722,
+      #0c1119
+    );
+  border:1px solid var(--border);
+  border-radius:19px;
+  padding:24px;
+  margin-bottom:18px;
+}
+
+.tool-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.tool-head h3{
+  font-size:1.1rem;
+}
+
+.tool-head p{
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+.tool-icon{
+  font-size:1.5rem;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.form-group{
+  margin-bottom:8px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+  font-size:.76rem;
+  font-weight:800;
+  color:#cbd5e1;
+  margin-bottom:6px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  background:#070b12;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:10px 11px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(139,92,246,.1);
+}
+
+textarea{
+  resize:vertical;
+}
+
+.result{
+  margin-top:13px;
+  padding:13px;
+  border-radius:10px;
+  background:rgba(34,211,238,.05);
+  border:1px solid rgba(34,211,238,.13);
+}
+
+/* ================= INVOICE ================= */
+
+.paper{
+  background:white;
+  color:#172033;
+  border-radius:13px;
+  padding:30px;
+  margin-top:20px;
+}
+
+.invoice-top{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:2px solid #e5e7eb;
+  padding-bottom:18px;
+}
+
+.invoice-brand{
+  color:#4f46e5;
+  font-size:1.4rem;
+  font-weight:950;
+  letter-spacing:1px;
+}
+
+.invoice-meta{
+  text-align:right;
+  color:#64748b;
+  font-size:.75rem;
+}
+
+.invoice-client{
+  display:flex;
+  justify-content:space-between;
+  padding:18px 0;
+}
+
+.invoice-client h4{
+  font-size:.7rem;
+  color:#64748b;
+  text-transform:uppercase;
+}
+
+.invoice-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.82rem;
+}
+
+.invoice-table th{
+  background:#f1f5f9;
+  padding:10px;
+  text-align:left;
+}
+
+.invoice-table td{
+  padding:12px 10px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.invoice-total{
+  width:280px;
+  margin-left:auto;
+  margin-top:15px;
+}
+
+.invoice-total div{
+  display:flex;
+  justify-content:space-between;
+  padding:5px;
+  color:#64748b;
+}
+
+.invoice-total .grand{
+  border-top:2px solid #111827;
+  margin-top:5px;
+  padding-top:10px;
+  color:#111827;
+  font-size:1.1rem;
+  font-weight:900;
+}
+
+/* ================= GRN ================= */
+
+.grn-paper{
+  background:white;
+  color:#172033;
+  border-radius:13px;
+  padding:30px;
+  margin-top:20px;
+}
+
+.grn-head{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:2px solid #111827;
+  padding-bottom:15px;
+}
+
+.grn-title{
+  font-size:1.45rem;
+  font-weight:950;
+}
+
+.grn-status{
+  background:#d1fae5;
+  color:#047857;
+  border-radius:999px;
+  padding:5px 10px;
+  font-size:.7rem;
+  font-weight:800;
+  height:max-content;
+}
+
+.grn-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+  font-size:.82rem;
+}
+
+.grn-table th,
+.grn-table td{
+  border:1px solid #dbe2ea;
+  padding:10px;
+}
+
+.grn-table th{
+  background:#f1f5f9;
+}
+
+.share-box{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:15px;
+  margin-top:18px;
+}
+
+.share-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:10px;
+}
+
+/* ================= TODO ================= */
+
+.todo-list{
+  list-style:none;
+  margin-top:13px;
+}
+
+.todo-list li{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.todo-list span{
+  flex:1;
+}
+
+.done{
+  text-decoration:line-through;
+  color:#64748b;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  border-top:1px solid var(--border);
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.75rem;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+  display:none;
+}
+
+@media(max-width:800px){
+
+  .sidebar{
+    width:0;
+    padding:0;
+    overflow:hidden;
+    transition:.3s;
+  }
+
+  .sidebar.open{
+    width:245px;
+    padding:25px 15px;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .mobile-menu{
+    display:block;
+    border:0;
+    background:rgba(255,255,255,.06);
+    color:white;
+    border-radius:8px;
+    padding:7px 10px;
+  }
+
+  .container{
+    padding:22px 15px;
+  }
+
+  .hero{
+    padding:55px 20px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .invoice-top,
+  .invoice-client,
+  .grn-head{
+    flex-direction:column;
+  }
+
+  .invoice-meta{
+    text-align:left;
+  }
+
+  .invoice-total{
+    width:100%;
+  }
+}
+
+/* PRINT */
+
+@media print{
+
+  body *{
+    visibility:hidden!important;
+  }
+
+  .print-area,
+  .print-area *{
+    visibility:visible!important;
+  }
+
+  .print-area{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    box-shadow:none!important;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- NAVIGATION HEADER -->
-  <header>
-    <div class="header-container">
-      <a href="#" class="brand">KVORA AUTOMATION</a>
-      <nav>
-        <button class="nav-btn active" onclick="openTab('home', this)">Home</button>
-        <button class="nav-btn" onclick="openTab('services', this)">Solutions</button>
-        <button class="nav-btn" onclick="openTab('dashboards', this)">Dashboards</button>
-        <button class="nav-btn" onclick="openTab('free-tools', this)">Free Micro Tools</button>
-        <button class="nav-btn" onclick="openTab('contact', this)">Request Solution</button>
-      </nav>
-    </div>
-  </header>
+<!-- ================= SIDEBAR ================= -->
 
-  <div class="container">
+<aside class="sidebar" id="sidebar">
 
-    <!-- TAB 1: HOME -->
-    <div id="home" class="tab-content active">
-      <section class="hero">
-        <h1>Google Apps Script & Web App Dashboards</h1>
-        <p>Expert in converting Google Sheets, Excel, and operations workflows into automated Google Apps Scripts & web apps.</p>
-        <button class="btn btn-primary" onclick="switchTabDirectly('contact')">Submit Custom Requirement</button>
-      </section>
+  <div class="logo">
+    <div class="logo-main">KVORA</div>
+    <div class="logo-sub">AUTOMATION SYSTEMS</div>
+  </div>
 
-      <div class="grid">
-        <div class="card">
-          <span class="card-badge badge-purple">Apps Script</span>
-          <h3>⚡ Custom Google Apps Script</h3>
-          <p>Automate email notifications, auto-generate invoices, import web APIs, and eliminate manual sheet entry.</p>
-        </div>
-        <div class="card">
-          <span class="card-badge badge-cyan">Dashboards</span>
-          <h3>📊 HTML/GAS Web App Portals</h3>
-          <p>Real-time Google Apps Script web apps and Looker Studio dashboards for operations and inventory management.</p>
-        </div>
-        <div class="card">
-          <span class="card-badge badge-green">Efficiency</span>
-          <h3>📈 Error-Free Workflows</h3>
-          <p>Built with enterprise logistics standards to reduce human errors and save over 15+ hours per week.</p>
-        </div>
-      </div>
-    </div>
+  <div class="sidebar-title">Workspace</div>
 
-    <!-- TAB 2: SOLUTIONS -->
-    <div id="services" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Expert Apps Script Solutions</h2>
-      <div class="grid">
-        <div class="card">
-          <span class="card-badge badge-cyan">Service 01</span>
-          <h3>Google Apps Script Web Apps</h3>
-          <p>Custom HTML/JS frontend interfaces powered by Google Apps Script backends for seamless inventory & order entries.</p>
-        </div>
-        <div class="card">
-          <span class="card-badge badge-purple">Service 02</span>
-          <h3>Automated Email & PDF Generators</h3>
-          <p>Automatically generate PDFs from Google Sheet rows and email them as attachments to vendors or clients.</p>
-        </div>
-        <div class="card">
-          <span class="card-badge badge-green">Service 03</span>
-          <h3>Inventory & GRN Dispatchers</h3>
-          <p>Real-time stock level synchronization, low stock triggers, and automated Goods Receipt Note notifications.</p>
-        </div>
-      </div>
+  <div class="nav">
+
+    <button class="nav-btn active"
+      onclick="openTab('home',this)">
+      <span class="nav-icon">⌂</span>
+      Home
+    </button>
+
+    <button class="nav-btn"
+      onclick="openTab('services',this)">
+      <span class="nav-icon">⚙</span>
+      Solutions
+    </button>
+
+    <button class="nav-btn"
+      onclick="openTab('dashboards',this)">
+      <span class="nav-icon">▦</span>
+      Dashboards
+    </button>
+
+    <button class="nav-btn"
+      onclick="openTab('tools',this)">
+      <span class="nav-icon">🧰</span>
+      Free Micro Tools
+    </button>
+
+    <button class="nav-btn"
+      onclick="openTab('contact',this)">
+      <span class="nav-icon">✉</span>
+      Request Solution
+    </button>
+
+  </div>
+
+  <div class="sidebar-bottom">
+
+    <div class="status">
+      <span class="status-dot"></span>
+      Systems Online
     </div>
 
-    <!-- TAB 3: DASHBOARDS SHOWCASE -->
-    <div id="dashboards" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 0.5rem;">Google Apps Script & Web Dashboards</h2>
-      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Explore custom web portals and Google Apps Script dashboard slots.</p>
-
-      <div class="grid">
-        <div class="dash-slot">
-          <h4>📊 Slot #1: Custom GAS Operations Dashboard</h4>
-          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
-        </div>
-        <div class="dash-slot">
-          <h4>📈 Slot #2: Inventory & Stock Dispatch Portal</h4>
-          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
-        </div>
-        <div class="dash-slot">
-          <h4>⚙️ Slot #3: Vendor GRN Tracker</h4>
-          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 4: FREE MICRO TOOLS -->
-    <div id="free-tools" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Free Business Utility Micro-Tools</h2>
-
-      <!-- TOOL 1: FREE INVOICE GENERATOR -->
-      <div class="tool-box">
-        <h3>📄 1. Free Instant Invoice Generator</h3>
-        <div class="grid">
-          <div class="form-group">
-            <label>Client / Business Name</label>
-            <input type="text" id="inv-client" placeholder="e.g. Acme Corp" />
-          </div>
-          <div class="form-group">
-            <label>Item Description</label>
-            <input type="text" id="inv-item" placeholder="e.g. Automation Consulting Service" />
-          </div>
-          <div class="form-group">
-            <label>Amount (₹)</label>
-            <input type="number" id="inv-amount" placeholder="5000" oninput="calculateInvoice()" />
-          </div>
-          <div class="form-group">
-            <label>Tax Rate (%)</label>
-            <input type="number" id="inv-tax" value="18" oninput="calculateInvoice()" />
-          </div>
-        </div>
-
-        <div id="printable-invoice" style="background: rgba(7, 9, 14, 0.9); border: 1px solid var(--card-border); padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">INVOICE PREVIEW</h4>
-          <p><strong>Billed To:</strong> <span id="prev-client">Acme Corp</span></p>
-          <p><strong>Service:</strong> <span id="prev-item">Automation Consulting Service</span></p>
-          <p><strong>Subtotal:</strong> ₹<span id="prev-sub">0</span></p>
-          <p><strong>Tax Amount:</strong> ₹<span id="prev-tax">0</span></p>
-          <h3 style="color: var(--accent-green); margin-top: 0.5rem;">Total: ₹<span id="prev-total">0</span></h3>
-        </div>
-
-        <button onclick="window.print()" class="btn btn-primary" style="margin-top: 1rem;">🖨️ Download / Print PDF Invoice</button>
-      </div>
-
-      <!-- TOOL 2: FREE GRN DISPATCHER -->
-      <div class="tool-box">
-        <h3>📦 2. Free Vendor GRN Dispatcher</h3>
-        <div class="form-group">
-          <label>Vendor Email Address</label>
-          <input type="email" id="grn-email" placeholder="vendor@supplier.com" required />
-        </div>
-        <div class="form-group">
-          <label>Material / Item Name & Quantity Received</label>
-          <textarea id="grn-details" rows="3" placeholder="e.g. Received 500 units of Packaging Boxes (PO #1042)"></textarea>
-        </div>
-        <button onclick="sendGRNMail()" class="btn btn-primary">✉️ Email GRN to Vendor</button>
-      </div>
-
-      <!-- TOOL 3: FREE GOOGLE APPS SCRIPT CODE GENERATOR -->
-      <div class="tool-box">
-        <h3>⚙️️ 3. Free Google Apps Script Snippet Generator</h3>
-        <div class="form-group">
-          <label>Select Your Needed Sheet Workflow:</label>
-          <select id="gas-option" onchange="generateGASCode()">
-            <option value="email">Auto Email Alert on New Row</option>
-            <option value="pdf">Convert Selected Sheet to PDF</option>
-            <option value="clean">Clear Blank Rows Automatically</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Generated Ready-To-Use Apps Script Code:</label>
-          <textarea id="gas-code" rows="6" style="font-family: monospace; color: var(--accent-cyan);" readonly></textarea>
-        </div>
-      </div>
-
-      <!-- TOOL 4: FREE REORDER ALERT CALCULATOR -->
-      <div class="tool-box">
-        <h3>📉 4. Free Stock Reorder Alert Calculator</h3>
-        <div class="grid">
-          <div class="form-group">
-            <label>Current Stock Quantity</label>
-            <input type="number" id="stk-curr" value="15" oninput="checkStockAlert()" />
-          </div>
-          <div class="form-group">
-            <label>Minimum Safety Stock Level</label>
-            <input type="number" id="stk-min" value="50" oninput="checkStockAlert()" />
-          </div>
-        </div>
-        <div id="stk-result" style="background: rgba(236, 72, 153, 0.1); border: 1px solid var(--accent-pink); border-radius: 8px; padding: 1rem; text-align: center; color: var(--accent-pink); font-weight: 700;">
-          Status: LOW STOCK! Reorder 35 units immediately.
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 5: REQUIREMENT FORM -->
-    <div id="contact" class="tab-content">
-      <div class="form-card" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem; max-width: 650px; margin: 0 auto;">
-        <h2 style="text-align: center; margin-bottom: 0.5rem;">Submit Your Requirement</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">
-          Submissions will be delivered straight to <strong>kvoura.automation@gmail.com</strong>.
-        </p>
-
-        <form action="https://formspree.io/f/myezoayj" method="POST">
-          <div class="form-group">
-            <label for="client-name">Your Name / Business Name</label>
-            <input type="text" id="client-name" name="Name" placeholder="e.g. Rahul Sharma" required />
-          </div>
-
-          <div class="form-group">
-            <label for="client-email">Your Contact Email</label>
-            <input type="email" id="client-email" name="_replyto" placeholder="e.g. client@company.com" required />
-          </div>
-
-          <div class="form-group">
-            <label for="client-req">Describe What You Want Built (Apps Script, Dashboards, Automations)</label>
-            <textarea id="client-req" name="Requirement" rows="5" placeholder="e.g. We want a Google Apps Script to auto-send invoice PDFs from Google Sheets." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Requirement to KVORA</button>
-        </form>
-      </div>
+    <div style="margin-top:8px;color:#475569;font-size:.65rem">
+      KVORA Automation © 2026
     </div>
 
   </div>
 
-  <footer>
-    <p>©️ 2026 KVORA Automation • Google Apps Script & Dashboard Systems • Contact: kvoura.automation@gmail.com</p>
-  </footer>
+</aside>
 
-  <script>
-    function openTab(tabName, element) {
-      const contents = document.querySelectorAll('.tab-content');
-      contents.forEach(content => content.classList.remove('active'));
+<!-- ================= MAIN ================= -->
 
-      const buttons = document.querySelectorAll('.nav-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
+<div class="main">
 
-      document.getElementById(tabName).classList.add('active');
-      if(element) element.classList.add('active');
-    }
+<header class="topbar">
 
-    function switchTabDirectly(tabName) {
-      const buttons = document.querySelectorAll('.nav-btn');
-      buttons.forEach(btn => {
-        if(btn.getAttribute('onclick').includes(tabName)) {
-          openTab(tabName, btn);
-        }
-      });
-    }
+  <div style="display:flex;align-items:center;gap:12px">
 
-    function calculateInvoice() {
-      const client = document.getElementById('inv-client').value || 'Acme Corp';
-      const item = document.getElementById('inv-item').value || 'Automation Service';
-      const amount = parseFloat(document.getElementById('inv-amount').value) || 0;
-      const taxRate = parseFloat(document.getElementById('inv-tax').value) || 0;
+    <button
+      class="mobile-menu"
+      onclick="toggleSidebar()">
+      ☰
+    </button>
 
-      const taxVal = (amount * taxRate) / 100;
-      const total = amount + taxVal;
+    <div class="top-title">
+      Business Automation & Dashboard Systems
+    </div>
 
-      document.getElementById('prev-client').innerText = client;
-      document.getElementById('prev-item').innerText = item;
-      document.getElementById('prev-sub').innerText = amount.toFixed(2);
-      document.getElementById('prev-tax').innerText = taxVal.toFixed(2);
-      document.getElementById('prev-total').innerText = total.toFixed(2);
-    }
+  </div>
 
-    function sendGRNMail() {
-      const email = document.getElementById('grn-email').value;
-      const details = document.getElementById('grn-details').value;
-      if (!email || !details) {
-        alert("Please enter both Vendor Email and GRN Details!");
-        return;
+  <div class="top-badge">
+    ● ONLINE
+  </div>
+
+</header>
+
+<main class="container">
+
+<!-- ===================================================== -->
+<!-- HOME -->
+<!-- ===================================================== -->
+
+<section id="home" class="tab active">
+
+  <div class="hero">
+
+    <div class="eyebrow">
+      ⚡ AUTOMATION • DASHBOARDS • WEB APPS
+    </div>
+
+    <h1>
+      Turn Manual Business Work
+      Into Smart Digital Systems.
+    </h1>
+
+    <p>
+      KVORA Automation builds custom Google Apps Script web apps,
+      dashboards, document systems and workflow automations that
+      help businesses work faster with less manual effort.
+    </p>
+
+    <div class="actions">
+
+      <button
+        class="btn primary"
+        onclick="go('contact')">
+        🚀 Request Custom Solution
+      </button>
+
+      <button
+        class="btn secondary"
+        onclick="go('dashboards')">
+        View Dashboards →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong>24/7</strong>
+      <span>Automated Workflows</span>
+    </div>
+
+    <div class="stat">
+      <strong>GAS</strong>
+      <span>Google Apps Script</span>
+    </div>
+
+    <div class="stat">
+      <strong>WEB</strong>
+      <span>Custom Portals</span>
+    </div>
+
+    <div class="stat">
+      <strong>FREE</strong>
+      <span>Business Tools</span>
+    </div>
+
+  </div>
+
+
+  <div class="section-title">
+
+    <h2>What KVORA Builds</h2>
+
+    <p>
+      Practical digital systems designed around real business workflows.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+
+      <div class="icon">⚙️</div>
+
+      <h3>Business Automation</h3>
+
+      <p>
+        Automate emails, reports, alerts, PDFs,
+        approvals and repetitive spreadsheet work.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📊</div>
+
+      <h3>Management Dashboards</h3>
+
+      <p>
+        Build clean dashboards for sales, inventory,
+        procurement, finance and operations.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📦</div>
+
+      <h3>Inventory & GRN Systems</h3>
+
+      <p>
+        Track receipts, suppliers, stock,
+        orders, invoices and dispatches.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📄</div>
+
+      <h3>Document Automation</h3>
+
+      <p>
+        Generate professional invoices, GRNs,
+        reports and PDFs automatically.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🔔</div>
+
+      <h3>Email & WhatsApp Workflows</h3>
+
+      <p>
+        Create structured notification and
+        communication workflows.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">🔗</div>
+
+      <h3>API Integrations</h3>
+
+      <p>
+        Connect spreadsheets and web applications
+        with APIs and external data.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SOLUTIONS -->
+<!-- ===================================================== -->
+
+<section id="services" class="tab">
+
+  <div class="section-title">
+
+    <h2>Business Automation Solutions</h2>
+
+    <p>
+      From a simple spreadsheet automation to a complete business portal.
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="badge">01 • WEB APPS</span>
+      <h3>Google Apps Script Web Apps</h3>
+      <p>
+        Custom HTML interfaces connected with Google Sheets,
+        Drive, Gmail and Apps Script.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <span class="badge">02 • DOCUMENTS</span>
+      <h3>Invoice & PDF Automation</h3>
+      <p>
+        Automatically generate professional documents
+        from forms or spreadsheet records.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <span class="badge">03 • OPERATIONS</span>
+      <h3>Inventory & GRN Management</h3>
+      <p>
+        Vendor receipt, stock movement,
+        purchase and GRN workflows.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <span class="badge">04 • REPORTING</span>
+      <h3>Daily / Weekly / Monthly MIS</h3>
+      <p>
+        Automated management reports with
+        KPIs and scheduled distribution.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <span class="badge">05 • ALERTS</span>
+      <h3>Alerts & Escalations</h3>
+      <p>
+        Trigger alerts for low stock,
+        pending invoices and delayed orders.
+      </p>
+    </div>
+
+
+    <div class="card">
+      <span class="badge">06 • CUSTOM</span>
+      <h3>Custom Business Systems</h3>
+      <p>
+        Turn manual Excel, email and repetitive
+        workflows into structured digital systems.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- DASHBOARDS -->
+<!-- ===================================================== -->
+
+<section id="dashboards" class="tab">
+
+  <div class="section-title">
+
+    <h2>Dashboard Systems</h2>
+
+    <p>
+      Professional dashboard concepts for real business operations.
+    </p>
+
+  </div>
+
+
+  <div class="dashboard-grid">
+
+
+    <!-- DASHBOARD 1 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Operations Command Center</b>
+              <span>Today ▾</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>₹8.4L</b>
+                Revenue
+              </div>
+
+              <div class="mock-card">
+                <b>94.8%</b>
+                Fill Rate
+              </div>
+
+              <div class="mock-card">
+                <b>126</b>
+                Orders
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:35%"></i>
+              <i class="bar" style="height:55%"></i>
+              <i class="bar" style="height:45%"></i>
+              <i class="bar" style="height:78%"></i>
+              <i class="bar" style="height:65%"></i>
+              <i class="bar" style="height:90%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>📊 Operations Dashboard</h3>
+
+        <p>
+          KPIs, daily performance, orders,
+          inventory and operational trends.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD 2 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Inventory Control</b>
+              <span>All Locations</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>1,842</b>
+                Units
+              </div>
+
+              <div class="mock-card">
+                <b>32</b>
+                Low Stock
+              </div>
+
+              <div class="mock-card">
+                <b>96%</b>
+                Accuracy
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:80%"></i>
+              <i class="bar" style="height:60%"></i>
+              <i class="bar" style="height:45%"></i>
+              <i class="bar" style="height:70%"></i>
+              <i class="bar" style="height:92%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>📦 Inventory & Stock Portal</h3>
+
+        <p>
+          Stock levels, reorder alerts,
+          inward/outward and location-wise inventory.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD 3 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Vendor GRN Portal</b>
+              <span>September</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>428</b>
+                GRNs
+              </div>
+
+              <div class="mock-card">
+                <b>₹12.6L</b>
+                Purchases
+              </div>
+
+              <div class="mock-card">
+                <b>7</b>
+                Pending
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:55%"></i>
+              <i class="bar" style="height:78%"></i>
+              <i class="bar" style="height:68%"></i>
+              <i class="bar" style="height:92%"></i>
+              <i class="bar" style="height:72%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>🚚 Vendor GRN Tracker</h3>
+
+        <p>
+          GRN entry, vendor records,
+          received quantity and payment tracking.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD 4 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Finance & P&L</b>
+              <span>Monthly</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>₹24.8L</b>
+                Sales
+              </div>
+
+              <div class="mock-card">
+                <b>₹18.2L</b>
+                Cost
+              </div>
+
+              <div class="mock-card">
+                <b>₹6.6L</b>
+                Profit
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:45%"></i>
+              <i class="bar" style="height:58%"></i>
+              <i class="bar" style="height:65%"></i>
+              <i class="bar" style="height:75%"></i>
+              <i class="bar" style="height:88%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>💰 P&L Dashboard</h3>
+
+        <p>
+          Daily, weekly and monthly revenue,
+          expenses, margins and costs.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD 5 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Procurement Analytics</b>
+              <span>South Region</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>58</b>
+                Suppliers
+              </div>
+
+              <div class="mock-card">
+                <b>₹7.2L</b>
+                Spend
+              </div>
+
+              <div class="mock-card">
+                <b>98%</b>
+                On Time
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:88%"></i>
+              <i class="bar" style="height:64%"></i>
+              <i class="bar" style="height:77%"></i>
+              <i class="bar" style="height:50%"></i>
+              <i class="bar" style="height:82%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>🛒 Procurement Dashboard</h3>
+
+        <p>
+          Supplier performance, purchase spend,
+          delivery trends and sourcing visibility.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD 6 -->
+
+    <div class="dashboard">
+
+      <div class="preview">
+
+        <div class="browser">
+
+          <div class="browser-top">
+            <i class="dot"></i>
+            <i class="dot"></i>
+            <i class="dot"></i>
+          </div>
+
+          <div class="mock">
+
+            <div class="mock-head">
+              <b>Sales Performance</b>
+              <span>Weekly</span>
+            </div>
+
+            <div class="mock-cards">
+
+              <div class="mock-card">
+                <b>₹4.8L</b>
+                Sales
+              </div>
+
+              <div class="mock-card">
+                <b>312</b>
+                Customers
+              </div>
+
+              <div class="mock-card">
+                <b>₹1,540</b>
+                AOV
+              </div>
+
+            </div>
+
+            <div class="chart">
+              <i class="bar" style="height:42%"></i>
+              <i class="bar" style="height:69%"></i>
+              <i class="bar" style="height:58%"></i>
+              <i class="bar" style="height:88%"></i>
+              <i class="bar" style="height:73%"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="dashboard-info">
+
+        <h3>📈 Sales Analytics</h3>
+
+        <p>
+          Sales trends, customer metrics,
+          products and period comparisons.
+        </p>
+
+        <button class="btn secondary"
+          onclick="sampleAlert()">
+          View Sample
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- FREE TOOLS -->
+<!-- ===================================================== -->
+
+<section id="tools" class="tab">
+
+<div class="section-title">
+
+  <h2>Free Business Micro Tools</h2>
+
+  <p>
+    Useful tools you can use directly in your browser.
+  </p>
+
+</div>
+
+
+<!-- INVOICE -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+<h3>📄 Professional Invoice Generator</h3>
+<p>Create a clean invoice and save it as PDF.</p>
+</div>
+
+<div class="tool-icon">₹</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Your Business Name</label>
+<input id="inv-from" value="KVORA Automation">
+</div>
+
+<div class="form-group">
+<label>Invoice Number</label>
+<input id="inv-no" value="KV-1001">
+</div>
+
+<div class="form-group">
+<label>Bill To</label>
+<input id="inv-client" placeholder="Client / Business Name">
+</div>
+
+<div class="form-group">
+<label>Invoice Date</label>
+<input type="date" id="inv-date">
+</div>
+
+<div class="form-group">
+<label>Service / Item</label>
+<input
+id="inv-item"
+value="Automation & Dashboard Development">
+</div>
+
+<div class="form-group">
+<label>Quantity</label>
+<input
+type="number"
+id="inv-qty"
+value="1"
+oninput="invoiceCalc()">
+</div>
+
+<div class="form-group">
+<label>Unit Price ₹</label>
+<input
+type="number"
+id="inv-price"
+value="5000"
+oninput="invoiceCalc()">
+</div>
+
+<div class="form-group">
+<label>GST / Tax %</label>
+<input
+type="number"
+id="inv-tax"
+value="18"
+oninput="invoiceCalc()">
+</div>
+
+</div>
+
+
+<div id="invoice-preview"
+class="paper print-area">
+
+<div class="invoice-top">
+
+<div>
+
+<div class="invoice-brand" id="pv-from">
+KVORA AUTOMATION
+</div>
+
+<div style="font-size:.72rem;color:#64748b">
+Business Automation & Dashboard Systems
+</div>
+
+</div>
+
+<div class="invoice-meta">
+
+INVOICE<br>
+
+<b id="pv-no">KV-1001</b>
+
+<br>
+
+<span id="pv-date"></span>
+
+</div>
+
+</div>
+
+
+<div class="invoice-client">
+
+<div>
+
+<h4>Billed To</h4>
+
+<b id="pv-client">
+Client Name
+</b>
+
+</div>
+
+<div>
+
+<h4>Status</h4>
+
+<b style="color:#047857">
+Pending
+</b>
+
+</div>
+
+</div>
+
+
+<table class="invoice-table">
+
+<thead>
+
+<tr>
+
+<th>Description</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td id="pv-item">
+Automation & Dashboard Development
+</td>
+
+<td id="pv-qty">
+1
+</td>
+
+<td>
+₹<span id="pv-price">5,000.00</span>
+</td>
+
+<td>
+₹<span id="pv-sub">5,000.00</span>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+<div class="invoice-total">
+
+<div>
+<span>Subtotal</span>
+<b>₹<span id="pv-sub2">5,000.00</span></b>
+</div>
+
+<div>
+<span>Tax</span>
+<b>₹<span id="pv-tax">900.00</span></b>
+</div>
+
+<div class="grand">
+<span>Grand Total</span>
+<b>₹<span id="pv-total">5,900.00</span></b>
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="btn primary"
+style="margin-top:15px"
+onclick="window.print()">
+
+🖨️ Print / Save PDF
+
+</button>
+
+</div>
+
+
+<!-- GRN -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>📦 Professional GRN Generator</h3>
+
+<p>
+Create a GRN and share it with the vendor.
+</p>
+
+</div>
+
+<div class="tool-icon">
+✓
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Vendor Name</label>
+
+<input
+id="grn-vendor"
+value="Supplier Name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>GRN Number</label>
+
+<input
+id="grn-no"
+value="GRN-1001">
+
+</div>
+
+
+<div class="form-group">
+
+<label>PO Number</label>
+
+<input
+id="grn-po"
+value="PO-1001">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Date</label>
+
+<input
+type="date"
+id="grn-date">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Item</label>
+
+<input
+id="grn-item"
+value="Fresh Produce / Material">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Ordered Qty</label>
+
+<input
+type="number"
+id="grn-ordered"
+value="100">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Received Qty</label>
+
+<input
+type="number"
+id="grn-received"
+value="98">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Rejected Qty</label>
+
+<input
+type="number"
+id="grn-rejected"
+value="2">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Vendor Email
+</label>
+
+<input
+type="email"
+id="grn-email"
+placeholder="vendor@company.com">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+WhatsApp Number
+</label>
+
+<input
+id="grn-wa"
+placeholder="919876543210">
+
+</div>
+
+</div>
+
+
+<div
+id="grn-preview"
+class="grn-paper print-area">
+
+<div class="grn-head">
+
+<div>
+
+<div class="grn-title">
+GOODS RECEIPT NOTE
+</div>
+
+<div style="font-size:.75rem;color:#64748b">
+KVORA Automation System
+</div>
+
+</div>
+
+<div class="grn-status">
+RECEIVED
+</div>
+
+</div>
+
+
+<div class="invoice-client">
+
+<div>
+
+<h4>Supplier</h4>
+
+<b id="gp-vendor">
+Supplier Name
+</b>
+
+<br>
+
+PO:
+<span id="gp-po">
+PO-1001
+</span>
+
+</div>
+
+
+<div>
+
+<h4>GRN</h4>
+
+<b id="gp-no">
+GRN-1001
+</b>
+
+<br>
+
+<span id="gp-date"></span>
+
+</div>
+
+</div>
+
+
+<table class="grn-table">
+
+<thead>
+
+<tr>
+
+<th>Item</th>
+<th>Ordered</th>
+<th>Received</th>
+<th>Rejected</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td id="gp-item">
+Fresh Produce / Material
+</td>
+
+<td id="gp-ordered">
+100
+</td>
+
+<td id="gp-received">
+98
+</td>
+
+<td id="gp-rejected">
+2
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+<p style="
+margin-top:18px;
+font-size:.72rem;
+color:#64748b">
+
+Received quantity is subject to quality
+and quantity verification.
+
+</p>
+
+</div>
+
+
+<div class="share-box">
+
+<h4>
+📤 Share GRN
+</h4>
+
+<p style="
+font-size:.72rem;
+color:#94a3b8">
+
+Email/WhatsApp sharing opens the recipient
+app with the GRN details pre-filled.
+
+</p>
+
+
+<div class="share-actions">
+
+<button
+class="btn mail"
+onclick="shareEmail()">
+
+✉️ Email
+
+</button>
+
+
+<button
+class="btn whatsapp"
+onclick="shareWhatsApp()">
+
+💬 WhatsApp
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="window.print()">
+
+🖨️ PDF
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NOTES -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>📝 Smart Notes</h3>
+
+<p>
+Notes are saved in this browser.
+</p>
+
+</div>
+
+<div class="tool-icon">
+✎
+</div>
+
+</div>
+
+
+<textarea
+id="notes"
+rows="7"
+placeholder="Write meeting notes, ideas, supplier observations, reminders...">
+</textarea>
+
+
+<div style="margin-top:10px">
+
+<button
+class="btn primary"
+onclick="saveNotes()">
+
+Save Notes
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="clearNotes()">
+
+Clear
+
+</button>
+
+<span
+id="note-status"
+style="
+font-size:.72rem;
+color:#64748b;
+margin-left:10px">
+</span>
+
+</div>
+
+</div>
+
+
+<!-- TODO -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>✅ To-Do List</h3>
+
+<p>
+Simple daily task manager.
+</p>
+
+</div>
+
+<div class="tool-icon">
+✓
+</div>
+
+</div>
+
+
+<div style="
+display:flex;
+gap:8px">
+
+<input
+id="todo-input"
+placeholder="Add a task..."
+style="flex:1">
+
+<button
+class="btn primary"
+onclick="addTodo()">
+
+Add
+
+</button>
+
+</div>
+
+
+<ul
+id="todo-list"
+class="todo-list">
+</ul>
+
+</div>
+
+
+<!-- COST MANAGER -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>💰 Personal Cost Manager</h3>
+
+<p>
+Track income and expenses.
+</p>
+
+</div>
+
+<div class="tool-icon">
+₹
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Description</label>
+
+<input
+id="cost-name"
+placeholder="Fuel / Food / Salary">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Amount ₹</label>
+
+<input
+type="number"
+id="cost-amount"
+placeholder="500">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Type</label>
+
+<select id="cost-type">
+
+<option value="expense">
+Expense
+</option>
+
+<option value="income">
+Income
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="cost-cat">
+
+<option>Food</option>
+<option>Travel</option>
+<option>Shopping</option>
+<option>Bills</option>
+<option>Salary</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button
+class="btn primary"
+onclick="addCost()">
+
+Add Entry
+
+</button>
+
+
+<div class="stats">
+
+<div class="stat">
+<strong id="income">₹0</strong>
+<span>Income</span>
+</div>
+
+<div class="stat">
+<strong id="expense">₹0</strong>
+<span>Expenses</span>
+</div>
+
+<div class="stat">
+<strong id="balance">₹0</strong>
+<span>Balance</span>
+</div>
+
+<div class="stat">
+<strong id="count">0</strong>
+<span>Entries</span>
+</div>
+
+</div>
+
+
+<div id="cost-list"
+style="margin-top:15px">
+</div>
+
+</div>
+
+
+<!-- STOCK -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>📉 Stock Reorder Calculator</h3>
+
+<p>
+Calculate your reorder requirement instantly.
+</p>
+
+</div>
+
+<div class="tool-icon">
+↘
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Current Stock</label>
+
+<input
+type="number"
+id="stock-current"
+value="15"
+oninput="stockCalc()">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Safety Stock</label>
+
+<input
+type="number"
+id="stock-safety"
+value="50"
+oninput="stockCalc()">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Daily Usage</label>
+
+<input
+type="number"
+id="stock-use"
+value="10"
+oninput="stockCalc()">
+
+</div>
+
+</div>
+
+
+<div
+id="stock-result"
+class="result">
+</div>
+
+</div>
+
+
+<!-- CODE GENERATOR -->
+
+<div class="tool">
+
+<div class="tool-head">
+
+<div>
+
+<h3>⚙️ Apps Script Generator</h3>
+
+<p>
+Generate small ready-to-edit Apps Script snippets.
+</p>
+
+</div>
+
+<div class="tool-icon">
+{ }
+</div>
+
+</div>
+
+
+<select
+id="gas-option"
+onchange="generateCode()">
+
+<option value="email">
+Send Email from Google Sheets
+</option>
+
+<option value="pdf">
+Create PDF
+</option>
+
+<option value="clean">
+Remove Blank Rows
+</option>
+
+<option value="timestamp">
+Add Timestamp
+</option>
+
+</select>
+
+
+<textarea
+id="gas-code"
+rows="10"
+readonly
+style="
+font-family:monospace;
+color:#67e8f9;
+margin-top:12px">
+</textarea>
+
+
+<button
+class="btn secondary"
+style="margin-top:10px"
+onclick="copyCode()">
+
+Copy Code
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CONTACT -->
+<!-- ===================================================== -->
+
+<section id="contact" class="tab">
+
+<div style="
+max-width:720px;
+margin:auto">
+
+<div class="section-title">
+
+<h2>Tell KVORA What You Want Built</h2>
+
+<p>
+Describe your current process and the result you want.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<form
+action="https://formspree.io/f/myezoayj"
+method="POST">
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Your Name / Business
+</label>
+
+<input
+name="Name"
+required
+placeholder="Rahul Sharma / ABC Traders">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+type="email"
+name="_replyto"
+required
+placeholder="you@company.com">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+What do you want to automate?
+</label>
+
+<textarea
+name="Requirement"
+rows="8"
+required
+placeholder="Example: We maintain GRNs manually in Excel. We want a dashboard with vendor login, GRN entry, invoice tracking and monthly P&L.">
+</textarea>
+
+</div>
+
+</div>
+
+
+<button
+class="btn primary"
+style="width:100%;margin-top:8px">
+
+🚀 Send Requirement to KVORA
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<b>KVORA AUTOMATION</b>
+
+<br>
+
+Business Automation • Dashboards • Google Apps Script • Web Apps
+
+<br><br>
+
+© 2026 KVORA Automation
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* ================= NAVIGATION ================= */
+
+function openTab(id,button){
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(tab=>{
+      tab.classList.remove("active");
+    });
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  document
+    .querySelector(".main")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  document
+    .getElementById("sidebar")
+    .classList.remove("open");
+}
+
+
+function go(id){
+
+  const button=
+    [...document.querySelectorAll(".nav-btn")]
+    .find(btn=>
+      btn.getAttribute("onclick")
+      ?.includes("'"+id+"'")
+    );
+
+  openTab(id,button);
+
+}
+
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+
+function sampleAlert(){
+
+  alert(
+    "This is a dashboard showcase preview. Connect your live Google Apps Script Web App here."
+  );
+
+}
+
+
+/* ================= DATE ================= */
+
+function today(id){
+
+  const el=
+    document.getElementById(id);
+
+  if(el && !el.value){
+
+    el.value=
+      new Date()
+      .toISOString()
+      .slice(0,10);
+
+  }
+
+}
+
+today("inv-date");
+today("grn-date");
+
+
+/* ================= INVOICE ================= */
+
+function invoiceCalc(){
+
+  const qty=
+    Number(
+      document
+      .getElementById("inv-qty")
+      .value
+    ) || 0;
+
+  const price=
+    Number(
+      document
+      .getElementById("inv-price")
+      .value
+    ) || 0;
+
+  const taxRate=
+    Number(
+      document
+      .getElementById("inv-tax")
+      .value
+    ) || 0;
+
+  const subtotal=
+    qty*price;
+
+  const tax=
+    subtotal*taxRate/100;
+
+  const total=
+    subtotal+tax;
+
+
+  document.getElementById("pv-from")
+    .textContent=
+    (
+      document.getElementById("inv-from").value
+      ||
+      "KVORA AUTOMATION"
+    ).toUpperCase();
+
+
+  document.getElementById("pv-no")
+    .textContent=
+    document.getElementById("inv-no").value
+    ||
+    "KV-1001";
+
+
+  document.getElementById("pv-client")
+    .textContent=
+    document.getElementById("inv-client").value
+    ||
+    "Client Name";
+
+
+  document.getElementById("pv-item")
+    .textContent=
+    document.getElementById("inv-item").value
+    ||
+    "Service";
+
+
+  document.getElementById("pv-qty")
+    .textContent=qty;
+
+
+  document.getElementById("pv-price")
+    .textContent=
+    price.toLocaleString(
+      "en-IN",
+      {
+        minimumFractionDigits:2
       }
-      window.location.href = `mailto:${email}?subject=Goods%20Receipt%20Note%20(GRN)%20Confirmation&body=${encodeURIComponent(details)}`;
-    }
+    );
 
-    function generateGASCode() {
-      const opt = document.getElementById('gas-option').value;
-      const codeBox = document.getElementById('gas-code');
 
-      if (opt === 'email') {
-        codeBox.value = `function sendEmailAlert() {\n  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();\n  var email = sheet.getRange("A2").getValue();\n  GmailApp.sendEmail(email, "Automated Notification", "Your entry has been recorded.");\n}`;
-      } else if (opt === 'pdf') {
-        codeBox.value = `function exportToPDF() {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var blob = ss.getAs('application/pdf').setName("Document.pdf");\n  DriveApp.createFile(blob);\n}`;
-      } else {
-        codeBox.value = `function removeBlankRows() {\n  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();\n  var maxRows = sheet.getMaxRows();\n  var lastRow = sheet.getLastRow();\n  if (maxRows > lastRow) sheet.deleteRows(lastRow + 1, maxRows - lastRow);\n}`;
+  document.getElementById("pv-sub")
+    .textContent=
+    subtotal.toLocaleString(
+      "en-IN",
+      {
+        minimumFractionDigits:2
       }
-    }
+    );
 
-    function checkStockAlert() {
-      const curr = parseFloat(document.getElementById('stk-curr').value) || 0;
-      const min = parseFloat(document.getElementById('stk-min').value) || 0;
-      const result = document.getElementById('stk-result');
 
-      if (curr < min) {
-        result.style.color = '#ec4899';
-        result.style.borderColor = '#ec4899';
-        result.innerText = `Status: LOW STOCK! Reorder ${min - curr} units immediately.`;
-      } else {
-        result.style.color = '#10b981';
-        result.style.borderColor = '#10b981';
-        result.innerText = `Status: STOCK HEALTHY! Current level is above safety threshold.`;
+  document.getElementById("pv-sub2")
+    .textContent=
+    subtotal.toLocaleString(
+      "en-IN",
+      {
+        minimumFractionDigits:2
       }
-    }
+    );
 
-    // Initialize scripts
-    calculateInvoice();
-    generateGASCode();
-    checkStockAlert();
-  </script>
+
+  document.getElementById("pv-tax")
+    .textContent=
+    tax.toLocaleString(
+      "en-IN",
+      {
+        minimumFractionDigits:2
+      }
+    );
+
+
+  document.getElementById("pv-total")
+    .textContent=
+    total.toLocaleString(
+      "en-IN",
+      {
+        minimumFractionDigits:2
+      }
+    );
+
+
+  document.getElementById("pv-date")
+    .textContent=
+    document.getElementById("inv-date").value;
+
+}
+
+
+[
+  "inv-from",
+  "inv-no",
+  "inv-client",
+  "inv-date",
+  "inv-item",
+  "inv-qty",
+  "inv-price",
+  "inv-tax"
+]
+.forEach(id=>{
+
+  document
+    .getElementById(id)
+    .addEventListener(
+      "input",
+      invoiceCalc
+    );
+
+});
+
+
+invoiceCalc();
+
+
+/* ================= GRN ================= */
+
+function grnUpdate(){
+
+  document.getElementById("gp-vendor")
+    .textContent=
+    document.getElementById("grn-vendor").value;
+
+  document.getElementById("gp-no")
+    .textContent=
+    document.getElementById("grn-no").value;
+
+  document.getElementById("gp-po")
+    .textContent=
+    document.getElementById("grn-po").value;
+
+  document.getElementById("gp-date")
+    .textContent=
+    document.getElementById("grn-date").value;
+
+  document.getElementById("gp-item")
+    .textContent=
+    document.getElementById("grn-item").value;
+
+  document.getElementById("gp-ordered")
+    .textContent=
+    document.getElementById("grn-ordered").value;
+
+  document.getElementById("gp-received")
+    .textContent=
+    document.getElementById("grn-received").value;
+
+  document.getElementById("gp-rejected")
+    .textContent=
+    document.getElementById("grn-rejected").value;
+
+}
+
+
+[
+  "grn-vendor",
+  "grn-no",
+  "grn-po",
+  "grn-date",
+  "grn-item",
+  "grn-ordered",
+  "grn-received",
+  "grn-rejected"
+]
+.forEach(id=>{
+
+  document
+    .getElementById(id)
+    .addEventListener(
+      "input",
+      grnUpdate
+    );
+
+});
+
+
+grnUpdate();
+
+
+function grnMessage(){
+
+  return `GRN ${document.getElementById("grn-no").value}
+
+Vendor: ${document.getElementById("grn-vendor").value}
+
+PO Number: ${document.getElementById("grn-po").value}
+
+Item: ${document.getElementById("grn-item").value}
+
+Ordered Quantity: ${document.getElementById("grn-ordered").value}
+
+Received Quantity: ${document.getElementById("grn-received").value}
+
+Rejected Quantity: ${document.getElementById("grn-rejected").value}
+
+Date: ${document.getElementById("grn-date").value}
+
+Generated using KVORA Automation.`;
+
+}
+
+
+function shareEmail(){
+
+  const email=
+    document
+    .getElementById("grn-email")
+    .value
+    .trim();
+
+  if(!email){
+
+    alert(
+      "Please enter the vendor email."
+    );
+
+    return;
+  }
+
+  location.href=
+    "mailto:"
+    +
+    encodeURIComponent(email)
+    +
+    "?subject="
+    +
+    encodeURIComponent(
+      "GRN Confirmation - "
+      +
+      document
+      .getElementById("grn-no")
+      .value
+    )
+    +
+    "&body="
+    +
+    encodeURIComponent(
+      grnMessage()
+    );
+
+}
+
+
+function shareWhatsApp(){
+
+  let number=
+    document
+    .getElementById("grn-wa")
+    .value
+    .replace(/\D/g,"");
+
+  if(!number){
+
+    alert(
+      "Please enter a WhatsApp number with country code."
+    );
+
+    return;
+
+  }
+
+  window.open(
+    "https://wa.me/"
+    +
+    number
+    +
+    "?text="
+    +
+    encodeURIComponent(
+      grnMessage()
+    ),
+    "_blank"
+  );
+
+}
+
+
+/* ================= NOTES ================= */
+
+const notes=
+  document.getElementById("notes");
+
+notes.value=
+  localStorage.getItem(
+    "kvora_notes"
+  ) || "";
+
+
+function saveNotes(){
+
+  localStorage.setItem(
+    "kvora_notes",
+    notes.value
+  );
+
+  document
+    .getElementById("note-status")
+    .textContent=
+    "Saved ✓";
+
+}
+
+
+function clearNotes(){
+
+  notes.value="";
+
+  localStorage.removeItem(
+    "kvora_notes"
+  );
+
+}
+
+
+/* ================= TODO ================= */
+
+let todos=
+  JSON.parse(
+    localStorage.getItem(
+      "kvora_todos"
+    ) || "[]"
+  );
+
+
+function renderTodos(){
+
+  const list=
+    document.getElementById(
+      "todo-list"
+    );
+
+  list.innerHTML="";
+
+  todos.forEach(
+    (todo,index)=>{
+
+      const li=
+        document.createElement("li");
+
+      li.innerHTML=`
+
+        <input
+          type="checkbox"
+          ${todo.done?"checked":""}
+          onchange="toggleTodo(${index})">
+
+        <span
+          class="${todo.done?"done":""}">
+          ${escapeHtml(todo.text)}
+        </span>
+
+        <button
+          class="btn secondary"
+          style="padding:5px 9px"
+          onclick="deleteTodo(${index})">
+          ×
+        </button>
+
+      `;
+
+      list.appendChild(li);
+
+    }
+  );
+
+}
+
+
+function addTodo(){
+
+  const input=
+    document.getElementById(
+      "todo-input"
+    );
+
+  const text=
+    input.value.trim();
+
+  if(!text)return;
+
+  todos.push({
+    text:text,
+    done:false
+  });
+
+  input.value="";
+
+  saveTodos();
+
+  renderTodos();
+
+}
+
+
+function toggleTodo(index){
+
+  todos[index].done=
+    !todos[index].done;
+
+  saveTodos();
+
+  renderTodos();
+
+}
+
+
+function deleteTodo(index){
+
+  todos.splice(index,1);
+
+  saveTodos();
+
+  renderTodos();
+
+}
+
+
+function saveTodos(){
+
+  localStorage.setItem(
+    "kvora_todos",
+    JSON.stringify(todos)
+  );
+
+}
+
+
+function escapeHtml(text){
+
+  return text.replace(
+    /[&<>"']/g,
+    char=>({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+
+    }[char])
+  );
+
+}
+
+
+renderTodos();
+
+
+/* ================= COST MANAGER ================= */
+
+let costs=
+  JSON.parse(
+    localStorage.getItem(
+      "kvora_costs"
+    ) || "[]"
+  );
+
+
+function addCost(){
+
+  const name=
+    document
+    .getElementById("cost-name")
+    .value
+    .trim();
+
+  const amount=
+    Number(
+      document
+      .getElementById("cost-amount")
+      .value
+    );
+
+  const type=
+    document
+    .getElementById("cost-type")
+    .value;
+
+  const category=
+    document
+    .getElementById("cost-cat")
+    .value;
+
+
+  if(!name || !amount){
+
+    alert(
+      "Enter a valid description and amount."
+    );
+
+    return;
+
+  }
+
+
+  costs.unshift({
+
+    name:name,
+    amount:amount,
+    type:type,
+    category:category,
+    date:new Date()
+      .toLocaleDateString("en-IN")
+
+  });
+
+
+  localStorage.setItem(
+    "kvora_costs",
+    JSON.stringify(costs)
+  );
+
+
+  document
+    .getElementById("cost-name")
+    .value="";
+
+  document
+    .getElementById("cost-amount")
+    .value="";
+
+
+  renderCosts();
+
+}
+
+
+function renderCosts(){
+
+  let income=0;
+  let expense=0;
+
+
+  costs.forEach(item=>{
+
+    if(item.type==="income")
+      income+=item.amount;
+
+    else
+      expense+=item.amount;
+
+  });
+
+
+  document
+    .getElementById("income")
+    .textContent=
+    "₹"+
+    income.toLocaleString("en-IN");
+
+
+  document
+    .getElementById("expense")
+    .textContent=
+    "₹"+
+    expense.toLocaleString("en-IN");
+
+
+  document
+    .getElementById("balance")
+    .textContent=
+    "₹"+
+    (income-expense)
+    .toLocaleString("en-IN");
+
+
+  document
+    .getElementById("count")
+    .textContent=
+    costs.length;
+
+
+  document
+    .getElementById("cost-list")
+    .innerHTML=
+    costs
+    .slice(0,10)
+    .map(item=>`
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+        padding:9px 0;
+        border-bottom:1px solid var(--border);
+        font-size:.8rem">
+
+        <span>
+          ${escapeHtml(item.name)}
+          <small style="color:#64748b">
+            • ${item.category}
+            • ${item.date}
+          </small>
+        </span>
+
+        <b style="
+          color:${item.type==="income"
+            ?"var(--green)"
+            :"var(--red)"}">
+
+          ${item.type==="income"?"+":"-"}
+          ₹${item.amount.toLocaleString("en-IN")}
+
+        </b>
+
+      </div>
+
+    `)
+    .join("");
+
+}
+
+
+renderCosts();
+
+
+/* ================= STOCK ================= */
+
+function stockCalc(){
+
+  const current=
+    Number(
+      document
+      .getElementById(
+        "stock-current"
+      ).value
+    ) || 0;
+
+
+  const safety=
+    Number(
+      document
+      .getElementById(
+        "stock-safety"
+      ).value
+    ) || 0;
+
+
+  const usage=
+    Number(
+      document
+      .getElementById(
+        "stock-use"
+      ).value
+    ) || 0;
+
+
+  const result=
+    document
+    .getElementById(
+      "stock-result"
+    );
+
+
+  if(current<safety){
+
+    const days=
+      usage
+      ? Math.floor(current/usage)
+      : 0;
+
+
+    result.innerHTML=`
+
+      <b style="color:var(--red)">
+        LOW STOCK
+      </b>
+
+      — Reorder at least
+      <b>${safety-current}</b>
+      units.
+
+      Approx.
+      ${days}
+      day(s) remaining.
+
+    `;
+
+  }else{
+
+    result.innerHTML=`
+
+      <b style="color:var(--green)">
+        STOCK HEALTHY
+      </b>
+
+      — Current stock is
+      ${current-safety}
+      units above your safety level.
+
+    `;
+
+  }
+
+}
+
+
+stockCalc();
+
+
+/* ================= GAS GENERATOR ================= */
+
+function generateCode(){
+
+  const option=
+    document
+    .getElementById(
+      "gas-option"
+    ).value;
+
+
+  const box=
+    document
+    .getElementById(
+      "gas-code"
+    );
+
+
+  const codes={
+
+
+email:
+
+`function sendEmailFromSheet() {
+
+  const sheet =
+    SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getActiveSheet();
+
+  const email =
+    sheet
+    .getRange("A2")
+    .getValue();
+
+  GmailApp.sendEmail(
+    email,
+    "Automated Notification",
+    "Your entry has been recorded."
+  );
+
+}`,
+
+
+pdf:
+
+`function createPDF() {
+
+  const ss =
+    SpreadsheetApp
+    .getActiveSpreadsheet();
+
+  const blob =
+    ss
+    .getBlob()
+    .getAs("application/pdf")
+    .setName("Report.pdf");
+
+  DriveApp.createFile(blob);
+
+}`,
+
+
+clean:
+
+`function removeBlankRows() {
+
+  const sheet =
+    SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getActiveSheet();
+
+  const lastRow =
+    sheet.getLastRow();
+
+  const maxRows =
+    sheet.getMaxRows();
+
+  if(maxRows > lastRow){
+
+    sheet.deleteRows(
+      lastRow + 1,
+      maxRows - lastRow
+    );
+
+  }
+
+}`,
+
+
+timestamp:
+
+`function onEdit(e) {
+
+  const sheet =
+    e.range.getSheet();
+
+  const row =
+    e.range.getRow();
+
+  const col =
+    e.range.getColumn();
+
+  if(row > 1 && col === 1){
+
+    sheet
+      .getRange(row,2)
+      .setValue(new Date());
+
+  }
+
+}`
+
+  };
+
+
+  box.value=
+    codes[option];
+
+}
+
+
+function copyCode(){
+
+  navigator
+    .clipboard
+    .writeText(
+      document
+      .getElementById(
+        "gas-code"
+      ).value
+    );
+
+  alert(
+    "Apps Script code copied."
+  );
+
+}
+
+
+generateCode();
+
+</script>
 
 </body>
 </html>
