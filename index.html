@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KVORA Automation | Business Automation & Dashboards</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.6; }
+
+    header { background-color: #0f172a; color: white; padding: 1.2rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: #38bdf8; text-decoration: none; }
+    nav a { color: #e2e8f0; text-decoration: none; margin-left: 1.5rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover { color: #38bdf8; }
+
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; text-align: center; padding: 5rem 1.5rem; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; color: #ffffff; }
+    .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 700px; margin: 0 auto 2rem auto; }
+    .cta-btn { background-color: #2563eb; color: white; padding: 0.8rem 1.8rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.2s; }
+    .cta-btn:hover { background-color: #1d4ed8; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 2.5rem; color: #0f172a; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .card h3 { margin-bottom: 0.8rem; color: #1e293b; display: flex; align-items: center; gap: 0.5rem; }
+    .card p { color: #64748b; font-size: 0.95rem; }
+
+    .calc-box { background: #ffffff; border: 1px solid #cbd5e1; padding: 2rem; border-radius: 12px; max-width: 600px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #334155; }
+    .form-group input { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; }
+    .calc-result { margin-top: 1.5rem; padding: 1rem; background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; text-align: center; font-weight: bold; color: #166534; }
+
+    footer { background-color: #0f172a; color: #94a3b8; text-align: center; padding: 2rem; margin-top: 4rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">KVORA Automation</a>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#calculator">ROI Calculator</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Automate Business Workflows & Dashboards</h1>
+    <p>Eliminate manual data entry, save 15+ hours weekly, and scale operations with real-time analytics tailored for fast-growing businesses.</p>
+    <a href="#contact" class="cta-btn">Book Free Automation Audit</a>
+  </section>
+
+  <div class="container" id="services">
+    <h2 class="section-title">Automation Solutions</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>📊 Real-Time Operations Dashboards</h3>
+        <p>Custom Google Looker Studio, Metabase, or Power BI dashboards tracking real-time KPIs, sales, stock movement, and fulfillment metrics.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Inventory & Workflow Automation</h3>
+        <p>Automate stock updates, order alerts, customer notification triggers, and auto-sync inventory across multiple sales channels.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Spreadsheet & API Automation</h3>
+        <p>Custom Google Apps Script and Python integrations to sync Google Sheets, Excel, APIs, and CRMs without human intervention.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="calculator" style="background-color: #f1f5f9; border-radius: 16px; margin-top: 2rem;">
+    <h2 class="section-title">Calculate Your Time & Cost Savings</h2>
+    <div class="calc-box">
+      <div class="form-group">
+        <label for="employees">Number of employees doing manual entry:</label>
+        <input type="number" id="employees" value="3" min="1" oninput="calculateSavings()" />
+      </div>
+      <div class="form-group">
+        <label for="hours">Hours spent per person each day on data/spreadsheets:</label>
+        <input type="number" id="hours" value="2" min="1" oninput="calculateSavings()" />
+      </div>
+      <div class="calc-result" id="result">
+        Your business wastes ~30 hours every week! KVORA can automate 80% of this.
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #334155;">Ready to automate your operations and scale faster?</p>
+      <p><strong>Email:</strong> contact.kvora@gmail.com</p>
+      <p style="margin-top: 0.5rem;"><strong>Location:</strong> Available globally for remote consulting</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>©️ 2026 KVORA Automation. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function calculateSavings() {
+      const emp = parseFloat(document.getElementById('employees').value) || 0;
+      const hrs = parseFloat(document.getElementById('hours').value) || 0;
+      const totalWeeklyHours = emp * hrs * 5;
+      
+      const resultDiv = document.getElementById('result');
+      if (totalWeeklyHours > 0) {
+        resultDiv.innerText = `Your business wastes ~${totalWeeklyHours} hours every week! KVORA can automate 80% of this.`;
+      } else {
+        resultDiv.innerText = "Enter valid numbers to calculate savings.";
+      }
+    }
+  </script>
+
+</body>
+</html>
