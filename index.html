@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KVORA Automation | Modern Business Dashboards & Analytics</title>
+  <title>KVORA Automation | Google Apps Script & Dashboard Systems</title>
   <style>
     /* DYNAMIC COLOR SYSTEM & RESET */
     :root {
@@ -50,6 +50,7 @@
     .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.25s ease; border: none; }
     .btn-primary { background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); color: white; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--card-border); }
 
     /* CARDS & GRID SYSTEM */
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
@@ -64,26 +65,24 @@
     .card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; color: white; }
     .card p { color: var(--text-muted); font-size: 0.92rem; }
 
-    /* ENHANCED DASHBOARD PREVIEW SLOTS */
-    .dash-slot { background: rgba(15, 23, 42, 0.8); border: 1px dashed var(--accent-purple); border-radius: 16px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); position: relative; }
+    /* DASHBOARD SLOTS */
+    .dash-slot { background: rgba(15, 23, 42, 0.8); border: 1px dashed var(--accent-purple); border-radius: 16px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); }
     .dash-slot h4 { color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 0.5rem; }
     .dash-slot p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; }
 
-    /* SIMULATED METRIC GRAPH GRAPHIC */
-    .dashboard-preview-box { background: rgba(7, 9, 14, 0.9); border: 1px solid var(--card-border); border-radius: 10px; padding: 1rem; margin-bottom: 1.2rem; }
-    .mini-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 60px; gap: 8px; padding-top: 10px; }
-    .chart-bar { width: 18%; background: linear-gradient(to top, var(--accent-purple), var(--accent-cyan)); border-radius: 4px; }
+    /* TOOL BOX STYLING */
+    .tool-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; }
+    .tool-box h3 { color: var(--accent-cyan); margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+    .form-group { margin-bottom: 1.2rem; text-align: left; }
+    .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(7, 9, 14, 0.8); border: 1px solid var(--card-border); border-radius: 8px; color: white; font-size: 0.95rem; outline: none; }
 
-    /* FORM STYLING */
-    .form-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.5rem 2rem; max-width: 650px; margin: 0 auto; backdrop-filter: blur(16px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-    .form-group { margin-bottom: 1.4rem; text-align: left; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
-    .form-group input, .form-group textarea { width: 100%; padding: 0.85rem 1rem; background: rgba(7, 9, 14, 0.8); border: 1px solid var(--card-border); border-radius: 8px; color: white; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); }
-
-    /* CALCULATOR BOX */
-    .calc-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.5rem 2rem; max-width: 600px; margin: 0 auto; }
-    .calc-result { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); border-radius: 10px; padding: 1.2rem; text-align: center; font-weight: 700; color: var(--accent-green); margin-top: 1.5rem; font-size: 1rem; }
+    /* PRINT INVOICE STYLES */
+    @media print {
+      body * { visibility: hidden; }
+      #printable-invoice, #printable-invoice * { visibility: visible; }
+      #printable-invoice { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; padding: 20px; }
+    }
 
     footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--card-border); color: var(--text-muted); margin-top: 4rem; font-size: 0.85rem; }
   </style>
@@ -98,7 +97,7 @@
         <button class="nav-btn active" onclick="openTab('home', this)">Home</button>
         <button class="nav-btn" onclick="openTab('services', this)">Solutions</button>
         <button class="nav-btn" onclick="openTab('dashboards', this)">Dashboards</button>
-        <button class="nav-btn" onclick="openTab('calculator', this)">ROI Calculator</button>
+        <button class="nav-btn" onclick="openTab('free-tools', this)">Free Micro Tools</button>
         <button class="nav-btn" onclick="openTab('contact', this)">Request Solution</button>
       </nav>
     </div>
@@ -109,136 +108,176 @@
     <!-- TAB 1: HOME -->
     <div id="home" class="tab-content active">
       <section class="hero">
-        <h1>Enterprise Analytics & Workflow Systems</h1>
-        <p>Eliminate manual spreadsheets, automate operational data flows, and gain real-time clarity with custom dashboards.</p>
+        <h1>Google Apps Script & Web App Dashboards</h1>
+        <p>Expert in converting Google Sheets, Excel, and operations workflows into automated Google Apps Scripts & web apps.</p>
         <button class="btn btn-primary" onclick="switchTabDirectly('contact')">Submit Custom Requirement</button>
       </section>
 
       <div class="grid">
         <div class="card">
-          <span class="card-badge badge-purple">Automations</span>
-          <h3>⚡ Workflows on Autopilot</h3>
-          <p>Replace manual data entry across Google Sheets, Excel, and CRM databases with automated scripts.</p>
+          <span class="card-badge badge-purple">Apps Script</span>
+          <h3>⚡ Custom Google Apps Script</h3>
+          <p>Automate email notifications, auto-generate invoices, import web APIs, and eliminate manual sheet entry.</p>
         </div>
         <div class="card">
-          <span class="card-badge badge-cyan">Analytics</span>
-          <h3>📊 Real-Time Visibility</h3>
-          <p>Executive dashboards in Looker Studio, Power BI, or Metabase tracking fulfillment, stock, and sales metrics.</p>
+          <span class="card-badge badge-cyan">Dashboards</span>
+          <h3>📊 HTML/GAS Web App Portals</h3>
+          <p>Real-time Google Apps Script web apps and Looker Studio dashboards for operations and inventory management.</p>
         </div>
         <div class="card">
-          <span class="card-badge badge-green">ROI Driven</span>
-          <h3>📈 Error-Free Operations</h3>
-          <p>Optimized systems built using scalable supply-chain practices to save up to 80% of daily operational hours.</p>
+          <span class="card-badge badge-green">Efficiency</span>
+          <h3>📈 Error-Free Workflows</h3>
+          <p>Built with enterprise logistics standards to reduce human errors and save over 15+ hours per week.</p>
         </div>
       </div>
     </div>
 
     <!-- TAB 2: SOLUTIONS -->
     <div id="services" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Tailored Business Automations</h2>
+      <h2 style="text-align: center; margin-bottom: 2rem;">Expert Apps Script Solutions</h2>
       <div class="grid">
         <div class="card">
           <span class="card-badge badge-cyan">Service 01</span>
-          <h3>Executive & Ops Dashboards</h3>
-          <p>Live tracking of revenue trends, inventory turnover, order dispatch times, and team KPIs.</p>
+          <h3>Google Apps Script Web Apps</h3>
+          <p>Custom HTML/JS frontend interfaces powered by Google Apps Script backends for seamless inventory & order entries.</p>
         </div>
         <div class="card">
           <span class="card-badge badge-purple">Service 02</span>
-          <h3>Spreadsheet & API Integrations</h3>
-          <p>Automated scripts running silently in the background to fetch, clean, and synchronize multi-platform data.</p>
+          <h3>Automated Email & PDF Generators</h3>
+          <p>Automatically generate PDFs from Google Sheet rows and email them as attachments to vendors or clients.</p>
         </div>
         <div class="card">
           <span class="card-badge badge-green">Service 03</span>
-          <h3>Stock & Supply Chain Trackers</h3>
-          <p>Automated reorder triggers, channel inventory synchronization, and low-stock notification alerts.</p>
+          <h3>Inventory & GRN Dispatchers</h3>
+          <p>Real-time stock level synchronization, low stock triggers, and automated Goods Receipt Note notifications.</p>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: DASHBOARDS (WITH WORKING SLOTS & MOCKUPS) -->
+    <!-- TAB 3: DASHBOARDS SHOWCASE -->
     <div id="dashboards" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 0.5rem;">Live Dashboard Showcase</h2>
-      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Explore sample layouts below. Embed your live Power BI or Looker links anytime.</p>
+      <h2 style="text-align: center; margin-bottom: 0.5rem;">Google Apps Script & Web Dashboards</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Explore custom web portals and Google Apps Script dashboard slots.</p>
 
       <div class="grid">
-        <!-- SLOT 1 -->
         <div class="dash-slot">
-          <h4>📊 Slot #1: Operations Dashboard</h4>
-          <div class="dashboard-preview-box">
-            <div class="mini-chart">
-              <div class="chart-bar" style="height: 40%;"></div>
-              <div class="chart-bar" style="height: 70%;"></div>
-              <div class="chart-bar" style="height: 50%;"></div>
-              <div class="chart-bar" style="height: 90%;"></div>
-            </div>
-          </div>
-          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
+          <h4>📊 Slot #1: Custom GAS Operations Dashboard</h4>
+          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
         </div>
-
-        <!-- SLOT 2 -->
         <div class="dash-slot">
-          <h4>📈 Slot #2: Inventory Tracker</h4>
-          <div class="dashboard-preview-box">
-            <div class="mini-chart">
-              <div class="chart-bar" style="height: 80%;"></div>
-              <div class="chart-bar" style="height: 60%;"></div>
-              <div class="chart-bar" style="height: 100%;"></div>
-              <div class="chart-bar" style="height: 75%;"></div>
-            </div>
-          </div>
-          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
+          <h4>📈 Slot #2: Inventory & Stock Dispatch Portal</h4>
+          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
         </div>
-
-        <!-- SLOT 3 -->
         <div class="dash-slot">
-          <h4>⚙️ Slot #3: Workflow Monitor</h4>
-          <div class="dashboard-preview-box">
-            <div class="mini-chart">
-              <div class="chart-bar" style="height: 30%;"></div>
-              <div class="chart-bar" style="height: 50%;"></div>
-              <div class="chart-bar" style="height: 85%;"></div>
-              <div class="chart-bar" style="height: 65%;"></div>
-            </div>
-          </div>
-          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
+          <h4>⚙️ Slot #3: Vendor GRN Tracker</h4>
+          <p>Paste your Google Apps Script Web App link or Looker Studio embed code here.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample App</a>
         </div>
       </div>
     </div>
 
-    <!-- TAB 4: CALCULATOR -->
-    <div id="calculator" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 2rem;">Time & Operational Cost Savings</h2>
-      <div class="calc-box">
+    <!-- TAB 4: FREE MICRO TOOLS -->
+    <div id="free-tools" class="tab-content">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Free Business Utility Micro-Tools</h2>
+
+      <!-- TOOL 1: FREE INVOICE GENERATOR -->
+      <div class="tool-box">
+        <h3>📄 1. Free Instant Invoice Generator</h3>
+        <div class="grid">
+          <div class="form-group">
+            <label>Client / Business Name</label>
+            <input type="text" id="inv-client" placeholder="e.g. Acme Corp" />
+          </div>
+          <div class="form-group">
+            <label>Item Description</label>
+            <input type="text" id="inv-item" placeholder="e.g. Automation Consulting Service" />
+          </div>
+          <div class="form-group">
+            <label>Amount (₹)</label>
+            <input type="number" id="inv-amount" placeholder="5000" oninput="calculateInvoice()" />
+          </div>
+          <div class="form-group">
+            <label>Tax Rate (%)</label>
+            <input type="number" id="inv-tax" value="18" oninput="calculateInvoice()" />
+          </div>
+        </div>
+
+        <div id="printable-invoice" style="background: rgba(7, 9, 14, 0.9); border: 1px solid var(--card-border); padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">INVOICE PREVIEW</h4>
+          <p><strong>Billed To:</strong> <span id="prev-client">Acme Corp</span></p>
+          <p><strong>Service:</strong> <span id="prev-item">Automation Consulting Service</span></p>
+          <p><strong>Subtotal:</strong> ₹<span id="prev-sub">0</span></p>
+          <p><strong>Tax Amount:</strong> ₹<span id="prev-tax">0</span></p>
+          <h3 style="color: var(--accent-green); margin-top: 0.5rem;">Total: ₹<span id="prev-total">0</span></h3>
+        </div>
+
+        <button onclick="window.print()" class="btn btn-primary" style="margin-top: 1rem;">🖨️ Download / Print PDF Invoice</button>
+      </div>
+
+      <!-- TOOL 2: FREE GRN DISPATCHER -->
+      <div class="tool-box">
+        <h3>📦 2. Free Vendor GRN Dispatcher</h3>
         <div class="form-group">
-          <label for="employees">Team members doing manual data entry:</label>
-          <input type="number" id="employees" value="3" min="1" oninput="calculateSavings()" />
+          <label>Vendor Email Address</label>
+          <input type="email" id="grn-email" placeholder="vendor@supplier.com" required />
         </div>
         <div class="form-group">
-          <label for="hours">Hours spent daily per person on spreadsheets:</label>
-          <input type="number" id="hours" value="2" min="1" oninput="calculateSavings()" />
+          <label>Material / Item Name & Quantity Received</label>
+          <textarea id="grn-details" rows="3" placeholder="e.g. Received 500 units of Packaging Boxes (PO #1042)"></textarea>
         </div>
-        <div class="calc-result" id="result">
-          Your business loses ~30 hours every week! KVORA can automate up to 80% of this.
+        <button onclick="sendGRNMail()" class="btn btn-primary">✉️ Email GRN to Vendor</button>
+      </div>
+
+      <!-- TOOL 3: FREE GOOGLE APPS SCRIPT CODE GENERATOR -->
+      <div class="tool-box">
+        <h3>⚙️️ 3. Free Google Apps Script Snippet Generator</h3>
+        <div class="form-group">
+          <label>Select Your Needed Sheet Workflow:</label>
+          <select id="gas-option" onchange="generateGASCode()">
+            <option value="email">Auto Email Alert on New Row</option>
+            <option value="pdf">Convert Selected Sheet to PDF</option>
+            <option value="clean">Clear Blank Rows Automatically</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Generated Ready-To-Use Apps Script Code:</label>
+          <textarea id="gas-code" rows="6" style="font-family: monospace; color: var(--accent-cyan);" readonly></textarea>
+        </div>
+      </div>
+
+      <!-- TOOL 4: FREE REORDER ALERT CALCULATOR -->
+      <div class="tool-box">
+        <h3>📉 4. Free Stock Reorder Alert Calculator</h3>
+        <div class="grid">
+          <div class="form-group">
+            <label>Current Stock Quantity</label>
+            <input type="number" id="stk-curr" value="15" oninput="checkStockAlert()" />
+          </div>
+          <div class="form-group">
+            <label>Minimum Safety Stock Level</label>
+            <input type="number" id="stk-min" value="50" oninput="checkStockAlert()" />
+          </div>
+        </div>
+        <div id="stk-result" style="background: rgba(236, 72, 153, 0.1); border: 1px solid var(--accent-pink); border-radius: 8px; padding: 1rem; text-align: center; color: var(--accent-pink); font-weight: 700;">
+          Status: LOW STOCK! Reorder 35 units immediately.
         </div>
       </div>
     </div>
 
-    <!-- TAB 5: WORKING FORMSPREE REQUIREMENT FORM -->
+    <!-- TAB 5: REQUIREMENT FORM -->
     <div id="contact" class="tab-content">
-      <div class="form-card">
+      <div class="form-card" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem; max-width: 650px; margin: 0 auto;">
         <h2 style="text-align: center; margin-bottom: 0.5rem;">Submit Your Requirement</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">
-          Fill out your requirements below. Submissions will be delivered straight to <strong>kvoura.automation@gmail.com</strong>.
+          Submissions will be delivered straight to <strong>kvoura.automation@gmail.com</strong>.
         </p>
 
-        <!-- UPDATED WORKING FORMSPREE ACTION -->
         <form action="https://formspree.io/f/myezoayj" method="POST">
           <div class="form-group">
             <label for="client-name">Your Name / Business Name</label>
-            <input type="text" id="client-name" name="Name" placeholder="e.g. Rahul Sharma / Retail Brand" required />
+            <input type="text" id="client-name" name="Name" placeholder="e.g. Rahul Sharma" required />
           </div>
 
           <div class="form-group">
@@ -247,8 +286,8 @@
           </div>
 
           <div class="form-group">
-            <label for="client-req">Describe What You Want Automated / Built</label>
-            <textarea id="client-req" name="Requirement" rows="5" placeholder="e.g. We want an automated Google Looker Studio dashboard that auto-syncs with our Google Sheets inventory every hour." required></textarea>
+            <label for="client-req">Describe What You Want Built (Apps Script, Dashboards, Automations)</label>
+            <textarea id="client-req" name="Requirement" rows="5" placeholder="e.g. We want a Google Apps Script to auto-send invoice PDFs from Google Sheets." required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">Send Requirement to KVORA</button>
@@ -259,7 +298,7 @@
   </div>
 
   <footer>
-    <p>©️ 2026 KVORA Automation • Business Analytics & Automation • Contact: kvoura.automation@gmail.com</p>
+    <p>©️ 2026 KVORA Automation • Google Apps Script & Dashboard Systems • Contact: kvoura.automation@gmail.com</p>
   </footer>
 
   <script>
@@ -283,18 +322,65 @@
       });
     }
 
-    function calculateSavings() {
-      const emp = parseFloat(document.getElementById('employees').value) || 0;
-      const hrs = parseFloat(document.getElementById('hours').value) || 0;
-      const totalWeeklyHours = emp * hrs * 5;
-      
-      const resultDiv = document.getElementById('result');
-      if (totalWeeklyHours > 0) {
-        resultDiv.innerText = `Your business loses ~${totalWeeklyHours} hours every week! KVORA can automate up to 80% of this.`;
+    function calculateInvoice() {
+      const client = document.getElementById('inv-client').value || 'Acme Corp';
+      const item = document.getElementById('inv-item').value || 'Automation Service';
+      const amount = parseFloat(document.getElementById('inv-amount').value) || 0;
+      const taxRate = parseFloat(document.getElementById('inv-tax').value) || 0;
+
+      const taxVal = (amount * taxRate) / 100;
+      const total = amount + taxVal;
+
+      document.getElementById('prev-client').innerText = client;
+      document.getElementById('prev-item').innerText = item;
+      document.getElementById('prev-sub').innerText = amount.toFixed(2);
+      document.getElementById('prev-tax').innerText = taxVal.toFixed(2);
+      document.getElementById('prev-total').innerText = total.toFixed(2);
+    }
+
+    function sendGRNMail() {
+      const email = document.getElementById('grn-email').value;
+      const details = document.getElementById('grn-details').value;
+      if (!email || !details) {
+        alert("Please enter both Vendor Email and GRN Details!");
+        return;
+      }
+      window.location.href = `mailto:${email}?subject=Goods%20Receipt%20Note%20(GRN)%20Confirmation&body=${encodeURIComponent(details)}`;
+    }
+
+    function generateGASCode() {
+      const opt = document.getElementById('gas-option').value;
+      const codeBox = document.getElementById('gas-code');
+
+      if (opt === 'email') {
+        codeBox.value = `function sendEmailAlert() {\n  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();\n  var email = sheet.getRange("A2").getValue();\n  GmailApp.sendEmail(email, "Automated Notification", "Your entry has been recorded.");\n}`;
+      } else if (opt === 'pdf') {
+        codeBox.value = `function exportToPDF() {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var blob = ss.getAs('application/pdf').setName("Document.pdf");\n  DriveApp.createFile(blob);\n}`;
       } else {
-        resultDiv.innerText = "Enter valid numbers to calculate savings.";
+        codeBox.value = `function removeBlankRows() {\n  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();\n  var maxRows = sheet.getMaxRows();\n  var lastRow = sheet.getLastRow();\n  if (maxRows > lastRow) sheet.deleteRows(lastRow + 1, maxRows - lastRow);\n}`;
       }
     }
+
+    function checkStockAlert() {
+      const curr = parseFloat(document.getElementById('stk-curr').value) || 0;
+      const min = parseFloat(document.getElementById('stk-min').value) || 0;
+      const result = document.getElementById('stk-result');
+
+      if (curr < min) {
+        result.style.color = '#ec4899';
+        result.style.borderColor = '#ec4899';
+        result.innerText = `Status: LOW STOCK! Reorder ${min - curr} units immediately.`;
+      } else {
+        result.style.color = '#10b981';
+        result.style.borderColor = '#10b981';
+        result.innerText = `Status: STOCK HEALTHY! Current level is above safety threshold.`;
+      }
+    }
+
+    // Initialize scripts
+    calculateInvoice();
+    generateGASCode();
+    checkStockAlert();
   </script>
 
 </body>
