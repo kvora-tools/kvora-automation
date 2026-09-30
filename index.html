@@ -3,79 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KVORA Automation | Enterprise Analytics & Workflow Automation</title>
+  <title>KVORA Automation | Modern Business Dashboards & Analytics</title>
   <style>
+    /* DYNAMIC COLOR SYSTEM & RESET */
     :root {
-      --bg-main: #090d16;
-      --panel-bg: rgba(22, 30, 46, 0.7);
-      --panel-border: rgba(255, 255, 255, 0.08);
-      --primary-accent: #6366f1;
-      --secondary-accent: #06b6d4;
-      --highlight: #10b981;
+      --bg-dark: #07090e;
+      --card-bg: rgba(18, 24, 38, 0.75);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
       --text-main: #f8fafc;
-      --text-sub: #94a3b8;
+      --text-muted: #94a3b8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; min-height: 100vh; }
+    body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; min-height: 100vh; background-image: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 50%), radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.1), transparent 50%); }
 
-    /* HEADER & NAVIGATION */
-    header { background: rgba(9, 13, 22, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--panel-border); position: sticky; top: 0; z-index: 1000; padding: 1rem 1.5rem; }
+    /* STICKY HEADER & NAVIGATION */
+    header { background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 1000; padding: 1rem 1.5rem; }
     .header-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
     @media(min-width: 768px) { .header-container { flex-direction: row; justify-content: space-between; } }
 
-    .brand { font-size: 1.4rem; font-weight: 800; tracking: 1px; background: linear-gradient(135deg, var(--secondary-accent), var(--primary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .brand { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
 
-    nav { display: flex; gap: 0.4rem; background: rgba(15, 23, 42, 0.8); padding: 0.3rem; border-radius: 10px; border: 1px solid var(--panel-border); overflow-x: auto; max-width: 100%; }
-    .nav-btn { background: transparent; border: none; color: var(--text-sub); padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; whitespace-nowrap; }
-    .nav-btn.active { background: var(--primary-accent); color: white; box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4); }
+    nav { display: flex; gap: 0.4rem; background: rgba(15, 23, 42, 0.9); padding: 0.35rem; border-radius: 12px; border: 1px solid var(--card-border); overflow-x: auto; max-width: 100%; }
+    .nav-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.55rem 1.1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease; whitespace-nowrap; }
+    .nav-btn.active { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
     .nav-btn:hover:not(.active) { color: white; background: rgba(255, 255, 255, 0.05); }
 
     /* LAYOUT CONTAINERS */
     .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
-    .tab-content { display: none; animation: fadeIn 0.3s ease-out; }
+    .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
     .tab-content.active { display: block; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* HERO */
-    .hero { text-align: center; padding: 3.5rem 1.5rem; background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.12), transparent 75%); border-radius: 16px; border: 1px solid var(--panel-border); margin-bottom: 2rem; }
-    .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.8rem; letter-spacing: -0.5px; }
-    .hero p { color: var(--text-sub); font-size: 1.05rem; max-width: 650px; margin: 0 auto 1.8rem auto; }
+    /* HERO SECTION */
+    .hero { text-align: center; padding: 4rem 1.5rem; background: rgba(18, 24, 38, 0.5); backdrop-filter: blur(12px); border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.25); box-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 2.5rem; position: relative; overflow: hidden; }
+    .hero h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 1rem; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 680px; margin: 0 auto 2rem auto; }
 
     /* BUTTONS */
-    .btn { display: inline-block; padding: 0.75rem 1.6rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
-    .btn-primary { background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
-    .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+    .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer; transition: all 0.25s ease; border: none; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); color: white; box-shadow: 0 4px 20px rgba(236, 72, 153, 0.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(236, 72, 153, 0.5); }
 
-    /* CARDS GRID */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
-    .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 1.75rem; backdrop-filter: blur(8px); }
-    .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; color: white; display: flex; align-items: center; gap: 0.5rem; }
-    .card p { color: var(--text-sub); font-size: 0.9rem; }
+    /* CARDS & GRID SYSTEM */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px); transition: all 0.3s ease; }
+    .card:hover { border-color: var(--accent-cyan); box-shadow: 0 8px 30px rgba(6, 182, 212, 0.15); transform: translateY(-3px); }
 
-    /* DASHBOARD PLACEHOLDERS */
-    .dash-slot { border: 1px dashed var(--primary-accent); background: rgba(99, 102, 241, 0.03); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; }
-    .dash-slot h4 { color: var(--secondary-accent); margin-bottom: 0.4rem; font-size: 1rem; }
-    .dash-slot p { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 1.2rem; }
+    .card-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.3); }
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; color: white; }
+    .card p { color: var(--text-muted); font-size: 0.92rem; }
+
+    /* ENHANCED DASHBOARD PREVIEW SLOTS */
+    .dash-slot { background: rgba(15, 23, 42, 0.8); border: 1px dashed var(--accent-purple); border-radius: 16px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); position: relative; }
+    .dash-slot h4 { color: var(--accent-cyan); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .dash-slot p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    /* SIMULATED METRIC GRAPH GRAPHIC */
+    .dashboard-preview-box { background: rgba(7, 9, 14, 0.9); border: 1px solid var(--card-border); border-radius: 10px; padding: 1rem; margin-bottom: 1.2rem; }
+    .mini-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 60px; gap: 8px; padding-top: 10px; }
+    .chart-bar { width: 18%; background: linear-gradient(to top, var(--accent-purple), var(--accent-cyan)); border-radius: 4px; }
 
     /* FORM STYLING */
-    .form-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 16px; padding: 2rem; max-width: 600px; margin: 0 auto; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--text-sub); }
-    .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 0.9rem; background: rgba(9, 13, 22, 0.8); border: 1px solid var(--panel-border); border-radius: 6px; color: white; font-size: 0.9rem; outline: none; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary-accent); }
+    .form-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.5rem 2rem; max-width: 650px; margin: 0 auto; backdrop-filter: blur(16px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+    .form-group { margin-bottom: 1.4rem; text-align: left; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.85rem 1rem; background: rgba(7, 9, 14, 0.8); border: 1px solid var(--card-border); border-radius: 8px; color: white; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); }
 
-    /* CALCULATOR */
-    .calc-box { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 16px; padding: 2rem; max-width: 550px; margin: 0 auto; }
-    .calc-result { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--highlight); border-radius: 8px; padding: 1rem; text-align: center; font-weight: 600; color: var(--highlight); margin-top: 1rem; font-size: 0.95rem; }
+    /* CALCULATOR BOX */
+    .calc-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.5rem 2rem; max-width: 600px; margin: 0 auto; }
+    .calc-result { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); border-radius: 10px; padding: 1.2rem; text-align: center; font-weight: 700; color: var(--accent-green); margin-top: 1.5rem; font-size: 1rem; }
 
-    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--panel-border); color: var(--text-sub); margin-top: 4rem; font-size: 0.85rem; }
+    footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--card-border); color: var(--text-muted); margin-top: 4rem; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER NAVIGATION -->
+  <!-- NAVIGATION HEADER -->
   <header>
     <div class="header-container">
       <a href="#" class="brand">KVORA AUTOMATION</a>
@@ -94,73 +109,108 @@
     <!-- TAB 1: HOME -->
     <div id="home" class="tab-content active">
       <section class="hero">
-        <h1>Automated Business Systems & Analytics</h1>
-        <p>Eliminate manual data entry, streamline supply chain tracking, and monitor key operational metrics with custom interactive dashboards.</p>
-        <button class="btn btn-primary" onclick="switchTabDirectly('contact')">Submit Requirements</button>
+        <h1>Enterprise Analytics & Workflow Systems</h1>
+        <p>Eliminate manual spreadsheets, automate operational data flows, and gain real-time clarity with custom dashboards.</p>
+        <button class="btn btn-primary" onclick="switchTabDirectly('contact')">Submit Custom Requirement</button>
       </section>
 
       <div class="grid">
         <div class="card">
-          <h3>⚡ Process Automation</h3>
-          <p>Replace repetitive Google Sheets and Excel tasks with reliable background scripts and automated workflows.</p>
+          <span class="card-badge badge-purple">Automations</span>
+          <h3>⚡ Workflows on Autopilot</h3>
+          <p>Replace manual data entry across Google Sheets, Excel, and CRM databases with automated scripts.</p>
         </div>
         <div class="card">
-          <h3>📊 Real-Time Operations</h3>
-          <p>Executive and operational dashboards built using Looker Studio, Metabase, or Power BI for continuous visibility.</p>
+          <span class="card-badge badge-cyan">Analytics</span>
+          <h3>📊 Real-Time Visibility</h3>
+          <p>Executive dashboards in Looker Studio, Power BI, or Metabase tracking fulfillment, stock, and sales metrics.</p>
         </div>
         <div class="card">
-          <h3>🎯 High ROI Systems</h3>
-          <p>Designed using scalable logistics and fulfillment metrics to reduce operational delays and human errors.</p>
+          <span class="card-badge badge-green">ROI Driven</span>
+          <h3>📈 Error-Free Operations</h3>
+          <p>Optimized systems built using scalable supply-chain practices to save up to 80% of daily operational hours.</p>
         </div>
       </div>
     </div>
 
     <!-- TAB 2: SOLUTIONS -->
     <div id="services" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 1.5rem;">Services & Offerings</h2>
+      <h2 style="text-align: center; margin-bottom: 2rem;">Tailored Business Automations</h2>
       <div class="grid">
         <div class="card">
-          <h3>Executive Dashboards</h3>
-          <p>Centralized metrics tracking fulfillment rates, inventory turn, revenue trends, and operational bottlenecks.</p>
+          <span class="card-badge badge-cyan">Service 01</span>
+          <h3>Executive & Ops Dashboards</h3>
+          <p>Live tracking of revenue trends, inventory turnover, order dispatch times, and team KPIs.</p>
         </div>
         <div class="card">
-          <h3>API & Sheet Automations</h3>
-          <p>Custom scripts integrating Google Apps Script, Python, and web APIs to synchronize data hands-free.</p>
+          <span class="card-badge badge-purple">Service 02</span>
+          <h3>Spreadsheet & API Integrations</h3>
+          <p>Automated scripts running silently in the background to fetch, clean, and synchronize multi-platform data.</p>
         </div>
         <div class="card">
-          <h3>Inventory Management Systems</h3>
-          <p>Real-time low-stock alerts, automated reordering metrics, and multi-channel synchronization.</p>
+          <span class="card-badge badge-green">Service 03</span>
+          <h3>Stock & Supply Chain Trackers</h3>
+          <p>Automated reorder triggers, channel inventory synchronization, and low-stock notification alerts.</p>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: DASHBOARDS (EMPTY SHOWCASE SLOTS) -->
+    <!-- TAB 3: DASHBOARDS (WITH WORKING SLOTS & MOCKUPS) -->
     <div id="dashboards" class="tab-content">
       <h2 style="text-align: center; margin-bottom: 0.5rem;">Live Dashboard Showcase</h2>
-      <p style="text-align: center; color: var(--text-sub); margin-bottom: 2rem;">Explore interactive dashboard demonstrations below.</p>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Explore sample layouts below. Embed your live Power BI or Looker links anytime.</p>
 
       <div class="grid">
+        <!-- SLOT 1 -->
         <div class="dash-slot">
-          <h4>📊 Slot #1: Custom Operations Dashboard</h4>
-          <p>Paste your Power BI, Looker Studio, or web dashboard embed link here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">View Demo Link</a>
+          <h4>📊 Slot #1: Operations Dashboard</h4>
+          <div class="dashboard-preview-box">
+            <div class="mini-chart">
+              <div class="chart-bar" style="height: 40%;"></div>
+              <div class="chart-bar" style="height: 70%;"></div>
+              <div class="chart-bar" style="height: 50%;"></div>
+              <div class="chart-bar" style="height: 90%;"></div>
+            </div>
+          </div>
+          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
         </div>
+
+        <!-- SLOT 2 -->
         <div class="dash-slot">
-          <h4>📈 Slot #2: Inventory Analytics System</h4>
-          <p>Paste your Power BI, Looker Studio, or web dashboard embed link here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">View Demo Link</a>
+          <h4>📈 Slot #2: Inventory Tracker</h4>
+          <div class="dashboard-preview-box">
+            <div class="mini-chart">
+              <div class="chart-bar" style="height: 80%;"></div>
+              <div class="chart-bar" style="height: 60%;"></div>
+              <div class="chart-bar" style="height: 100%;"></div>
+              <div class="chart-bar" style="height: 75%;"></div>
+            </div>
+          </div>
+          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
         </div>
+
+        <!-- SLOT 3 -->
         <div class="dash-slot">
           <h4>⚙️ Slot #3: Workflow Monitor</h4>
-          <p>Paste your Power BI, Looker Studio, or web dashboard embed link here.</p>
-          <a href="#" class="btn btn-primary" style="padding: 0.4rem 0.9rem; font-size: 0.8rem;">View Demo Link</a>
+          <div class="dashboard-preview-box">
+            <div class="mini-chart">
+              <div class="chart-bar" style="height: 30%;"></div>
+              <div class="chart-bar" style="height: 50%;"></div>
+              <div class="chart-bar" style="height: 85%;"></div>
+              <div class="chart-bar" style="height: 65%;"></div>
+            </div>
+          </div>
+          <p>Paste your Power BI, Looker Studio, or web app embed code into this slot.</p>
+          <a href="#" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;">View Sample Link</a>
         </div>
       </div>
     </div>
 
     <!-- TAB 4: CALCULATOR -->
     <div id="calculator" class="tab-content">
-      <h2 style="text-align: center; margin-bottom: 1.5rem;">Calculate Operational Savings</h2>
+      <h2 style="text-align: center; margin-bottom: 2rem;">Time & Operational Cost Savings</h2>
       <div class="calc-box">
         <div class="form-group">
           <label for="employees">Team members doing manual data entry:</label>
@@ -176,29 +226,29 @@
       </div>
     </div>
 
-    <!-- TAB 5: AUTOMATIC REQUIREMENT SUBMISSION FORM -->
+    <!-- TAB 5: WORKING FORMSPREE REQUIREMENT FORM -->
     <div id="contact" class="tab-content">
       <div class="form-card">
         <h2 style="text-align: center; margin-bottom: 0.5rem;">Submit Your Requirement</h2>
-        <p style="text-align: center; color: var(--text-sub); margin-bottom: 1.5rem; font-size: 0.9rem;">
-          Tell us about your automation or dashboard needs. Submissions will be sent directly to <strong>kvoura.automation@gmail.com</strong>.
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">
+          Fill out your requirements below. Submissions will be delivered straight to <strong>kvoura.automation@gmail.com</strong>.
         </p>
 
-        <!-- Formspree Action: Sends input directly to your email -->
-        <form action="https://formspree.io/f/kvoura.automation@gmail.com" method="POST">
+        <!-- UPDATED WORKING FORMSPREE ACTION -->
+        <form action="https://formspree.io/f/myezoayj" method="POST">
           <div class="form-group">
-            <label for="client-name">Your Name / Company Name</label>
-            <input type="text" id="client-name" name="name" placeholder="e.g., John Doe / Acme Corp" required />
+            <label for="client-name">Your Name / Business Name</label>
+            <input type="text" id="client-name" name="Name" placeholder="e.g. Rahul Sharma / Retail Brand" required />
           </div>
 
           <div class="form-group">
-            <label for="client-email">Your Email Address</label>
-            <input type="email" id="client-email" name="_replyto" placeholder="e.g., client@example.com" required />
+            <label for="client-email">Your Contact Email</label>
+            <input type="email" id="client-email" name="_replyto" placeholder="e.g. client@company.com" required />
           </div>
 
           <div class="form-group">
-            <label for="client-req">Describe Your Automation / Dashboard Need</label>
-            <textarea id="client-req" name="requirement" rows="5" placeholder="e.g., We want an automated Looker Studio dashboard to track our daily sales and inventory from Google Sheets." required></textarea>
+            <label for="client-req">Describe What You Want Automated / Built</label>
+            <textarea id="client-req" name="Requirement" rows="5" placeholder="e.g. We want an automated Google Looker Studio dashboard that auto-syncs with our Google Sheets inventory every hour." required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%;">Send Requirement to KVORA</button>
@@ -209,7 +259,7 @@
   </div>
 
   <footer>
-    <p>©️ 2026 KVORA Automation • Business Systems & Analytics • Contact: kvoura.automation@gmail.com</p>
+    <p>©️ 2026 KVORA Automation • Business Analytics & Automation • Contact: kvoura.automation@gmail.com</p>
   </footer>
 
   <script>
