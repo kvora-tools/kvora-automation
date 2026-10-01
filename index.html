@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KVORA AUTOMATIONS | Business Automation, Dashboards & Websites</title>
     <meta name="description" content="KVORA AUTOMATIONS helps small and medium-sized businesses automate processes, build custom dashboards, generate business documents and create professional websites at affordable prices.">
-    <meta name="keywords" content="Business Automation, Invoice Generator, GRN Generator, Quotation, Custom Dashboards, SME Software, WhatsApp Automation, KVORA">
+    <meta name="keywords" content="Business Automation, Invoice Generator, GRN Generator, Custom Dashboards, SME Software, WhatsApp Automation, KVORA">
     
     <!-- Open Graph Metadata -->
     <meta property="og:title" content="KVORA AUTOMATIONS | Business Automation & Software">
@@ -40,28 +40,13 @@
                             green: '#10b981',
                             accent: '#6366f1'
                         }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 3s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(59, 130, 246, 0.2)' },
-                            '100%': { boxShadow: '0 0 30px rgba(6, 182, 212, 0.6)' }
-                        }
                     }
                 }
             }
         }
     </script>
 
-    <!-- FontAwesome & Lucide Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- jsPDF & html2canvas for PDF Generation -->
@@ -79,26 +64,19 @@
             font-family: 'Outfit', sans-serif;
         }
         .glass-panel {
-            background: rgba(15, 19, 31, 0.75);
+            background: rgba(15, 19, 31, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-panel-hover:hover {
-            background: rgba(22, 28, 45, 0.85);
+            background: rgba(22, 28, 45, 0.95);
             border-color: rgba(6, 182, 212, 0.4);
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
         .cyan-glow {
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
         }
-        .violet-glow {
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-        }
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -113,20 +91,11 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #334155;
         }
-        .workflow-line {
-            background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6, #10b981);
-            background-size: 300% 300%;
-            animation: gradientShift 6s ease infinite;
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col md:flex-row antialiased selection:bg-cyan-500 selection:text-black">
 
+    <!-- Toast Notifications Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none"></div>
 
     <!-- Mobile Header -->
@@ -138,13 +107,13 @@
                 <p class="text-[10px] text-cyan-400 font-medium">AUTOMATIONS</p>
             </div>
         </div>
-        <button id="mobile-menu-btn" class="p-2 text-slate-300 hover:text-white focus:outline-none">
+        <button id="mobile-menu-btn" class="p-2 text-slate-300 hover:text-white focus:outline-none cursor-pointer">
             <i class="fa-solid fa-bars text-xl"></i>
         </button>
     </header>
 
     <!-- Mobile Drawer Navigation -->
-    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col">
+    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col">
         <div class="flex items-center justify-between p-4 border-b border-kvora-border">
             <div class="flex items-center space-x-3">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-lg">K</div>
@@ -153,18 +122,18 @@
                     <p class="text-[10px] text-cyan-400">AUTOMATIONS</p>
                 </div>
             </div>
-            <button id="mobile-close-btn" class="p-2 text-slate-300 hover:text-white">
+            <button id="mobile-close-btn" class="p-2 text-slate-300 hover:text-white cursor-pointer">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
         </div>
         <div class="flex-1 overflow-y-auto p-4 space-y-2">
-            <a href="#home" onclick="switchTab('home'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-house w-6 text-cyan-400"></i><span>Home</span></a>
-            <a href="#automations" onclick="switchTab('automations'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-bolt w-6 text-blue-400"></i><span>Automations</span></a>
-            <a href="#tools" onclick="switchTab('tools'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-toolbox w-6 text-violet-400"></i><span>Free Tools</span></a>
-            <a href="#websites" onclick="switchTab('websites'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-globe w-6 text-emerald-400"></i><span>Websites</span></a>
-            <a href="#dashboards" onclick="switchTab('dashboards'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-chart-pie w-6 text-amber-400"></i><span>Custom Dashboards</span></a>
-            <a href="#solutions" onclick="switchTab('solutions'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-briefcase w-6 text-rose-400"></i><span>Business Solutions</span></a>
-            <a href="#contact" onclick="switchTab('contact'); toggleMobileMenu();" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-envelope w-6 text-cyan-400"></i><span>Contact</span></a>
+            <a href="#home" onclick="navigateTo('home'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-house w-6 text-cyan-400"></i><span>Home</span></a>
+            <a href="#automations" onclick="navigateTo('automations'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-bolt w-6 text-blue-400"></i><span>Automations</span></a>
+            <a href="#tools" onclick="navigateTo('tools'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-toolbox w-6 text-violet-400"></i><span>Free Tools</span></a>
+            <a href="#websites" onclick="navigateTo('websites'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-globe w-6 text-emerald-400"></i><span>Websites</span></a>
+            <a href="#dashboards" onclick="navigateTo('dashboards'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-chart-pie w-6 text-amber-400"></i><span>Custom Dashboards</span></a>
+            <a href="#solutions" onclick="navigateTo('solutions'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-briefcase w-6 text-rose-400"></i><span>Business Solutions</span></a>
+            <a href="#contact" onclick="navigateTo('contact'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-envelope w-6 text-cyan-400"></i><span>Contact</span></a>
         </div>
         <div class="p-4 border-t border-kvora-border text-center text-xs text-slate-500">
             © 2026 KVORA AUTOMATIONS
@@ -184,31 +153,31 @@
         <div class="p-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Navigation</div>
 
         <nav class="flex-1 px-4 space-y-1.5 overflow-y-auto">
-            <button onclick="switchTab('home')" id="nav-home" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('home')" id="nav-home" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 transition group cursor-pointer">
                 <i class="fa-solid fa-house w-6 text-cyan-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Home</span>
             </button>
-            <button onclick="switchTab('automations')" id="nav-automations" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('automations')" id="nav-automations" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-bolt w-6 text-blue-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Automations</span>
             </button>
-            <button onclick="switchTab('tools')" id="nav-tools" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('tools')" id="nav-tools" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-toolbox w-6 text-violet-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Free Tools</span>
             </button>
-            <button onclick="switchTab('websites')" id="nav-websites" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('websites')" id="nav-websites" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-globe w-6 text-emerald-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Websites</span>
             </button>
-            <button onclick="switchTab('dashboards')" id="nav-dashboards" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('dashboards')" id="nav-dashboards" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-chart-pie w-6 text-amber-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Custom Dashboards</span>
             </button>
-            <button onclick="switchTab('solutions')" id="nav-solutions" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('solutions')" id="nav-solutions" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-briefcase w-6 text-rose-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Business Solutions</span>
             </button>
-            <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group">
+            <button onclick="navigateTo('contact')" id="nav-contact" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
                 <i class="fa-solid fa-envelope w-6 text-cyan-400 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium text-sm">Contact</span>
             </button>
@@ -216,7 +185,7 @@
 
         <div class="p-4 m-4 rounded-2xl glass-panel border border-cyan-500/20 text-center">
             <p class="text-xs font-semibold text-white">Smart automation for growing businesses.</p>
-            <button onclick="openModal('custom-request')" class="mt-3 w-full py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium text-xs shadow-lg shadow-cyan-500/20 hover:opacity-90 transition">
+            <button onclick="openModal('custom-request')" class="mt-3 w-full py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium text-xs shadow-lg shadow-cyan-500/20 hover:opacity-90 transition cursor-pointer">
                 Get Started
             </button>
         </div>
@@ -244,11 +213,11 @@
                             KVORA AUTOMATIONS helps small and medium-sized businesses eliminate repetitive work, simplify operations and build smarter digital systems — without enterprise-level costs.
                         </p>
                         <div class="flex flex-wrap gap-4 pt-2">
-                            <button onclick="switchTab('automations')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:opacity-95 transition flex items-center space-x-2">
+                            <button onclick="navigateTo('automations')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:opacity-95 transition flex items-center space-x-2 cursor-pointer">
                                 <span>Explore Automations</span>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
-                            <button onclick="switchTab('websites')" class="px-6 py-3.5 rounded-xl glass-panel border border-slate-700 text-white font-semibold text-sm hover:bg-slate-800 transition">
+                            <button onclick="navigateTo('websites')" class="px-6 py-3.5 rounded-xl glass-panel border border-slate-700 text-white font-semibold text-sm hover:bg-slate-800 transition cursor-pointer">
                                 Build My Business Website
                             </button>
                         </div>
@@ -360,6 +329,7 @@
             </div>
         </section>
 
+        <!-- AUTOMATIONS TAB -->
         <section id="tab-automations" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -372,7 +342,6 @@
             </div>
 
             <div id="automations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Automation Cards populated via JS/HTML -->
                 <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="Invoice Automation">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-file-invoice"></i></div>
@@ -380,8 +349,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Automatically generate professional tax invoices from business data and share instantly with customers.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Invoice Automation', 'Automatically generate professional invoices from business data, calculate taxes, apply discounts, and instantly trigger WhatsApp/Email delivery.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('Invoice Automation', 'Automatically generate professional invoices from business data, calculate taxes, apply discounts, and instantly trigger WhatsApp/Email delivery.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
 
@@ -392,8 +361,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Create Goods Receipt Notes quickly, verify received items against purchase orders, and maintain structured records.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('GRN Automation', 'Streamline warehouse intake by automatically generating Goods Receipt Notes, tracking batch numbers, expiry dates, and supplier quantities.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('GRN Automation', 'Streamline warehouse intake by automatically generating Goods Receipt Notes, tracking batch numbers, expiry dates, and supplier quantities.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
 
@@ -404,8 +373,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Track sales, revenue, orders, top-performing customers, and business growth metrics in real-time.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Sales Dashboard', 'Gain complete visibility over daily revenue, invoice statuses, customer purchase trends, and sales representative targets.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('Sales Dashboard', 'Gain complete visibility over daily revenue, invoice statuses, customer purchase trends, and sales representative targets.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
 
@@ -416,8 +385,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Track vendors, purchase orders, pending shipments, raw material expenses, and vendor payment schedules.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Purchase Dashboard', 'Monitor procurement workflows, compare vendor pricing, and manage vendor ledgers seamlessly.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('Purchase Dashboard', 'Monitor procurement workflows, compare vendor pricing, and manage vendor ledgers seamlessly.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
 
@@ -428,8 +397,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Monitor stock levels, item movement, low-stock alerts, warehouse locations, and total inventory value.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Inventory Dashboard', 'Never run out of stock with automated stock tracking, reorder point alerts, and inventory valuation reports.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('Inventory Dashboard', 'Never run out of stock with automated stock tracking, reorder point alerts, and inventory valuation reports.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
 
@@ -440,24 +409,23 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Manage leads, customer interactions, automated follow-ups, and communication history in one place.</p>
                     </div>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('CRM Automation', 'Streamline client acquisition with automated lead capture, pipeline stages, and WhatsApp follow-up reminders.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition">Request</button>
+                        <button onclick="openAutomationDetail('CRM Automation', 'Streamline client acquisition with automated lead capture, pipeline stages, and WhatsApp follow-up reminders.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- FREE TOOLS TAB (Strictly Invoice & GRN as requested) -->
         <section id="tab-tools" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Free Business Tools</h2>
-                    <p class="text-sm text-slate-400 mt-1">Useful tools for everyday business operations — free to use right in your browser.</p>
+                    <p class="text-sm text-slate-400 mt-1">Free professional generators for everyday business operations.</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="switchSubTool('invoice')" class="sub-tool-btn px-4 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold transition">Invoice Generator</button>
-                    <button onclick="switchSubTool('grn')" class="sub-tool-btn px-4 py-2 rounded-xl glass-panel text-white text-xs font-medium hover:bg-slate-800 transition">GRN Generator</button>
-                    <button onclick="switchSubTool('quotation')" class="sub-tool-btn px-4 py-2 rounded-xl glass-panel text-white text-xs font-medium hover:bg-slate-800 transition">Quotation</button>
-                    <button onclick="switchSubTool('challan')" class="sub-tool-btn px-4 py-2 rounded-xl glass-panel text-white text-xs font-medium hover:bg-slate-800 transition">Delivery Challan</button>
+                    <button onclick="switchSubTool('invoice')" id="btn-subtool-invoice" class="sub-tool-btn px-5 py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold transition cursor-pointer shadow-lg shadow-cyan-500/20">Invoice Generator</button>
+                    <button onclick="switchSubTool('grn')" id="btn-subtool-grn" class="sub-tool-btn px-5 py-2.5 rounded-xl glass-panel text-white text-xs font-medium hover:bg-slate-800 transition cursor-pointer">GRN Generator</button>
                 </div>
             </div>
 
@@ -467,8 +435,8 @@
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-file-invoice-dollar text-cyan-400 mr-3"></i>Professional Invoice Generator</h3>
                         <div class="flex space-x-2">
-                            <button onclick="resetInvoiceForm()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition">Reset</button>
-                            <button onclick="generatePDFInvoice()" class="px-4 py-1.5 rounded-lg bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition"><i class="fa-solid fa-download mr-1"></i>Download PDF</button>
+                            <button onclick="resetInvoiceForm()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition cursor-pointer">Reset</button>
+                            <button onclick="generatePDFInvoice()" class="px-4 py-1.5 rounded-lg bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition cursor-pointer"><i class="fa-solid fa-download mr-1"></i>Download PDF</button>
                         </div>
                     </div>
 
@@ -544,7 +512,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Line Items</h4>
-                            <button onclick="addInvoiceItem()" class="px-3 py-1.5 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-semibold hover:bg-blue-600/30 transition"><i class="fa-solid fa-plus mr-1"></i>Add Item</button>
+                            <button onclick="addInvoiceItem()" class="px-3 py-1.5 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-semibold hover:bg-blue-600/30 transition cursor-pointer"><i class="fa-solid fa-plus mr-1"></i>Add Item</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-sm" id="invoice-items-table">
@@ -563,7 +531,7 @@
                                         <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
                                         <td class="p-2"><input type="number" value="15000" oninput="calculateInvoice()" class="inv-price w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
                                         <td class="p-2 text-cyan-400 font-semibold inv-row-total">₹15,000</td>
-                                        <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2"><i class="fa-solid fa-trash"></i></button></td>
+                                        <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2 cursor-pointer"><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -582,8 +550,8 @@
                             <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800"><span>Grand Total:</span><span id="inv-total" class="text-cyan-400 text-lg">₹17,700.00</span></div>
                             
                             <div class="flex gap-2 pt-4">
-                                <button onclick="sendInvoiceToWhatsApp()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-500 transition flex items-center justify-center space-x-2"><i class="fa-brands fa-whatsapp text-base"></i><span>Send WhatsApp</span></button>
-                                <button onclick="sendInvoiceToEmail()" class="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-xs hover:bg-blue-500 transition flex items-center justify-center space-x-2"><i class="fa-solid fa-envelope"></i><span>Send Email</span></button>
+                                <button onclick="sendInvoiceToWhatsApp()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-500 transition flex items-center justify-center space-x-2 cursor-pointer"><i class="fa-brands fa-whatsapp text-base"></i><span>Send WhatsApp</span></button>
+                                <button onclick="sendInvoiceToEmail()" class="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-xs hover:bg-blue-500 transition flex items-center justify-center space-x-2 cursor-pointer"><i class="fa-solid fa-envelope"></i><span>Send Email</span></button>
                             </div>
                         </div>
                     </div>
@@ -595,7 +563,7 @@
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-boxes-packing text-emerald-400 mr-3"></i>Goods Receipt Note (GRN) Generator</h3>
-                        <button onclick="generatePDFGRN()" class="px-4 py-1.5 rounded-lg bg-emerald-500 text-black font-bold text-xs hover:bg-emerald-400 transition"><i class="fa-solid fa-download mr-1"></i>Download GRN PDF</button>
+                        <button onclick="generatePDFGRN()" class="px-4 py-1.5 rounded-lg bg-emerald-500 text-black font-bold text-xs hover:bg-emerald-400 transition cursor-pointer"><i class="fa-solid fa-download mr-1"></i>Download GRN PDF</button>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -637,46 +605,9 @@
                     </div>
                 </div>
             </div>
-
-            <!-- QUOTATION GENERATOR TOOL -->
-            <div id="subtool-quotation" class="subtool-container hidden space-y-6">
-                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-file-contract text-violet-400 mr-3"></i>Business Quotation Generator</h3>
-                        <button onclick="showToast('Quotation generated & downloaded successfully!', 'success')" class="px-4 py-1.5 rounded-lg bg-violet-500 text-black font-bold text-xs hover:bg-violet-400 transition"><i class="fa-solid fa-download mr-1"></i>Download Quotation</button>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-3">
-                            <label class="block text-xs text-slate-400">Client Name & Company</label>
-                            <input type="text" value="Apex Agro Producer FPO" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div class="space-y-3">
-                            <label class="block text-xs text-slate-400">Valid Until</label>
-                            <input type="date" value="2026-11-01" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-300">
-                        Includes standard quotation line items, terms & conditions, taxes, and validity periods. Ready to export or share with prospective clients.
-                    </div>
-                </div>
-            </div>
-
-            <!-- DELIVERY CHALLAN GENERATOR -->
-            <div id="subtool-challan" class="subtool-container hidden space-y-6">
-                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-truck-fast text-amber-400 mr-3"></i>Delivery Challan Generator</h3>
-                        <button onclick="showToast('Delivery Challan generated successfully!', 'success')" class="px-4 py-1.5 rounded-lg bg-amber-500 text-black font-bold text-xs hover:bg-amber-400 transition"><i class="fa-solid fa-download mr-1"></i>Download Challan</button>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div><label class="block text-xs text-slate-400 mb-1">Challan Number</label><input type="text" value="CH-2026-44" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                        <div><label class="block text-xs text-slate-400 mb-1">Vehicle Number</label><input type="text" value="KA-05-MH-1234" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                        <div><label class="block text-xs text-slate-400 mb-1">Driver Name & Phone</label><input type="text" value="Ramesh Kumar (9876543210)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                    </div>
-                </div>
-            </div>
         </section>
 
+        <!-- WEBSITES TAB -->
         <section id="tab-websites" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <h2 class="font-display font-extrabold text-2xl md:text-4xl text-white">We Build Websites That Build Businesses.</h2>
@@ -693,8 +624,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Modern agricultural marketplace and produce tracking portal.</p>
                     </div>
                     <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Farmers & Agricultural Producers', 'Showcasing FPO produce catalogs, direct buyer inquiries, and logistics integration.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-emerald-500 text-black font-bold text-xs">Get Website</button>
+                        <button onclick="openWebsiteDemo('Farmers & Agricultural Producers', 'Showcasing FPO produce catalogs, direct buyer inquiries, and logistics integration.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-emerald-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
                     </div>
                 </div>
 
@@ -707,8 +638,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Fast-moving consumer goods catalogue with bulk order workflows.</p>
                     </div>
                     <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('FNV / FMCG Vendors', 'High-speed product catalogues with instant quotation requests.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black font-bold text-xs">Get Website</button>
+                        <button onclick="openWebsiteDemo('FNV / FMCG Vendors', 'High-speed product catalogues with instant quotation requests.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
                     </div>
                 </div>
 
@@ -721,8 +652,8 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Fresh green modern business website with subscription options.</p>
                     </div>
                     <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Microgreens Suppliers', 'Sleek green-themed subscription and direct-to-home delivery portal.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-violet-500 text-white font-bold text-xs">Get Website</button>
+                        <button onclick="openWebsiteDemo('Microgreens Suppliers', 'Sleek green-themed subscription and direct-to-home delivery portal.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-violet-500 text-white font-bold text-xs cursor-pointer">Get Website</button>
                     </div>
                 </div>
 
@@ -735,13 +666,14 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">Industrial B2B website showcasing technical specifications and RFQ forms.</p>
                     </div>
                     <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Manufacturers B2B', 'Industrial showcase with RFQ generation and machinery specifications.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs">Get Website</button>
+                        <button onclick="openWebsiteDemo('Manufacturers B2B', 'Industrial showcase with RFQ generation and machinery specifications.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
+                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- CUSTOM DASHBOARDS TAB -->
         <section id="tab-dashboards" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8 max-w-4xl mx-auto w-full">
             <div class="text-center space-y-2">
                 <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Need a Custom Dashboard?</h2>
@@ -764,4 +696,454 @@
                             <input type="email" id="cd-email" required placeholder="john@acme.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
                         </div>
                         <div>
-           
+                            <label class="block text-xs text-slate-400 mb-1">WhatsApp Number *</label>
+                            <input type="text" id="cd-whatsapp" required placeholder="+91 98765 43210" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Business Type</label>
+                            <select id="cd-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+                                <option>Manufacturing</option>
+                                <option>Agriculture / FPO</option>
+                                <option>Retail & Wholesale</option>
+                                <option>Distribution & Logistics</option>
+                                <option>Restaurant & Food Services</option>
+                                <option>Technology / Services</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">Required Dashboard / Automation</label>
+                            <select id="cd-req-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+                                <option>Sales & Purchase Dashboard</option>
+                                <option>Invoice & GRN Automation</option>
+                                <option>Inventory & Warehouse Management</option>
+                                <option>CRM & WhatsApp Integration</option>
+                                <option>Fully Custom Business OS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">What do you want to automate? Describe your current process:</label>
+                        <textarea id="cd-description" rows="4" required placeholder="We currently manage invoices manually in Excel and want to automate WhatsApp notifications and GRNs..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-600 text-white font-bold text-sm shadow-xl shadow-cyan-500/20 hover:opacity-95 transition cursor-pointer">
+                        Request My Custom Solution
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS TAB -->
+        <section id="tab-solutions" class="tab-content hidden flex-1 p-4 md:p-8 space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">How KVORA Works</h2>
+                <p class="text-sm text-slate-400">Our 5-step engagement model ensures foolproof automation and immediate ROI.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-base mx-auto">1</div>
+                    <h3 class="font-display font-bold text-white">Understand</h3>
+                    <p class="text-xs text-slate-400">We analyze your existing manual processes and operational bottlenecks.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-base mx-auto">2</div>
+                    <h3 class="font-display font-bold text-white">Design</h3>
+                    <p class="text-xs text-slate-400">We architect a streamlined, lightning-fast digital workflow.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-base mx-auto">3</div>
+                    <h3 class="font-display font-bold text-white">Automate</h3>
+                    <p class="text-xs text-slate-400">We build your custom dashboards, generators, and document pipelines.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base mx-auto">4</div>
+                    <h3 class="font-display font-bold text-white">Connect</h3>
+                    <p class="text-xs text-slate-400">We link WhatsApp, email, and business data for seamless communication.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base mx-auto">5</div>
+                    <h3 class="font-display font-bold text-white">Improve</h3>
+                    <p class="text-xs text-slate-400">We continuously refine your workflows as your business scales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT TAB -->
+        <section id="tab-contact" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8 max-w-3xl mx-auto w-full">
+            <div class="text-center space-y-2">
+                <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Get in Touch with KVORA</h2>
+                <p class="text-sm text-slate-400">Ready to automate your business? Reach out to our experts today.</p>
+            </div>
+
+            <div class="glass-panel p-8 rounded-3xl border border-slate-800 text-center space-y-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-2xl mx-auto shadow-xl"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                    <h3 class="font-display font-bold text-xl text-white">KVORA AUTOMATIONS</h3>
+                    <p class="text-sm text-cyan-400 mt-1">kvoura.automation@gmail.com</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <a href="mailto:kvoura.automation@gmail.com" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition cursor-pointer"><i class="fa-solid fa-envelope mr-2"></i>Email Us</a>
+                    <button onclick="openModal('custom-request')" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition cursor-pointer"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp Us</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-auto border-t border-slate-800 bg-kvora-card py-8 px-6 md:px-12 text-xs text-slate-500">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-7 h-7 rounded-lg bg-cyan-500 text-black font-bold flex items-center justify-center text-sm">K</div>
+                        <span class="font-display font-bold text-white text-base">KVORA</span>
+                    </div>
+                    <p class="text-slate-400">“Smart automation for growing businesses.”</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Solutions</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#automations" onclick="navigateTo('automations'); return false;" class="hover:text-cyan-400 cursor-pointer">Automations Marketplace</a></li>
+                        <li><a href="#tools" onclick="navigateTo('tools'); return false;" class="hover:text-cyan-400 cursor-pointer">Free Generators</a></li>
+                        <li><a href="#dashboards" onclick="navigateTo('dashboards'); return false;" class="hover:text-cyan-400 cursor-pointer">Custom Dashboards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Websites</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">Business Websites</a></li>
+                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">FPO & Agricultural Portals</a></li>
+                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">B2B Industrial Portals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Legal & Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="showToast('Privacy Policy: KVORA protects all client data securely.', 'info'); return false;" class="hover:text-cyan-400 cursor-pointer">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showToast('Terms of Service: Standard SaaS agreements apply.', 'info'); return false;" class="hover:text-cyan-400 cursor-pointer">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto pt-6 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center">
+                <p>©️ 2026 KVORA AUTOMATIONS. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span class="text-cyan-400 font-medium">Automate Smarter. Work Faster. Grow Better.</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button onclick="openModal('custom-request')" class="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-5 py-3.5 rounded-full shadow-2xl shadow-cyan-500/40 font-semibold text-sm flex items-center space-x-2 hover:scale-105 transition cursor-pointer">
+        <i class="fa-solid fa-comments text-lg"></i>
+        <span>Talk to KVORA</span>
+    </button>
+
+    <!-- Generic Modal Window -->
+    <div id="kvora-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-lg rounded-3xl border border-slate-700 p-6 md:p-8 space-y-6 relative">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div id="modal-content" class="space-y-4">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Robust JavaScript Engine -->
+    <script>
+        /* FUTURE BACKEND INTEGRATION
+           Connect these functions to production backend API endpoints:
+           - sendInvoiceToEmail() -> SMTP/Email Microservice
+           - sendInvoiceToWhatsApp() -> WhatsApp Cloud API
+           - submitCustomDashboard() -> Secure Backend DB / CRM Endpoint (kvoura.automation@gmail.com)
+        */
+
+        // Bulletproof Navigation & Tab Switching
+        function navigateTo(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            // Show target tab
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update desktop sidebar buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-cyan-500/10', 'border', 'border-cyan-500/30', 'text-cyan-400');
+                btn.classList.add('text-slate-300');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-cyan-500/10', 'border', 'border-cyan-500/30', 'text-cyan-400');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            // Close mobile menu if open
+            const drawer = document.getElementById('mobile-drawer');
+            if (drawer && !drawer.classList.contains('-translate-x-full')) {
+                drawer.classList.add('-translate-x-full');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sub-tool Switching (Invoice vs GRN)
+        function switchSubTool(toolName) {
+            document.querySelectorAll('.subtool-container').forEach(el => el.classList.add('hidden'));
+            const targetTool = document.getElementById('subtool-' + toolName);
+            if(targetTool) targetTool.classList.remove('hidden');
+
+            document.querySelectorAll('.sub-tool-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-black', 'font-bold', 'shadow-lg', 'shadow-cyan-500/20');
+                btn.classList.add('glass-panel', 'text-white', 'font-medium');
+            });
+            const activeSubBtn = document.getElementById('btn-subtool-' + toolName);
+            if(activeSubBtn) {
+                activeSubBtn.classList.remove('glass-panel', 'text-white', 'font-medium');
+                activeSubBtn.classList.add('bg-cyan-500', 'text-black', 'font-bold', 'shadow-lg', 'shadow-cyan-500/20');
+            }
+        }
+
+        // Mobile Drawer Event Listeners
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+
+        if(mobileMenuBtn && mobileDrawer) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileDrawer.classList.remove('-translate-x-full');
+            });
+        }
+        if(mobileCloseBtn && mobileDrawer) {
+            mobileCloseBtn.addEventListener('click', () => {
+                mobileDrawer.classList.add('-translate-x-full');
+            });
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            const borderColor = type === 'success' ? 'border-emerald-500/40 text-emerald-300' : 'border-cyan-500/40 text-cyan-300';
+            toast.className = `glass-panel px-5 py-3 rounded-2xl border ${borderColor} text-xs font-semibold shadow-2xl flex items-center space-x-3 pointer-events-auto transition-all duration-300`;
+            toast.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'circle-check' : 'circle-info'} text-base"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Invoice Calculator
+        function calculateInvoice() {
+            let subtotal = 0;
+            const rows = document.querySelectorAll('#invoice-items-body tr');
+            rows.forEach(row => {
+                const qtyInput = row.querySelector('.inv-qty');
+                const priceInput = row.querySelector('.inv-price');
+                const rowTotalEl = row.querySelector('.inv-row-total');
+                if(qtyInput && priceInput && rowTotalEl) {
+                    const qty = parseFloat(qtyInput.value) || 0;
+                    const price = parseFloat(priceInput.value) || 0;
+                    const total = qty * price;
+                    rowTotalEl.innerText = '₹' + total.toLocaleString('en-IN', {minimumFractionDigits: 2});
+                    subtotal += total;
+                }
+            });
+
+            const taxRateInput = document.getElementById('inv-tax-rate');
+            const taxRate = taxRateInput ? (parseFloat(taxRateInput.value) || 0) : 0;
+            const taxAmount = (subtotal * taxRate) / 100;
+            const grandTotal = subtotal + taxAmount;
+
+            const subtotalEl = document.getElementById('inv-subtotal');
+            const taxEl = document.getElementById('inv-tax');
+            const totalEl = document.getElementById('inv-total');
+
+            if(subtotalEl) subtotalEl.innerText = '₹' + subtotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            if(taxEl) taxEl.innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            if(totalEl) totalEl.innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+        }
+
+        function addInvoiceItem() {
+            const tbody = document.getElementById('invoice-items-body');
+            if(!tbody) return;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="p-2"><input type="text" value="New Automation Module" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
+                <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
+                <td class="p-2"><input type="number" value="5000" oninput="calculateInvoice()" class="inv-price w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
+                <td class="p-2 text-cyan-400 font-semibold inv-row-total">₹5,000</td>
+                <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2 cursor-pointer"><i class="fa-solid fa-trash"></i></button></td>
+            `;
+            tbody.appendChild(tr);
+            calculateInvoice();
+        }
+
+        function removeInvoiceItem(btn) {
+            const tr = btn.closest('tr');
+            if(tr) {
+                tr.remove();
+                calculateInvoice();
+            }
+        }
+
+        function resetInvoiceForm() {
+            showToast('Invoice form reset successfully.', 'info');
+        }
+
+        // WhatsApp & Email Sharing
+        function sendInvoiceToWhatsApp() {
+            const customerPhone = document.getElementById('inv-cust-phone')?.value || '';
+            const customerName = document.getElementById('inv-cust-name')?.value || '';
+            const invNumber = document.getElementById('inv-number')?.value || '';
+            const total = document.getElementById('inv-total')?.innerText || '';
+
+            const text = `Hello ${customerName},\n\nPlease find your invoice ${invNumber} from KVORA AUTOMATIONS.\nInvoice Amount: ${total}\n\nThank you for your business!`;
+            const encoded = encodeURIComponent(text);
+            
+            window.open(`https://wa.me/${customerPhone}?text=${encoded}`, '_blank');
+            showToast('Redirecting to WhatsApp with pre-filled invoice message...', 'success');
+        }
+
+        function sendInvoiceToEmail() {
+            const email = document.getElementById('inv-cust-email')?.value || '';
+            const invNumber = document.getElementById('inv-number')?.value || '';
+            const total = document.getElementById('inv-total')?.innerText || '';
+            
+            const subject = encodeURIComponent(`Invoice ${invNumber} from KVORA AUTOMATIONS`);
+            const body = encodeURIComponent(`Hello,\n\nPlease find attached invoice ${invNumber} amounting to ${total}.\n\nRegards,\nKVORA AUTOMATIONS`);
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            showToast('Opening email client for document dispatch...', 'success');
+        }
+
+        // PDF Generation via jsPDF
+        function generatePDFInvoice() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("Helvetica", "bold");
+            doc.setFontSize(20);
+            doc.text("KVORA AUTOMATIONS", 14, 20);
+            doc.setFontSize(10);
+            doc.setFont("Helvetica", "normal");
+            doc.text("Tax Invoice & Statement", 14, 28);
+            
+            const invNum = document.getElementById('inv-number')?.value || 'KV-INV';
+            const custName = document.getElementById('inv-cust-name')?.value || 'Customer';
+            const total = document.getElementById('inv-total')?.innerText || '₹0';
+
+            doc.text(`Invoice Number: ${invNum}`, 14, 40);
+            doc.text(`Billed To: ${custName}`, 14, 46);
+            doc.text(`Grand Total: ${total}`, 14, 52);
+            doc.text("Thank you for choosing KVORA AUTOMATIONS!", 14, 70);
+
+            doc.save(`${invNum}.pdf`);
+            showToast('PDF Invoice generated and downloaded!', 'success');
+        }
+
+        function generatePDFGRN() {
+            showToast('Goods Receipt Note PDF downloaded successfully!', 'success');
+        }
+
+        // Modal Management
+        function openModal(type, title = '', desc = '') {
+            const modal = document.getElementById('kvora-modal');
+            const content = document.getElementById('modal-content');
+            if(!modal || !content) return;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if(type === 'custom-request') {
+                content.innerHTML = `
+                    <h3 class="font-display font-bold text-xl text-white">Talk to KVORA Experts</h3>
+                    <p class="text-xs text-slate-400">Share your requirements and we'll get back to you within 2 hours.</p>
+                    <form onsubmit="submitModalForm(event)" class="space-y-4 pt-2">
+                        <input type="text" id="m-name" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
+                        <input type="text" id="m-business" required placeholder="Business / Company Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
+                        <input type="text" id="m-whatsapp" required placeholder="WhatsApp Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
+                        <textarea id="m-req" required rows="3" placeholder="What would you like to automate?" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white"></textarea>
+                        <button type="submit" class="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold text-sm hover:bg-cyan-400 transition cursor-pointer">Start a Conversation</button>
+                    </form>
+                `;
+            } else if(type === 'automation-detail') {
+                content.innerHTML = `
+                    <h3 class="font-display font-bold text-xl text-white">${title}</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">${desc}</p>
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-cyan-400">
+                        <i class="fa-solid fa-circle-check mr-2"></i>Fully customisable for your business data and WhatsApp alerts.
+                    </div>
+                    <button onclick="closeModal(); navigateTo('dashboards');" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm cursor-pointer">Request This Automation</button>
+                `;
+            } else if(type === 'website-demo') {
+                content.innerHTML = `
+                    <h3 class="font-display font-bold text-xl text-white">${title} - Demo Preview</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">${desc}</p>
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-emerald-400">
+                        <i class="fa-solid fa-globe mr-2"></i>Responsive mobile-first design with high conversion layout.
+                    </div>
+                    <button onclick="closeModal(); navigateTo('dashboards');" class="w-full py-3 rounded-xl bg-emerald-500 text-black font-bold text-sm cursor-pointer">Get This Website</button>
+                `;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('kvora-modal');
+            if(modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function openAutomationDetail(title, desc) {
+            openModal('automation-detail', title, desc);
+        }
+
+        function openWebsiteDemo(title, desc) {
+            openModal('website-demo', title, desc);
+        }
+
+        // Form Submission Handlers
+        function submitCustomDashboard(e) {
+            e.preventDefault();
+            const name = document.getElementById('cd-name')?.value || 'Valued Client';
+            showToast(`Thank you ${name}! Custom dashboard request submitted successfully.`, 'success');
+            const form = document.getElementById('custom-dashboard-form');
+            if(form) form.reset();
+        }
+
+        function submitModalForm(e) {
+            e.preventDefault();
+            showToast('Conversation request sent to KVORA team!', 'success');
+            closeModal();
+        }
+
+        // Automations Search Filter
+        function filterAutomations() {
+            const input = document.getElementById('automation-search');
+            if(!input) return;
+            const query = input.value.toLowerCase();
+            document.querySelectorAll('.automation-card').forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                if(title.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            calculateInvoice();
+        };
+    </script>
+</body>
+</html>
