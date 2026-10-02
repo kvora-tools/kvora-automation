@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct search bots to the site index
+Sitemap: https://kvora-tools.github.io/kvora-automation/sitemap.xml
