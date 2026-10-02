@@ -86,7 +86,7 @@
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
                 <a href="#home" id="nav-home" onclick="navigateTo('home')" class="nav-btn text-brand-600">Home</a>
-                <a href="#websites" id="nav-websites" onclick="navigateTo('websites')" class="nav-btn hover:text-brand-600">Websites</a>
+                <a href="#websites" id="nav-websites" onclick="navigateTo('websites')" class="nav-btn hover:text-brand-600">Websites & Portfolio</a>
                 <a href="#dashboards" id="nav-dashboards" onclick="navigateTo('dashboards')" class="nav-btn hover:text-brand-600">Dashboards</a>
                 <a href="#automations" id="nav-automations" onclick="navigateTo('automations')" class="nav-btn hover:text-brand-600">Automation</a>
                 <a href="#tools" id="nav-tools" onclick="navigateTo('tools')" class="nav-btn hover:text-brand-600">Free Tools</a>
@@ -113,7 +113,7 @@
                 </div>
                 <nav class="py-6 space-y-3 font-semibold text-slate-700">
                     <a href="#home" onclick="navigateTo('home');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Home</a>
-                    <a href="#websites" onclick="navigateTo('websites');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Websites</a>
+                    <a href="#websites" onclick="navigateTo('websites');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Websites & Portfolio</a>
                     <a href="#dashboards" onclick="navigateTo('dashboards');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Dashboards</a>
                     <a href="#automations" onclick="navigateTo('automations');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Automation</a>
                     <a href="#tools" onclick="navigateTo('tools');" class="block px-4 py-2 rounded-lg hover:bg-slate-50">Free Tools</a>
@@ -220,6 +220,81 @@
                                         <span class="text-slate-500 font-bold">Connected</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORK & PORTFOLIO SHOWCASE (NEWLY ADDED LIVE & DEMO SITES) -->
+            <div class="py-16 bg-white border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Client Work & Live Projects</span>
+                            <h2 class="font-display font-extrabold text-3xl text-slate-900">Our Website Portfolio</h2>
+                            <p class="text-xs text-slate-600">Explore our real deployed websites and interactive restaurant showcases.</p>
+                        </div>
+                        <button onclick="navigateTo('websites')" class="text-xs font-bold text-brand-600 hover:text-brand-700">View All Work &rarr;</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Chumbak House (Live) -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-slate-900 text-white flex flex-col justify-between relative overflow-hidden">
+                            <div class="space-y-3 z-10">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">Live Client Site</span>
+                                    <i class="fa-solid fa-house-laptop text-slate-400 text-lg"></i>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-white">Chumbak House</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">Interactive interior housing showcase and dynamic ideas presentation page built for modern client experience.</p>
+                            </div>
+                            <div class="pt-6 mt-4 border-t border-slate-800 flex items-center justify-between z-10">
+                                <span class="text-[10px] font-mono text-slate-400">kvora-tools.github.io</span>
+                                <a href="https://kvora-tools.github.io/chumbak-house/#ideas" target="_blank" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition flex items-center gap-1.5">
+                                    <span>Visit Site</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Advika (Live) -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-slate-900 text-white flex flex-col justify-between relative overflow-hidden">
+                            <div class="space-y-3 z-10">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">Live Client Site</span>
+                                    <i class="fa-solid fa-gem text-slate-400 text-lg"></i>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-white">Advika Digital</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">High-performance custom web layout engineered for Advika brand storytelling, optimized for mobile responsiveness.</p>
+                            </div>
+                            <div class="pt-6 mt-4 border-t border-slate-800 flex items-center justify-between z-10">
+                                <span class="text-[10px] font-mono text-slate-400">kvora-tools.github.io</span>
+                                <a href="https://kvora-tools.github.io/advika/" target="_blank" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition flex items-center gap-1.5">
+                                    <span>Visit Site</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- The Spiced Table (Restaurant Showcase) -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-amber-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Restaurant Demo</span>
+                                    <i class="fa-solid fa-utensils text-amber-600 text-lg"></i>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-slate-900">The Spiced Table</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">Luxury fine dining concept with interactive digital menu, table reservation system, and online dish previews.</p>
+                            </div>
+                            <div class="pt-6 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-500">Fine Dining</span>
+                                <a href="https://kvora-tools.github.io/demo-spiced-table/" target="_blank" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition flex items-center gap-1.5">
+                                    <span>Demo Preview</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -341,9 +416,9 @@
         </section>
 
 
-        <!-- CUSTOM WEBSITES TAB -->
+        <!-- CUSTOM WEBSITES & PORTFOLIO SHOWCASE TAB -->
         <section id="tab-websites" class="tab-content hidden py-16 bg-slate-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
                 
                 <div class="text-center max-w-3xl mx-auto space-y-3">
                     <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider">Starting at ₹799</span>
@@ -351,67 +426,165 @@
                     <p class="text-slate-600 text-base">We build clean, fast, and modern websites designed to make your brand look credible and established.</p>
                 </div>
 
-                <!-- CATEGORIES SHOWCASE -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    <!-- Restaurant Website Showcase -->
-                    <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
-                        <div class="space-y-3">
-                            <div class="h-40 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col items-center justify-center text-amber-700 p-4 text-center">
-                                <i class="fa-solid fa-utensils text-4xl mb-2"></i>
-                                <span class="font-display font-bold text-base">Restaurant & Cafe Portal</span>
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-slate-900">For Your Restaurants & Food Business</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                Show interactive digital menus, accept online table reservations, direct WhatsApp order inquiries, and highlight food photos & reviews.
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-bold text-amber-600">From ₹799</span>
-                            <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Restaurant Site</button>
-                        </div>
+                <!-- LIVE PORTFOLIO SHOWCASE GRID (CHUMBAK HOUSE, ADVIKA & RESTAURANTS) -->
+                <div class="space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h3 class="font-display font-extrabold text-2xl text-slate-900">Live Client Sites & Work Demos</h3>
+                        <p class="text-xs text-slate-500">Click any card below to launch the live site in a new tab.</p>
                     </div>
 
-                    <!-- Business & Corporate Showcase -->
-                    <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
-                        <div class="space-y-3">
-                            <div class="h-40 rounded-2xl bg-brand-50 border border-brand-200 flex flex-col items-center justify-center text-brand-700 p-4 text-center">
-                                <i class="fa-solid fa-briefcase text-4xl mb-2"></i>
-                                <span class="font-display font-bold text-base">Business & Enterprise Site</span>
-                            </div>
-                            <h3 class="font-display font-bold text-xl text-slate-900">For Your Company & Services</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                Establish industry authority, list corporate services, enable instant inquiry forms, display client testimonials, and capture B2B leads.
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-bold text-brand-600">From ₹799</span>
-                            <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Business Site</button>
-                        </div>
-                    </div>
-
-                    <!-- Personal & Creator Showcase -->
-                    <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
-                        <div class="space-y-3">
-                            <div class="h-40 rounded-2xl bg-violet-50 border border-violet-200 flex flex-col items-center justify-center text-violet-700 p-4 text-center">
-                                <div class="flex space-x-3 text-2xl mb-2">
-                                    <i class="fa-brands fa-instagram"></i>
-                                    <i class="fa-brands fa-youtube"></i>
-                                    <i class="fa-solid fa-user"></i>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- 1. Chumbak House -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Live Project</span>
+                                    <i class="fa-solid fa-house text-brand-600 text-lg"></i>
                                 </div>
-                                <span class="font-display font-bold text-base">Personal Creator Showcase</span>
+                                <h4 class="font-display font-bold text-lg text-slate-900">Chumbak House</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Housing and interior ideas presentation landing page featuring interactive layout sections.</p>
                             </div>
-                            <h3 class="font-display font-bold text-xl text-slate-900">For Your Personal Brand & Socials</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                Consolidate your Instagram feed, YouTube videos, bio links, portfolio highlights, brand sponsorship inquiry forms, and contact info in one link.
-                            </p>
+                            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] font-semibold text-slate-400">Housing & Interior</span>
+                                <a href="https://kvora-tools.github.io/chumbak-house/#ideas" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 transition">View Website &rarr;</a>
+                            </div>
                         </div>
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-xs font-bold text-violet-600">From ₹799</span>
-                            <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Personal Site</button>
+
+                        <!-- 2. Advika -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Live Project</span>
+                                    <i class="fa-solid fa-crown text-violet-600 text-lg"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-lg text-slate-900">Advika Digital</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Modern web presence built for Advika brand storytelling and client engagement.</p>
+                            </div>
+                            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] font-semibold text-slate-400">Brand Showcase</span>
+                                <a href="https://kvora-tools.github.io/advika/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 transition">View Website &rarr;</a>
+                            </div>
                         </div>
+
+                        <!-- 3. Fine Dining Restaurant -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Restaurant Demo</span>
+                                    <i class="fa-solid fa-utensils text-amber-600 text-lg"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-lg text-slate-900">The Spiced Table</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Fine dining showcase featuring digital menu, table reservation modal, and chef specials.</p>
+                            </div>
+                            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] font-semibold text-slate-400">Boutique Dining</span>
+                                <a href="https://kvora-tools.github.io/demo-spiced-table/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-amber-600 text-white font-bold text-xs hover:bg-amber-700 transition">View Demo &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- 4. Artisan Pizzeria -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Restaurant Demo</span>
+                                    <i class="fa-solid fa-pizza-slice text-rose-500 text-lg"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-lg text-slate-900">Artisan Crust Pizzeria</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Fast-casual restaurant site with custom pizza options and WhatsApp order placement.</p>
+                            </div>
+                            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] font-semibold text-slate-400">Fast Casual</span>
+                                <a href="https://kvora-tools.github.io/demo-artisan-crust/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition">View Demo &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- 5. Urban Brew Cafe -->
+                        <div class="pro-card pro-card-hover p-6 rounded-3xl bg-white border border-slate-200 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Restaurant Demo</span>
+                                    <i class="fa-solid fa-mug-hot text-emerald-600 text-lg"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-lg text-slate-900">Urban Brew & Bistro</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">Trendy cafe page with daily specials display, customer feedback, and map integration.</p>
+                            </div>
+                            <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] font-semibold text-slate-400">Cafe & Bistro</span>
+                                <a href="https://kvora-tools.github.io/demo-urban-brew/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition">View Demo &rarr;</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- CATEGORIES SHOWCASE -->
+                <div class="space-y-6 pt-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h3 class="font-display font-extrabold text-2xl text-slate-900">Solutions By Industry</h3>
                     </div>
 
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Restaurant Website Showcase -->
+                        <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
+                            <div class="space-y-3">
+                                <div class="h-40 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col items-center justify-center text-amber-700 p-4 text-center">
+                                    <i class="fa-solid fa-utensils text-4xl mb-2"></i>
+                                    <span class="font-display font-bold text-base">Restaurant & Cafe Portal</span>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-slate-900">For Your Restaurants & Food Business</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Show interactive digital menus, accept online table reservations, direct WhatsApp order inquiries, and highlight food photos & reviews.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-amber-600">From ₹799</span>
+                                <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Restaurant Site</button>
+                            </div>
+                        </div>
+
+                        <!-- Business & Corporate Showcase -->
+                        <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
+                            <div class="space-y-3">
+                                <div class="h-40 rounded-2xl bg-brand-50 border border-brand-200 flex flex-col items-center justify-center text-brand-700 p-4 text-center">
+                                    <i class="fa-solid fa-briefcase text-4xl mb-2"></i>
+                                    <span class="font-display font-bold text-base">Business & Enterprise Site</span>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-slate-900">For Your Company & Services</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Establish industry authority, list corporate services, enable instant inquiry forms, display client testimonials, and capture B2B leads.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-brand-600">From ₹799</span>
+                                <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Business Site</button>
+                            </div>
+                        </div>
+
+                        <!-- Personal & Creator Showcase -->
+                        <div class="pro-card p-6 rounded-3xl bg-white space-y-4 flex flex-col justify-between shadow-sm">
+                            <div class="space-y-3">
+                                <div class="h-40 rounded-2xl bg-violet-50 border border-violet-200 flex flex-col items-center justify-center text-violet-700 p-4 text-center">
+                                    <div class="flex space-x-3 text-2xl mb-2">
+                                        <i class="fa-brands fa-instagram"></i>
+                                        <i class="fa-brands fa-youtube"></i>
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <span class="font-display font-bold text-base">Personal Creator Showcase</span>
+                                </div>
+                                <h3 class="font-display font-bold text-xl text-slate-900">For Your Personal Brand & Socials</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Consolidate your Instagram feed, YouTube videos, bio links, portfolio highlights, brand sponsorship inquiry forms, and contact info in one link.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-violet-600">From ₹799</span>
+                                <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 cursor-pointer">Get Personal Site</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
@@ -491,7 +664,7 @@
         </section>
 
 
-        <!-- FREE BUSINESS TOOLS TAB (ENHANCED WITH MULTI-ITEMS & PAYMENT RECEIPT GENERATOR) -->
+        <!-- FREE BUSINESS TOOLS TAB -->
         <section id="tab-tools" class="tab-content hidden py-16 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                 
