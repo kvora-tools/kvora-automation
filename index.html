@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-    
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVORA AUTOMATIONS | Business Automation, Dashboards & Websites</title>
-    <meta name="description" content="KVORA AUTOMATIONS helps small and medium-sized businesses automate processes, build custom dashboards, generate business documents and create professional websites at affordable prices.">
-    <meta name="keywords" content="Business Automation, Invoice Generator, GRN Generator, Custom Dashboards, SME Software, WhatsApp Automation, KVORA">
+    <title>KVORA AUTOMATIONS | Custom Business Websites, Dashboards & Automation</title>
+    <meta name="description" content="KVORA AUTOMATIONS builds custom business websites, powerful analytics dashboards, and automated digital workflows for growing companies.">
+    <meta name="keywords" content="Business Websites, Custom Dashboards, Process Automation, Invoice Generator, GRN Generator, SME Software">
     <meta name="google-site-verification" content="ug-5LYucIXl5wijzopNS0VE6-MJsj_82fHtrfjtBfu4" />
-    
+
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="KVORA AUTOMATIONS | Business Automation & Software">
-    <meta property="og:description" content="Automate Smarter. Work Faster. Grow Better. Affordable business automation solutions for SMEs.">
+    <meta property="og:title" content="KVORA AUTOMATIONS | Custom Business Websites & Dashboards">
+    <meta property="og:description" content="Websites, Dashboards & Automation Built Around Your Business. Professional B2B digital solutions.">
     <meta property="og:type" content="website">
 
-    <!-- Google Fonts: Outfit & Inter -->
+    <!-- Fonts: Plus Jakarta Sans & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,19 +27,21 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        kvora: {
-                            bg: '#07090e',
-                            card: '#0f131f',
-                            cardHover: '#161c2d',
-                            border: '#1e293b',
-                            primary: '#3b82f6',
-                            cyan: '#06b6d4',
-                            violet: '#8b5cf6',
-                            green: '#10b981',
-                            accent: '#6366f1'
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                            emerald: '#10b981',
+                            teal: '#0d9488',
+                            surface: '#f8fafc'
                         }
                     }
                 }
@@ -58,831 +59,1025 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #07090e;
-            color: #f8fafc;
+            background-color: #f8fafc;
+            color: #1e293b;
             overflow-x: hidden;
         }
         h1, h2, h3, h4, h5, h6, .font-display {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .glass-panel {
-            background: rgba(15, 19, 31, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .light-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
         }
-        .glass-panel-hover:hover {
-            background: rgba(22, 28, 45, 0.95);
-            border-color: rgba(6, 182, 212, 0.4);
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+        .light-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .cyan-glow {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        .light-card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -4px rgba(37, 99, 235, 0.12);
+            border-color: #cbd5e1;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-        ::-webkit-scrollbar-track {
-            background: #07090e;
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tab-active {
+            border-bottom: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        /* Document Print Specific Overrides */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-area, #printable-area * {
+                visibility: visible;
+            }
+            #printable-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col md:flex-row antialiased selection:bg-cyan-500 selection:text-black">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
 
     <!-- Toast Notifications Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none"></div>
 
-    <!-- Mobile Header -->
-    <header class="md:hidden flex items-center justify-between p-4 bg-kvora-card border-b border-kvora-border sticky top-0 z-40">
-        <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-lg shadow-lg">K</div>
-            <div>
-                <h1 class="font-display font-bold text-lg tracking-wider text-white">KVORA</h1>
-                <p class="text-[10px] text-cyan-400 font-medium">AUTOMATIONS</p>
+    <!-- STICKY NAVIGATION BAR -->
+    <header id="main-navbar" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#home" onclick="navigateTo('home'); return false;" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-brand-500 flex items-center justify-center text-white font-display font-extrabold text-xl shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                    K
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-xl tracking-tight text-slate-900 block leading-none">KVORA</span>
+                    <span class="text-[10px] font-bold text-brand-600 tracking-widest uppercase block mt-1">AUTOMATIONS</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" id="nav-home" onclick="navigateTo('home')" class="nav-btn text-brand-600 font-semibold hover:text-brand-700 transition">Home</a>
+                <a href="#websites" id="nav-websites" onclick="navigateTo('websites')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Websites</a>
+                <a href="#dashboards" id="nav-dashboards" onclick="navigateTo('dashboards')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Dashboards</a>
+                <a href="#automations" id="nav-automations" onclick="navigateTo('automations')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Automation</a>
+                <a href="#tools" id="nav-tools" onclick="navigateTo('tools')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Free Tools</a>
+                <a href="#solutions" id="nav-solutions" onclick="navigateTo('solutions')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Solutions</a>
+                <a href="#contact" id="nav-contact" onclick="navigateTo('contact')" class="nav-btn text-slate-600 hover:text-brand-600 transition">Contact</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center space-x-3">
+                <button onclick="openModal('project-inquiry')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-600/20 transition flex items-center space-x-2 cursor-pointer">
+                    <span>Start a Project</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
             </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
         </div>
-        <button id="mobile-menu-btn" class="p-2 text-slate-300 hover:text-white focus:outline-none cursor-pointer">
-            <i class="fa-solid fa-bars text-xl"></i>
-        </button>
     </header>
 
-    <!-- Mobile Drawer Navigation -->
-    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col">
-        <div class="flex items-center justify-between p-4 border-b border-kvora-border">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-lg">K</div>
-                <div>
-                    <h1 class="font-display font-bold text-lg text-white">KVORA</h1>
-                    <p class="text-[10px] text-cyan-400">AUTOMATIONS</p>
+    <!-- MOBILE DRAWER NAVIGATION -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-between">
+        <div class="bg-white w-4/5 max-w-sm h-full p-6 flex flex-col justify-between shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-brand-600 text-white font-bold flex items-center justify-center font-display">K</div>
+                        <span class="font-display font-bold text-lg text-slate-900">KVORA</span>
+                    </div>
+                    <button id="mobile-close-btn" class="p-2 text-slate-400 hover:text-slate-700">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
                 </div>
+                <nav class="py-6 space-y-3 font-medium text-slate-700">
+                    <a href="#home" onclick="navigateTo('home');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Home</a>
+                    <a href="#websites" onclick="navigateTo('websites');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Custom Websites</a>
+                    <a href="#dashboards" onclick="navigateTo('dashboards');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Business Dashboards</a>
+                    <a href="#automations" onclick="navigateTo('automations');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Workflow Automation</a>
+                    <a href="#tools" onclick="navigateTo('tools');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Free Business Tools</a>
+                    <a href="#solutions" onclick="navigateTo('solutions');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Solutions</a>
+                    <a href="#contact" onclick="navigateTo('contact');" class="block px-4 py-2.5 rounded-xl hover:bg-slate-50 transition">Contact Us</a>
+                </nav>
             </div>
-            <button id="mobile-close-btn" class="p-2 text-slate-300 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-        </div>
-        <div class="flex-1 overflow-y-auto p-4 space-y-2">
-            <a href="#home" onclick="navigateTo('home'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-house w-6 text-cyan-400"></i><span>Home</span></a>
-            <a href="#automations" onclick="navigateTo('automations'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-bolt w-6 text-blue-400"></i><span>Automations</span></a>
-            <a href="#tools" onclick="navigateTo('tools'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-toolbox w-6 text-violet-400"></i><span>Free Tools</span></a>
-            <a href="#websites" onclick="navigateTo('websites'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-globe w-6 text-emerald-400"></i><span>Websites</span></a>
-            <a href="#dashboards" onclick="navigateTo('dashboards'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-chart-pie w-6 text-amber-400"></i><span>Custom Dashboards</span></a>
-            <a href="#solutions" onclick="navigateTo('solutions'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-briefcase w-6 text-rose-400"></i><span>Business Solutions</span></a>
-            <a href="#contact" onclick="navigateTo('contact'); return false;" class="mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 transition"><i class="fa-solid fa-envelope w-6 text-cyan-400"></i><span>Contact</span></a>
-        </div>
-        <div class="p-4 border-t border-kvora-border text-center text-xs text-slate-500">
-            © 2026 KVORA AUTOMATIONS
+            <div class="pt-6 border-t border-slate-100 space-y-3">
+                <button onclick="openModal('project-inquiry')" class="w-full py-3 rounded-xl bg-brand-600 text-white font-semibold text-sm text-center shadow-md">
+                    Start a Project
+                </button>
+                <p class="text-center text-xs text-slate-400">© 2026 KVORA AUTOMATIONS</p>
+            </div>
         </div>
     </div>
 
-    <!-- Desktop Sidebar Navigation -->
-    <aside class="hidden md:flex flex-col w-72 bg-kvora-card border-r border-kvora-border h-screen sticky top-0 z-30 select-none">
-        <div class="p-6 border-b border-kvora-border flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-violet-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-cyan-500/20">K</div>
-            <div>
-                <h1 class="font-display font-extrabold text-xl tracking-wider text-white">KVORA</h1>
-                <p class="text-[11px] font-semibold text-cyan-400 tracking-wider">AUTOMATIONS</p>
-            </div>
-        </div>
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="flex-1">
 
-        <div class="p-4 px-6 text-xs font-semibold text-slate-400 uppercase tracking-wider">Navigation</div>
-
-        <nav class="flex-1 px-4 space-y-1.5 overflow-y-auto">
-            <button onclick="navigateTo('home')" id="nav-home" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 transition group cursor-pointer">
-                <i class="fa-solid fa-house w-6 text-cyan-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Home</span>
-            </button>
-            <button onclick="navigateTo('automations')" id="nav-automations" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-bolt w-6 text-blue-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Automations</span>
-            </button>
-            <button onclick="navigateTo('tools')" id="nav-tools" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-toolbox w-6 text-violet-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Free Tools</span>
-            </button>
-            <button onclick="navigateTo('websites')" id="nav-websites" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-globe w-6 text-emerald-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Websites</span>
-            </button>
-            <button onclick="navigateTo('dashboards')" id="nav-dashboards" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-chart-pie w-6 text-amber-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Custom Dashboards</span>
-            </button>
-            <button onclick="navigateTo('solutions')" id="nav-solutions" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-briefcase w-6 text-rose-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Business Solutions</span>
-            </button>
-            <button onclick="navigateTo('contact')" id="nav-contact" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/80 transition group cursor-pointer">
-                <i class="fa-solid fa-envelope w-6 text-cyan-400 group-hover:scale-110 transition-transform"></i>
-                <span class="font-medium text-sm">Contact</span>
-            </button>
-        </nav>
-
-        <div class="p-4 m-4 rounded-2xl glass-panel border border-cyan-500/20 text-center">
-            <p class="text-xs font-semibold text-white">Smart automation for growing businesses.</p>
-            <button onclick="openModal('custom-request')" class="mt-3 w-full py-2 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium text-xs shadow-lg shadow-cyan-500/20 hover:opacity-90 transition cursor-pointer">
-                Get Started
-            </button>
-        </div>
-    </aside>
-
-    <main class="flex-1 min-w-0 flex flex-col min-h-screen">
-        
-        <!-- HOME TAB -->
-        <section id="tab-home" class="tab-content flex-1 p-4 md:p-8 space-y-12">
-            <!-- Hero Section -->
-            <div class="relative rounded-3xl glass-panel p-6 md:p-12 overflow-hidden border border-slate-800">
-                <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-                    <div class="lg:col-span-7 space-y-6">
-                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-medium">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                            <span>Automate Smarter. Work Faster. Grow Better.</span>
-                        </div>
-                        <h1 class="font-display font-extrabold text-3xl md:text-5xl lg:text-6xl text-white leading-tight">
-                            Turn Your Business Processes Into <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-400">Smart Automation.</span>
-                        </h1>
-                        <p class="text-slate-300 text-base md:text-lg max-w-2xl leading-relaxed">
-                            KVORA AUTOMATIONS helps small and medium-sized businesses eliminate repetitive work, simplify operations and build smarter digital systems — without enterprise-level costs.
-                        </p>
-                        <div class="flex flex-wrap gap-4 pt-2">
-                            <button onclick="navigateTo('automations')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:opacity-95 transition flex items-center space-x-2 cursor-pointer">
-                                <span>Explore Automations</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <button onclick="navigateTo('websites')" class="px-6 py-3.5 rounded-xl glass-panel border border-slate-700 text-white font-semibold text-sm hover:bg-slate-800 transition cursor-pointer">
-                                Build My Business Website
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Right Illustration / Animated Workflow -->
-                    <div class="lg:col-span-5">
-                        <div class="rounded-2xl glass-panel p-6 border border-cyan-500/20 shadow-2xl relative overflow-hidden">
-                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                                <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider"><i class="fa-solid fa-microchip mr-2"></i>Live Workflow Engine</span>
-                                <span class="flex h-2 w-2 relative">
-                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                                </span>
+        <!-- ================= HOME TAB ================= -->
+        <section id="tab-home" class="tab-content">
+            
+            <!-- HERO SECTION -->
+            <div class="relative bg-gradient-to-b from-brand-50/60 via-white to-slate-50 py-16 md:py-24 border-b border-slate-200/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        
+                        <!-- Left Hero Content -->
+                        <div class="lg:col-span-7 space-y-6 text-left">
+                            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-brand-100/70 border border-brand-200 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+                                <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+                                <span>WEBSITES • DASHBOARDS • AUTOMATION</span>
                             </div>
-                            <div class="space-y-3">
-                                <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                                    <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">01</div>
-                                    <div class="flex-1"><div class="text-xs text-slate-400">Lead Acquired</div><div class="text-sm font-semibold text-white">Inbound WhatsApp / Web Form</div></div>
-                                    <i class="fa-solid fa-check text-emerald-400"></i>
-                                </div>
-                                <div class="w-0.5 h-4 bg-cyan-500/40 ml-7"></div>
-                                <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs">02</div>
-                                    <div class="flex-1"><div class="text-xs text-slate-400">Order & Inventory</div><div class="text-sm font-semibold text-white">Stock Verified & Reserved</div></div>
-                                    <i class="fa-solid fa-check text-emerald-400"></i>
-                                </div>
-                                <div class="w-0.5 h-4 bg-cyan-500/40 ml-7"></div>
-                                <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-900/80 border border-cyan-500/40 cyan-glow">
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">03</div>
-                                    <div class="flex-1"><div class="text-xs text-cyan-300">Automated Invoice & GRN</div><div class="text-sm font-semibold text-white">Sent via WhatsApp & Email</div></div>
-                                    <div class="animate-spin w-4 h-4 border-2 border-cyan-400 border-t-transparent rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Statistics / Demo Metrics Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center hover:border-cyan-500/40 transition">
-                    <div class="text-3xl md:text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">50+</div>
-                    <p class="text-xs md:text-sm text-slate-400 mt-1">Processes Automatable</p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center hover:border-violet-500/40 transition">
-                    <div class="text-3xl md:text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-pink-400">100%</div>
-                    <p class="text-xs md:text-sm text-slate-400 mt-1">Affordable SME Pricing</p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center hover:border-emerald-500/40 transition">
-                    <div class="text-3xl md:text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">Custom</div>
-                    <p class="text-xs md:text-sm text-slate-400 mt-1">Business Dashboards</p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center hover:border-amber-500/40 transition">
-                    <div class="text-3xl md:text-4xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Free</div>
-                    <p class="text-xs md:text-sm text-slate-400 mt-1">Business Generators</p>
-                </div>
-            </div>
-
-            <!-- What Can KVORA Automate? -->
-            <div class="space-y-6">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h2 class="font-display font-bold text-2xl md:text-3xl text-white">What Can KVORA Automate?</h2>
-                    <p class="text-sm text-slate-400">Transform your manual operational bottlenecks into lightning-fast digital workflows.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Invoice Generation</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Auto-generate and dispatch professional tax invoices instantly.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-boxes-packing"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">GRN Management</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Seamless goods receipt note creation and verification tracking.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-cart-shopping"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Order Processing</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Track customer orders from placement to final delivery effortlessly.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-warehouse"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Inventory Management</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Real-time stock monitoring with low-stock alerts and valuations.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Sales Dashboards</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Visualize revenue, top products, and daily sales performance.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Purchase Dashboards</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Track vendor performance, purchase orders, and expenses.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-comments"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">WhatsApp Notifications</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Instant automated customer alerts and document sharing.</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 glass-panel-hover transition group">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-network-wired"></i></div>
-                        <h3 class="font-display font-semibold text-white text-base mb-1">Custom Workflows</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Tailored automations built specifically for your unique business.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AUTOMATIONS TAB -->
-        <section id="tab-automations" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Business Automations</h2>
-                    <p class="text-sm text-slate-400 mt-1">Replace repetitive manual work with intelligent digital workflows.</p>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <input type="text" id="automation-search" placeholder="Search automations..." onkeyup="filterAutomations()" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500">
-                </div>
-            </div>
-
-            <div id="automations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="Invoice Automation">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-file-invoice"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">Invoice Automation</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Automatically generate professional tax invoices from business data and share instantly with customers.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Invoice Automation', 'Automatically generate professional invoices from business data, calculate taxes, apply discounts, and instantly trigger WhatsApp/Email delivery.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="GRN Automation">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-clipboard-check"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">GRN Automation</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Create Goods Receipt Notes quickly, verify received items against purchase orders, and maintain structured records.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('GRN Automation', 'Streamline warehouse intake by automatically generating Goods Receipt Notes, tracking batch numbers, expiry dates, and supplier quantities.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="Sales Dashboard">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-chart-column"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">Sales Dashboard</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Track sales, revenue, orders, top-performing customers, and business growth metrics in real-time.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Sales Dashboard', 'Gain complete visibility over daily revenue, invoice statuses, customer purchase trends, and sales representative targets.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="Purchase Dashboard">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">Purchase Dashboard</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Track vendors, purchase orders, pending shipments, raw material expenses, and vendor payment schedules.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Purchase Dashboard', 'Monitor procurement workflows, compare vendor pricing, and manage vendor ledgers seamlessly.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="Inventory Dashboard">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-boxes-stacked"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">Inventory Dashboard</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Monitor stock levels, item movement, low-stock alerts, warehouse locations, and total inventory value.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('Inventory Dashboard', 'Never run out of stock with automated stock tracking, reorder point alerts, and inventory valuation reports.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-
-                <div class="automation-card glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between" data-title="CRM Automation">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-address-book"></i></div>
-                        <h3 class="font-display font-bold text-lg text-white mb-2">CRM Automation</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Manage leads, customer interactions, automated follow-ups, and communication history in one place.</p>
-                    </div>
-                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-800">
-                        <button onclick="openAutomationDetail('CRM Automation', 'Streamline client acquisition with automated lead capture, pipeline stages, and WhatsApp follow-up reminders.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 transition cursor-pointer">Explore</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition cursor-pointer">Request</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FREE TOOLS TAB (Strictly Invoice & GRN as requested) -->
-        <section id="tab-tools" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Free Business Tools</h2>
-                    <p class="text-sm text-slate-400 mt-1">Free professional generators for everyday business operations.</p>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="switchSubTool('invoice')" id="btn-subtool-invoice" class="sub-tool-btn px-5 py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold transition cursor-pointer shadow-lg shadow-cyan-500/20">Invoice Generator</button>
-                    <button onclick="switchSubTool('grn')" id="btn-subtool-grn" class="sub-tool-btn px-5 py-2.5 rounded-xl glass-panel text-white text-xs font-medium hover:bg-slate-800 transition cursor-pointer">GRN Generator</button>
-                </div>
-            </div>
-
-            <!-- INVOICE GENERATOR TOOL -->
-            <div id="subtool-invoice" class="subtool-container space-y-6">
-                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6" id="invoice-printable-area">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-file-invoice-dollar text-cyan-400 mr-3"></i>Professional Invoice Generator</h3>
-                        <div class="flex space-x-2">
-                            <button onclick="resetInvoiceForm()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition cursor-pointer">Reset</button>
-                            <button onclick="generatePDFInvoice()" class="px-4 py-1.5 rounded-lg bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition cursor-pointer"><i class="fa-solid fa-download mr-1"></i>Download PDF</button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Seller Details -->
-                        <div class="space-y-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                            <h4 class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Business Details (Bill From)</h4>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Seller Name / Business Name</label>
-                                <input type="text" id="inv-seller-name" placeholder="Enter Business Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Address</label>
-                                <input type="text" id="inv-seller-address" placeholder="Enter Business Address" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                            </div>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs text-slate-400 mb-1">Phone</label>
-                                    <input type="text" id="inv-seller-phone" placeholder="Phone Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-slate-400 mb-1">GSTIN</label>
-                                    <input type="text" id="inv-seller-gstin" placeholder="GSTIN Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Customer Details -->
-                        <div class="space-y-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                            <h4 class="text-xs font-semibold text-violet-400 uppercase tracking-wider">Customer Details (Bill To)</h4>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Customer Name</label>
-                                <input type="text" id="inv-cust-name" placeholder="Customer / Company Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-slate-400 mb-1">Customer Address</label>
-                                <input type="text" id="inv-cust-address" placeholder="Customer Address" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                            </div>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs text-slate-400 mb-1">WhatsApp / Phone</label>
-                                    <input type="text" id="inv-cust-phone" placeholder="WhatsApp Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-slate-400 mb-1">Customer Email</label>
-                                    <input type="email" id="inv-cust-email" placeholder="customer@email.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Invoice Metadata -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Invoice Number</label>
-                            <input type="text" id="inv-number" placeholder="INV-001" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Invoice Date</label>
-                            <input type="date" id="inv-date" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Due Date</label>
-                            <input type="date" id="inv-duedate" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Tax Rate (%)</label>
-                            <input type="number" id="inv-tax-rate" value="18" oninput="calculateInvoice()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                    </div>
-
-                    <!-- Item Table -->
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Line Items</h4>
-                            <button onclick="addInvoiceItem()" class="px-3 py-1.5 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-semibold hover:bg-blue-600/30 transition cursor-pointer"><i class="fa-solid fa-plus mr-1"></i>Add Item</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm" id="invoice-items-table">
-                                <thead class="bg-slate-900 text-slate-400 text-xs uppercase">
-                                    <tr>
-                                        <th class="p-3 rounded-l-xl">Item Description</th>
-                                        <th class="p-3 w-20">Qty</th>
-                                        <th class="p-3 w-28">Price (₹)</th>
-                                        <th class="p-3 w-28">Total (₹)</th>
-                                        <th class="p-3 w-16 rounded-r-xl">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="invoice-items-body" class="divide-y divide-slate-800">
-                                    <tr>
-                                        <td class="p-2"><input type="text" placeholder="Item name or service description" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                                        <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                                        <td class="p-2"><input type="number" value="0" oninput="calculateInvoice()" class="inv-price w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                                        <td class="p-2 text-cyan-400 font-semibold inv-row-total">₹0.00</td>
-                                        <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2 cursor-pointer"><i class="fa-solid fa-trash"></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Calculation Totals & Share Actions -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-800 items-center">
-                        <div class="space-y-3">
-                            <label class="block text-xs text-slate-400">Payment Instructions & Notes</label>
-                            <textarea id="inv-notes" rows="3" placeholder="Enter bank details, UPI ID or payment terms..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-cyan-500"></textarea>
-                        </div>
-                        <div class="space-y-2 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
-                            <div class="flex justify-between text-sm text-slate-400"><span>Subtotal:</span><span id="inv-subtotal" class="text-white">₹0.00</span></div>
-                            <div class="flex justify-between text-sm text-slate-400"><span>Tax (18%):</span><span id="inv-tax" class="text-white">₹0.00</span></div>
-                            <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800"><span>Grand Total:</span><span id="inv-total" class="text-cyan-400 text-lg">₹0.00</span></div>
                             
-                            <div class="flex gap-2 pt-4">
-                                <button onclick="sendInvoiceToWhatsApp()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-500 transition flex items-center justify-center space-x-2 cursor-pointer"><i class="fa-brands fa-whatsapp text-base"></i><span>Send WhatsApp</span></button>
-                                <button onclick="sendInvoiceToEmail()" class="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-xs hover:bg-blue-500 transition flex items-center justify-center space-x-2 cursor-pointer"><i class="fa-solid fa-envelope"></i><span>Send Email</span></button>
+                            <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-tight">
+                                Websites, Dashboards & Automation <span class="text-brand-600">Built Around Your Business.</span>
+                            </h1>
+                            
+                            <p class="text-slate-600 text-base sm:text-lg max-w-2xl leading-relaxed">
+                                KVORA AUTOMATIONS builds professional business websites, custom analytics dashboards, and automated digital workflows designed to optimize operations, elevate brand presence, and scale revenue.
+                            </p>
+
+                            <div class="flex flex-wrap items-center gap-4 pt-2">
+                                <button onclick="navigateTo('websites')" class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-lg shadow-brand-600/25 transition flex items-center space-x-2 cursor-pointer">
+                                    <span>Build My Website</span>
+                                    <i class="fa-solid fa-globe text-xs"></i>
+                                </button>
+                                <button onclick="navigateTo('dashboards')" class="px-6 py-3.5 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-semibold text-sm shadow-sm transition flex items-center space-x-2 cursor-pointer">
+                                    <span>Create a Dashboard</span>
+                                    <i class="fa-solid fa-chart-pie text-xs text-brand-600"></i>
+                                </button>
+                                <button onclick="navigateTo('tools')" class="px-4 py-3.5 text-slate-600 hover:text-brand-600 font-medium text-sm transition">
+                                    Explore Free Tools →
+                                </button>
+                            </div>
+
+                            <div class="pt-4 flex items-center space-x-6 text-xs text-slate-500 font-medium border-t border-slate-200/60">
+                                <span class="flex items-center"><i class="fa-solid fa-circle-check text-brand-600 mr-2"></i>Built for SMEs</span>
+                                <span class="flex items-center"><i class="fa-solid fa-circle-check text-brand-600 mr-2"></i>Fully Tailored</span>
+                                <span class="flex items-center"><i class="fa-solid fa-circle-check text-brand-600 mr-2"></i>Practical ROI</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Realistic Desktop / App Preview Mockup -->
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl bg-slate-900 p-3 shadow-2xl border border-slate-800">
+                                <!-- Top Window Control Bar -->
+                                <div class="flex items-center space-x-2 pb-3 px-2 border-b border-slate-800">
+                                    <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                                    <span class="text-[11px] font-mono text-slate-400 ml-4">kvora-command-center.internal.app</span>
+                                </div>
+
+                                <!-- UI Showcase Area -->
+                                <div class="bg-slate-950 rounded-xl p-4 space-y-4 font-sans text-left">
+                                    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                                        <div>
+                                            <p class="text-xs font-semibold text-slate-400">Live Operations Control Center</p>
+                                            <p class="text-sm font-bold text-white">Acme Enterprise Dashboard</p>
+                                        </div>
+                                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold flex items-center">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2 animate-ping"></span> Live Sync
+                                        </span>
+                                    </div>
+
+                                    <!-- Key Metrics Row -->
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-[10px] text-slate-400 uppercase">Monthly Revenue</p>
+                                            <p class="text-base font-bold text-white mt-1" id="hero-stat-rev">₹18,42,000</p>
+                                            <span class="text-[10px] text-emerald-400"><i class="fa-solid fa-arrow-up text-[9px] mr-1"></i>+14.2%</span>
+                                        </div>
+                                        <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-[10px] text-slate-400 uppercase">Active Orders</p>
+                                            <p class="text-base font-bold text-white mt-1" id="hero-stat-orders">342</p>
+                                            <span class="text-[10px] text-brand-400"><i class="fa-solid fa-check text-[9px] mr-1"></i>100% Dispatched</span>
+                                        </div>
+                                        <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-[10px] text-slate-400 uppercase">Automations</p>
+                                            <p class="text-base font-bold text-white mt-1">1,280/day</p>
+                                            <span class="text-[10px] text-emerald-400"><i class="fa-solid fa-bolt text-[9px] mr-1"></i>0 Errors</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Simulated Workflow Activity Stream -->
+                                    <div class="space-y-2 pt-1">
+                                        <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Automated Workflows</div>
+                                        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs">
+                                            <div class="flex items-center space-x-2">
+                                                <div class="w-6 h-6 rounded bg-brand-500/20 text-brand-400 flex items-center justify-center text-[10px]"><i class="fa-solid fa-file-invoice"></i></div>
+                                                <span class="text-slate-200">Tax Invoice #INV-4091 Auto-Generated</span>
+                                            </div>
+                                            <span class="text-[10px] text-emerald-400">0.2s</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs">
+                                            <div class="flex items-center space-x-2">
+                                                <div class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px]"><i class="fa-brands fa-whatsapp"></i></div>
+                                                <span class="text-slate-200">WhatsApp Notification Dispatched</span>
+                                            </div>
+                                            <span class="text-[10px] text-emerald-400">Delivered</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs">
+                                            <div class="flex items-center space-x-2">
+                                                <div class="w-6 h-6 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px]"><i class="fa-solid fa-boxes-packing"></i></div>
+                                                <span class="text-slate-200">Warehouse Inventory Verified</span>
+                                            </div>
+                                            <span class="text-[10px] text-brand-400">Sync Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE SERVICES OVERVIEW -->
+            <div class="py-20 bg-white border-b border-slate-200/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
+                    <div class="max-w-3xl mx-auto space-y-3">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600">Core Services</h2>
+                        <h3 class="font-display font-bold text-3xl sm:text-4xl text-slate-900">
+                            Digital Solutions Designed to Scale Your Operations
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base">
+                            We combine custom website engineering, real-time analytics dashboards, and workflow automation into clean, reliable systems.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                        <!-- Service 1: Custom Websites -->
+                        <div class="light-card light-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-xl text-slate-900">Custom Business Websites</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    High-performance websites tailored to your specific industry. Designed to establish credibility, generate leads, and showcase products seamlessly.
+                                </p>
+                            </div>
+                            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-semibold text-brand-600">Tailored Design & Code</span>
+                                <button onclick="navigateTo('websites')" class="text-sm font-bold text-slate-900 hover:text-brand-600 flex items-center space-x-1">
+                                    <span>Explore</span> <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 2: Custom Dashboards -->
+                        <div class="light-card light-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-xl text-slate-900">Business Dashboards</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Unified command centers that aggregate revenue, sales performance, inventory levels, and operational metrics into single-screen clarity.
+                                </p>
+                            </div>
+                            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-semibold text-emerald-600">Real-Time Data Visibility</span>
+                                <button onclick="navigateTo('dashboards')" class="text-sm font-bold text-slate-900 hover:text-emerald-600 flex items-center space-x-1">
+                                    <span>Explore</span> <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 3: Workflow Automation -->
+                        <div class="light-card light-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl font-bold">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <h4 class="font-display font-bold text-xl text-slate-900">Workflow Automation</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Eliminate repetitive manual entry. Auto-generate invoices, dispatch GRNs, send customer WhatsApp notifications, and sync inventory.
+                                </p>
+                            </div>
+                            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-semibold text-brand-700">Zero-Error Efficiency</span>
+                                <button onclick="navigateTo('automations')" class="text-sm font-bold text-slate-900 hover:text-brand-700 flex items-center space-x-1">
+                                    <span>Explore</span> <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- GRN GENERATOR TOOL -->
-            <div id="subtool-grn" class="subtool-container hidden space-y-6">
-                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6" id="grn-printable-area">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <h3 class="font-display font-bold text-xl text-white flex items-center"><i class="fa-solid fa-boxes-packing text-emerald-400 mr-3"></i>Goods Receipt Note (GRN) Generator</h3>
-                        <div class="flex space-x-2">
-                            <button onclick="resetGrnForm()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition cursor-pointer">Reset</button>
-                            <button onclick="generatePDFGRN()" class="px-4 py-1.5 rounded-lg bg-emerald-500 text-black font-bold text-xs hover:bg-emerald-400 transition cursor-pointer"><i class="fa-solid fa-download mr-1"></i>Download GRN PDF</button>
+            <!-- VALUE METRICS SECTION -->
+            <div class="py-16 bg-slate-50 border-b border-slate-200/80">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div class="light-card p-6 rounded-2xl">
+                            <div class="font-display font-extrabold text-3xl sm:text-4xl text-brand-600">50+</div>
+                            <p class="text-xs font-medium text-slate-500 mt-1">Custom Workflows Engineered</p>
                         </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                            <h4 class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Supplier Information</h4>
-                            <input type="text" id="grn-supplier" placeholder="Supplier Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                            <input type="text" id="grn-sup-address" placeholder="Supplier Address" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
+                        <div class="light-card p-6 rounded-2xl">
+                            <div class="font-display font-extrabold text-3xl sm:text-4xl text-emerald-600">Tailored</div>
+                            <p class="text-xs font-medium text-slate-500 mt-1">Business Analytics Dashboards</p>
                         </div>
-                        <div class="space-y-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-                            <h4 class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Receiving Business</h4>
-                            <input type="text" id="grn-company" placeholder="Receiving Company Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                            <input type="text" id="grn-comp-address" placeholder="Warehouse / Delivery Address" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
+                        <div class="light-card p-6 rounded-2xl">
+                            <div class="font-display font-extrabold text-3xl sm:text-4xl text-brand-700">Fast</div>
+                            <p class="text-xs font-medium text-slate-500 mt-1">Turnaround & Deployment</p>
                         </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">GRN Number</label>
-                            <input type="text" id="grn-number" placeholder="GRN-001" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Purchase Order (PO)</label>
-                            <input type="text" id="grn-po" placeholder="PO Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Vehicle Number</label>
-                            <input type="text" id="grn-vehicle" placeholder="Vehicle No." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white">
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-                        <h4 class="text-xs font-semibold text-slate-300 uppercase">Received Goods</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                            <div><label class="block text-xs text-slate-500 mb-1">Item Name</label><input type="text" id="grn-item-name" placeholder="Item Description" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                            <div><label class="block text-xs text-slate-500 mb-1">Ordered Qty</label><input type="number" id="grn-qty-ordered" placeholder="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                            <div><label class="block text-xs text-slate-500 mb-1">Received Qty</label><input type="number" id="grn-qty-received" placeholder="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
-                            <div><label class="block text-xs text-slate-500 mb-1">Batch / QC Status</label><input type="text" id="grn-batch" placeholder="Batch No. / QC Passed" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white"></div>
+                        <div class="light-card p-6 rounded-2xl">
+                            <div class="font-display font-extrabold text-3xl sm:text-4xl text-slate-800">Affordable</div>
+                            <p class="text-xs font-medium text-slate-500 mt-1">SME-Focused Solution Models</p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- PROCESS TIMELINE -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                    <div class="text-center max-w-2xl mx-auto space-y-3">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600">How We Work</h2>
+                        <h3 class="font-display font-bold text-3xl text-slate-900">A Simple 4-Step Engagement Process</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div class="relative p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-xs mb-4">01</div>
+                            <h4 class="font-display font-bold text-slate-900 text-base mb-2">Understand</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">We analyze your business operations, data flows, and current manual friction points.</p>
+                        </div>
+                        <div class="relative p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-xs mb-4">02</div>
+                            <h4 class="font-display font-bold text-slate-900 text-base mb-2">Architect</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">We design custom web mockups, dashboard layouts, and automated database rules.</p>
+                        </div>
+                        <div class="relative p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-xs mb-4">03</div>
+                            <h4 class="font-display font-bold text-slate-900 text-base mb-2">Develop</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">We build, test, and integrate your website or dashboard with existing software.</p>
+                        </div>
+                        <div class="relative p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                            <div class="w-8 h-8 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-xs mb-4">04</div>
+                            <h4 class="font-display font-bold text-slate-900 text-base mb-2">Scale</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Your team operates with clarity while we provide continuous system refinement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CUSTOM WEBSITES TAB ================= -->
+        <section id="tab-websites" class="tab-content hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold tracking-wider uppercase">Client Website Development</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-900">
+                        Professional Websites Built For Your Business
+                    </h2>
+                    <p class="text-slate-600 text-base">
+                        We build high-converting, modern, and mobile-responsive websites tailored specifically to your industry—whether you're in manufacturing, retail, agriculture, or services.
+                    </p>
+                </div>
+
+                <!-- PORTFOLIO SLIDER / CAROUSEL -->
+                <div class="relative light-card rounded-3xl p-6 sm:p-8 bg-white overflow-hidden shadow-xl">
+                    <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                        <div>
+                            <h3 class="font-display font-bold text-xl text-slate-900">Selected Client Projects</h3>
+                            <p class="text-xs text-slate-500">Explore interactive website concepts designed by KVORA</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button id="slider-prev-btn" onclick="rotateWebsiteSlider(-1)" class="w-10 h-10 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-700 transition">
+                                <i class="fa-solid fa-chevron-left text-sm"></i>
+                            </button>
+                            <button id="slider-next-btn" onclick="rotateWebsiteSlider(1)" class="w-10 h-10 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-700 transition">
+                                <i class="fa-solid fa-chevron-right text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Slide Items Container -->
+                    <div class="pt-6 relative min-h-[380px]" id="website-slider-container">
+                        
+                        <!-- Slide 1: Agriculture / FPO -->
+                        <div class="website-slide grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-7 bg-slate-900 rounded-2xl p-2 border border-slate-800 shadow-xl">
+                                <div class="bg-slate-950 rounded-xl overflow-hidden p-6 text-white space-y-4 font-sans">
+                                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+                                        <span class="font-bold text-emerald-400">VERDANT HILLS AGRI-TECH</span>
+                                        <span class="text-slate-400">FPO Produce & Produce Marketplace</span>
+                                    </div>
+                                    <h4 class="text-2xl font-bold font-display">Direct Farm Produce Portal & B2B Wholesale</h4>
+                                    <p class="text-xs text-slate-300">Features direct harvest scheduling, regional rate calculators, and integrated buyer WhatsApp inquiries.</p>
+                                    <div class="pt-2 flex gap-2">
+                                        <span class="px-2.5 py-1 rounded bg-slate-800 text-[10px] text-slate-300">Catalog Engine</span>
+                                        <span class="px-2.5 py-1 rounded bg-slate-800 text-[10px] text-slate-300">WhatsApp Orders</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-5 space-y-4 text-left">
+                                <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase">Agriculture & FPO</span>
+                                <h3 class="font-display font-bold text-2xl text-slate-900">Verdant Hills Agri-Tech</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    A robust digital catalog built for agricultural collectives and FPOs to connect directly with wholesale buyers and eliminate intermediary delays.
+                                </p>
+                                <div class="pt-2 flex space-x-3">
+                                    <button onclick="openWebsiteDemo('Verdant Hills Agri-Tech', 'Showcasing FPO produce catalogs, direct buyer inquiries, wholesale pricing calculators, and harvest scheduling automation.')" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition">View Concept</button>
+                                    <button onclick="openModal('project-inquiry')" class="px-5 py-2.5 rounded-xl bg-brand-600 text-white font-semibold text-xs hover:bg-brand-700 transition">Get Website</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Manufacturing & Industrial B2B -->
+                        <div class="website-slide hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-7 bg-slate-900 rounded-2xl p-2 border border-slate-800 shadow-xl">
+                                <div class="bg-slate-950 rounded-xl overflow-hidden p-6 text-white space-y-4 font-sans">
+                                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+                                        <span class="font-bold text-amber-400">APEX INDUSTRIAL SOURCING</span>
+                                        <span class="text-slate-400">Industrial Manufacturing & B2B</span>
+                                    </div>
+                                    <h4 class="text-2xl font-bold font-display">Heavy Machinery & CAD Specs Showcase</h4>
+                                    <p class="text-xs text-slate-300">Includes automated Request For Quote (RFQ) builders, technical specification sheets, and vendor registration portals.</p>
+                                    <div class="pt-2 flex gap-2">
+                                        <span class="px-2.5 py-1 rounded bg-slate-800 text-[10px] text-slate-300">RFQ Generator</span>
+                                        <span class="px-2.5 py-1 rounded bg-slate-800 text-[10px] text-slate-300">Spec Downloads</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-5 space-y-4 text-left">
+                                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase">Manufacturing & B2B</span>
+                                <h3 class="font-display font-bold text-2xl text-slate-900">Apex Industrial Sourcing</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    A sleek industrial B2B portal designed for component manufacturers to streamline incoming RFQs and send instant quotes to prospective buyers.
+                                </p>
+                                <div class="pt-2 flex space-x-3">
+                                    <button onclick="openWebsiteDemo('Apex Industrial Sourcing', 'Industrial showcase with instant RFQ generation, machinery CAD downloads, and vendor verification portals.')" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition">View Concept</button>
+                                    <button onclick="openModal('project-inquiry')" class="px-5 py-2.5 rounded-xl bg-brand-600 text-white font-semibold text-xs hover:bg-brand-700 transition">Get Website</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- WHAT WE BUILD GRID -->
+                <div class="space-y-8 pt-8">
+                    <div class="text-center max-w-2xl mx-auto">
+                        <h3 class="font-display font-bold text-2xl text-slate-900">Tailored Websites Across Industries</h3>
+                        <p class="text-xs text-slate-500 mt-1">Every business model requires custom feature architecture</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="light-card p-6 rounded-2xl space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-base"><i class="fa-solid fa-industry"></i></div>
+                            <h4 class="font-display font-bold text-base text-slate-900">Industrial & B2B</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Technical spec sheets, CAD file downloads, RFQ generation, and vendor verification modules.</p>
+                        </div>
+                        <div class="light-card p-6 rounded-2xl space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-base"><i class="fa-solid fa-wheat-awn"></i></div>
+                            <h4 class="font-display font-bold text-base text-slate-900">Agriculture & FPO</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Direct farm produce catalogs, seasonal price tickers, and WhatsApp inquiry routing.</p>
+                        </div>
+                        <div class="light-card p-6 rounded-2xl space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-base"><i class="fa-solid fa-store"></i></div>
+                            <h4 class="font-display font-bold text-base text-slate-900">Retail & FMCG</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Fast product displays, stock availability indicators, and instant WhatsApp ordering.</p>
+                        </div>
+                        <div class="light-card p-6 rounded-2xl space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center font-bold text-base"><i class="fa-solid fa-utensils"></i></div>
+                            <h4 class="font-display font-bold text-base text-slate-900">Hospitality & Dining</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">Digital menus, table reservations, direct catering quotes, and customer reviews.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- WEBSITES TAB -->
-        <section id="tab-websites" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="font-display font-extrabold text-2xl md:text-4xl text-white">We Build Websites That Build Businesses.</h2>
-                <p class="text-sm text-slate-400">Professional websites for businesses, entrepreneurs, manufacturers, suppliers and personal brands — at highly competitive prices.</p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Agricultural -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between hover:border-emerald-500/40 transition">
-                    <div>
-                        <div class="w-full h-32 rounded-xl bg-emerald-950/40 border border-emerald-500/20 mb-4 flex items-center justify-center text-emerald-400 text-3xl"><i class="fa-solid fa-seedling"></i></div>
-                        <span class="text-[10px] uppercase font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Agriculture / FPO</span>
-                        <h3 class="font-display font-bold text-lg text-white mt-2 mb-1">Verdant Hills Agri-Tech</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Modern agricultural marketplace and direct farmer produce portal.</p>
-                    </div>
-                    <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Verdant Hills Agri-Tech', 'Showcasing FPO produce catalogs, direct buyer inquiries, wholesale pricing calculators, and harvest scheduling automation.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-emerald-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
-                    </div>
+        <!-- ================= CUSTOM DASHBOARDS TAB ================= -->
+        <section id="tab-dashboards" class="tab-content hidden py-16 bg-white border-y border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wider uppercase">Custom Business Dashboards</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-900">
+                        Turn Your Business Data Into A Dashboard
+                    </h2>
+                    <p class="text-slate-600 text-base">
+                        Stop managing operations through disconnected spreadsheets. We aggregate sales, inventory, purchases, and finances into a single, intuitive dashboard.
+                    </p>
                 </div>
 
-                <!-- FMCG Vendor -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between hover:border-cyan-500/40 transition">
-                    <div>
-                        <div class="w-full h-32 rounded-xl bg-cyan-950/40 border border-cyan-500/20 mb-4 flex items-center justify-center text-cyan-400 text-3xl"><i class="fa-solid fa-box-open"></i></div>
-                        <span class="text-[10px] uppercase font-semibold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-full">FMCG & Vendors</span>
-                        <h3 class="font-display font-bold text-lg text-white mt-2 mb-1">Namma Fresh Organics</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Fast-moving consumer goods catalogue with bulk order workflows.</p>
-                    </div>
-                    <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Namma Fresh Organics', 'High-speed product catalogues with instant quotation requests, stock level indicators, and automated WhatsApp checkout.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-cyan-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
-                    </div>
-                </div>
-
-                <!-- Microgreens -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between hover:border-violet-500/40 transition">
-                    <div>
-                        <div class="w-full h-32 rounded-xl bg-violet-950/40 border border-violet-500/20 mb-4 flex items-center justify-center text-violet-400 text-3xl"><i class="fa-solid fa-spa"></i></div>
-                        <span class="text-[10px] uppercase font-semibold text-violet-400 bg-violet-500/10 px-2.5 py-1 rounded-full">Specialty Produce</span>
-                        <h3 class="font-display font-bold text-lg text-white mt-2 mb-1">Kuro Culinary & Dining</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Fresh green modern business website with subscription options.</p>
-                    </div>
-                    <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Kuro Culinary & Dining', 'Sleek culinary-themed subscription and direct-to-home delivery portal with automated recurring billing.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-violet-500 text-white font-bold text-xs cursor-pointer">Get Website</button>
-                    </div>
-                </div>
-
-                <!-- Manufacturers -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between hover:border-amber-500/40 transition">
-                    <div>
-                        <div class="w-full h-32 rounded-xl bg-amber-950/40 border border-amber-500/20 mb-4 flex items-center justify-center text-amber-400 text-3xl"><i class="fa-solid fa-industry"></i></div>
-                        <span class="text-[10px] uppercase font-semibold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full">Industrial B2B</span>
-                        <h3 class="font-display font-bold text-lg text-white mt-2 mb-1">Apex Industrial Sourcing</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed mb-4">Industrial B2B website showcasing technical specifications and RFQ forms.</p>
-                    </div>
-                    <div class="flex items-center space-x-2 pt-3 border-t border-slate-800">
-                        <button onclick="openWebsiteDemo('Apex Industrial Sourcing', 'Industrial showcase with instant RFQ generation, machinery CAD downloads, and vendor verification portals.')" class="flex-1 py-2 rounded-xl glass-panel text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer">View Demo</button>
-                        <button onclick="openModal('custom-request')" class="flex-1 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs cursor-pointer">Get Website</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CUSTOM DASHBOARDS TAB -->
-        <section id="tab-dashboards" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8 max-w-4xl mx-auto w-full">
-            <div class="text-center space-y-2">
-                <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Need a Custom Dashboard?</h2>
-                <p class="text-sm text-slate-400">Tell us what you want to automate. We’ll design the workflow around your business.</p>
-            </div>
-
-            <div class="glass-panel p-6 md:p-10 rounded-3xl border border-slate-800 space-y-6">
-                <form id="custom-dashboard-form" onsubmit="submitCustomDashboard(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- REALISTIC DASHBOARD DEMO PREVIEW -->
+                <div class="light-card p-6 sm:p-8 rounded-3xl bg-slate-900 text-white space-y-6">
+                    <!-- Dashboard Control Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">Full Name *</label>
-                            <input type="text" id="cd-name" required placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
+                            <span class="text-xs font-mono text-emerald-400 uppercase tracking-widest block">Operational Intelligence</span>
+                            <h3 class="font-display font-bold text-2xl text-white mt-1">Multi-Department Executive Dashboard</h3>
                         </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Business Name *</label>
-                            <input type="text" id="cd-business" required placeholder="Acme Enterprises" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Email *</label>
-                            <input type="email" id="cd-email" required placeholder="john@acme.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">WhatsApp Number *</label>
-                            <input type="text" id="cd-whatsapp" required placeholder="+91 98765 43210" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Business Type</label>
-                            <select id="cd-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                <option>Manufacturing</option>
-                                <option>Agriculture / FPO</option>
-                                <option>Retail & Wholesale</option>
-                                <option>Distribution & Logistics</option>
-                                <option>Restaurant & Food Services</option>
-                                <option>Technology / Services</option>
-                                <option>Other</option>
+                        <div class="flex items-center space-x-3">
+                            <select id="dashboard-preview-select" onchange="switchDashboardPreview(this.value)" class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                                <option value="sales">Sales & Revenue Dashboard</option>
+                                <option value="inventory">Inventory & Stock Dashboard</option>
+                                <option value="purchase">Purchase & Vendor Dashboard</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-slate-400 mb-1">Required Dashboard / Automation</label>
-                            <select id="cd-req-type" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500">
-                                <option>Sales & Purchase Dashboard</option>
-                                <option>Invoice & GRN Automation</option>
-                                <option>Inventory & Warehouse Management</option>
-                                <option>CRM & WhatsApp Integration</option>
-                                <option>Fully Custom Business OS</option>
-                            </select>
+                            <button onclick="openModal('project-inquiry')" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs">Request Dashboard</button>
                         </div>
                     </div>
+
+                    <!-- Dynamic Dashboard Preview Content -->
+                    <div id="dashboard-preview-viewport" class="space-y-6">
+                        <!-- Sales View (Default) -->
+                        <div id="dash-view-sales" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Total Monthly Revenue</span>
+                                    <div class="text-2xl font-bold text-white mt-1">₹24,80,500</div>
+                                    <span class="text-[10px] text-emerald-400 font-semibold">+18.4% vs last month</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Orders Processed</span>
+                                    <div class="text-2xl font-bold text-white mt-1">1,124</div>
+                                    <span class="text-[10px] text-brand-400 font-semibold">98.2% Fulfillment Rate</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Average Order Value</span>
+                                    <div class="text-2xl font-bold text-white mt-1">₹2,206</div>
+                                    <span class="text-[10px] text-slate-400">Consistent</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Pending Invoices</span>
+                                    <div class="text-2xl font-bold text-amber-400 mt-1">₹1,45,000</div>
+                                    <span class="text-[10px] text-amber-400">12 Pending Payments</span>
+                                </div>
+                            </div>
+
+                            <!-- Simulated Data Table -->
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 overflow-x-auto">
+                                <div class="text-xs font-semibold text-slate-300 mb-3">Recent Sales Transactions</div>
+                                <table class="w-full text-left text-xs text-slate-300">
+                                    <thead class="text-slate-500 uppercase text-[10px] border-b border-slate-800">
+                                        <tr>
+                                            <th class="pb-2">Invoice #</th>
+                                            <th class="pb-2">Customer</th>
+                                            <th class="pb-2">Amount</th>
+                                            <th class="pb-2">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-800">
+                                        <tr><td class="py-2.5 font-mono">#INV-8021</td><td>Acme Retailers</td><td class="font-bold text-white">₹45,000</td><td><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px]">Paid</span></td></tr>
+                                        <tr><td class="py-2.5 font-mono">#INV-8022</td><td>Metro Supplies</td><td class="font-bold text-white">₹12,400</td><td><span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[10px]">Pending</span></td></tr>
+                                        <tr><td class="py-2.5 font-mono">#INV-8023</td><td>Highland Foods</td><td class="font-bold text-white">₹88,200</td><td><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px]">Paid</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Inventory View (Hidden by default) -->
+                        <div id="dash-view-inventory" class="hidden space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Total SKUs Tracked</span>
+                                    <div class="text-2xl font-bold text-white mt-1">1,480 Items</div>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Low Stock Alerts</span>
+                                    <div class="text-2xl font-bold text-rose-400 mt-1">14 SKUs</div>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Inventory Valuation</span>
+                                    <div class="text-2xl font-bold text-emerald-400 mt-1">₹62,10,000</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Purchase View (Hidden by default) -->
+                        <div id="dash-view-purchase" class="hidden space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Active Vendor POs</span>
+                                    <div class="text-2xl font-bold text-white mt-1">28 Open POs</div>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Pending GRN Receipts</span>
+                                    <div class="text-2xl font-bold text-amber-400 mt-1">6 Shipments</div>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                    <span class="text-[10px] text-slate-400 uppercase">Monthly Procurement</span>
+                                    <div class="text-2xl font-bold text-brand-400 mt-1">₹14,20,000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD FEATURES GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                    <div class="light-card p-6 rounded-2xl space-y-2">
+                        <div class="text-brand-600 font-bold text-lg"><i class="fa-solid fa-plug mr-2"></i>Multi-Source Integration</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">Connect Google Sheets, Tally, SQL databases, or Excel files into automated update feeds.</p>
+                    </div>
+                    <div class="light-card p-6 rounded-2xl space-y-2">
+                        <div class="text-emerald-600 font-bold text-lg"><i class="fa-solid fa-mobile-screen mr-2"></i>Mobile-Responsive</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">Access key operational metrics directly from your phone with tailored executive views.</p>
+                    </div>
+                    <div class="light-card p-6 rounded-2xl space-y-2">
+                        <div class="text-brand-700 font-bold text-lg"><i class="fa-solid fa-bell mr-2"></i>Automated Threshold Alerts</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">Receive instant WhatsApp or email alerts when inventory drops or payments become overdue.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= WORKFLOW AUTOMATION TAB ================= -->
+        <section id="tab-automations" class="tab-content hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">What do you want to automate? Describe your current process:</label>
-                        <textarea id="cd-description" rows="4" required placeholder="We currently manage invoices manually in Excel and want to automate WhatsApp notifications and GRNs..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-cyan-500"></textarea>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 block">Workflow Automation</span>
+                        <h2 class="font-display font-extrabold text-3xl text-slate-900 mt-1">Automate Repetitive Business Tasks</h2>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <input type="text" id="automation-search" placeholder="Search automations..." onkeyup="filterAutomations()" class="bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-brand-600 shadow-sm w-64">
+                    </div>
+                </div>
+
+                <!-- Automations Grid -->
+                <div id="automations-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="automation-card light-card light-card-hover p-6 rounded-2xl flex flex-col justify-between" data-title="Invoice Automation">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold mb-4"><i class="fa-solid fa-file-invoice"></i></div>
+                            <h3 class="font-display font-bold text-lg text-slate-900 mb-2">Invoice Automation</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Automatically generate tax invoices from orders and trigger immediate WhatsApp and email dispatch.</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex items-center space-x-2">
+                            <button onclick="openAutomationDetail('Invoice Automation', 'Automatically generate professional invoices from sales data, apply taxes, and trigger WhatsApp notifications.')" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">Explore</button>
+                            <button onclick="openModal('project-inquiry')" class="flex-1 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold hover:bg-brand-700 transition">Request</button>
+                        </div>
                     </div>
 
-                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-600 text-white font-bold text-sm shadow-xl shadow-cyan-500/20 hover:opacity-95 transition cursor-pointer">
-                        Request My Custom Solution
-                    </button>
-                </form>
+                    <div class="automation-card light-card light-card-hover p-6 rounded-2xl flex flex-col justify-between" data-title="GRN Management Automation">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold mb-4"><i class="fa-solid fa-boxes-packing"></i></div>
+                            <h3 class="font-display font-bold text-lg text-slate-900 mb-2">GRN Management</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Streamline warehouse intake by logging Goods Receipt Notes, batch numbers, and vendor quantities.</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex items-center space-x-2">
+                            <button onclick="openAutomationDetail('GRN Management', 'Create Goods Receipt Notes quickly, match against purchase orders, and maintain digital stock records.')" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">Explore</button>
+                            <button onclick="openModal('project-inquiry')" class="flex-1 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold hover:bg-brand-700 transition">Request</button>
+                        </div>
+                    </div>
+
+                    <div class="automation-card light-card light-card-hover p-6 rounded-2xl flex flex-col justify-between" data-title="WhatsApp Alerts & Follow-ups">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold mb-4"><i class="fa-brands fa-whatsapp"></i></div>
+                            <h3 class="font-display font-bold text-lg text-slate-900 mb-2">WhatsApp Notifications</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">Send instant order confirmations, PDF invoices, and payment reminders via official WhatsApp flows.</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex items-center space-x-2">
+                            <button onclick="openAutomationDetail('WhatsApp Notifications', 'Automate customer messaging, payment follow-ups, and order dispatch alerts.')" class="flex-1 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition">Explore</button>
+                            <button onclick="openModal('project-inquiry')" class="flex-1 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold hover:bg-brand-700 transition">Request</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- SOLUTIONS TAB -->
-        <section id="tab-solutions" class="tab-content hidden flex-1 p-4 md:p-8 space-y-12">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">How KVORA Works</h2>
-                <p class="text-sm text-slate-400">Our 5-step engagement model ensures foolproof automation and immediate ROI.</p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-base mx-auto">1</div>
-                    <h3 class="font-display font-bold text-white">Understand</h3>
-                    <p class="text-xs text-slate-400">We analyze your existing manual processes and operational bottlenecks.</p>
+        <!-- ================= FREE BUSINESS TOOLS TAB ================= -->
+        <section id="tab-tools" class="tab-content hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 block">Free Utilities</span>
+                        <h2 class="font-display font-extrabold text-3xl text-slate-900 mt-1">Free Business Generators</h2>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="switchSubTool('invoice')" id="btn-subtool-invoice" class="sub-tool-btn px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs shadow-sm transition">Invoice Generator</button>
+                        <button onclick="switchSubTool('grn')" id="btn-subtool-grn" class="sub-tool-btn px-4 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 font-medium text-xs hover:bg-slate-100 transition">GRN Generator</button>
+                    </div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-base mx-auto">2</div>
-                    <h3 class="font-display font-bold text-white">Design</h3>
-                    <p class="text-xs text-slate-400">We architect a streamlined, lightning-fast digital workflow.</p>
+
+                <!-- INVOICE GENERATOR TOOL -->
+                <div id="subtool-invoice" class="subtool-container space-y-6">
+                    <div class="light-card p-6 sm:p-8 rounded-3xl bg-white space-y-6 shadow-sm" id="invoice-printable-area">
+                        
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                            <div>
+                                <h3 class="font-display font-bold text-xl text-slate-900 flex items-center">
+                                    <i class="fa-solid fa-file-invoice text-brand-600 mr-2"></i> Professional Invoice Generator
+                                </h3>
+                                <p class="text-xs text-slate-500">Fill details below to generate, print, or share a clean PDF invoice</p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="resetInvoiceForm()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold">Reset</button>
+                                <button onclick="generatePDFInvoice()" class="px-4 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs"><i class="fa-solid fa-download mr-1"></i>Download PDF</button>
+                            </div>
+                        </div>
+
+                        <!-- Form Inputs -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Seller Details -->
+                            <div class="space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <h4 class="text-xs font-bold text-brand-600 uppercase tracking-wider">Your Business Details (Bill From)</h4>
+                                <input type="text" id="inv-seller-name" placeholder="Business / Seller Name" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                <input type="text" id="inv-seller-address" placeholder="Business Address" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="inv-seller-phone" placeholder="Phone Number" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                    <input type="text" id="inv-seller-gstin" placeholder="GSTIN Number" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                </div>
+                            </div>
+
+                            <!-- Customer Details -->
+                            <div class="space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Customer Details (Bill To)</h4>
+                                <input type="text" id="inv-cust-name" placeholder="Customer / Company Name" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                <input type="text" id="inv-cust-address" placeholder="Customer Address" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="inv-cust-phone" placeholder="WhatsApp Number" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                    <input type="email" id="inv-cust-email" placeholder="customer@email.com" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-brand-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Meta -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Invoice #</label>
+                                <input type="text" id="inv-number" placeholder="INV-001" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Invoice Date</label>
+                                <input type="date" id="inv-date" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Due Date</label>
+                                <input type="date" id="inv-duedate" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">GST / Tax (%)</label>
+                                <input type="number" id="inv-tax-rate" value="18" oninput="calculateInvoice()" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase">Items / Services</h4>
+                                <button onclick="addInvoiceItem()" class="px-3 py-1 rounded-lg bg-brand-50 text-brand-600 text-xs font-bold hover:bg-brand-100">+ Add Row</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-xs" id="invoice-items-table">
+                                    <thead class="bg-slate-100 text-slate-600 uppercase font-bold text-[10px]">
+                                        <tr>
+                                            <th class="p-2.5 rounded-l-lg">Item Description</th>
+                                            <th class="p-2.5 w-20">Qty</th>
+                                            <th class="p-2.5 w-28">Price (₹)</th>
+                                            <th class="p-2.5 w-28">Total (₹)</th>
+                                            <th class="p-2.5 w-12 rounded-r-lg"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoice-items-body" class="divide-y divide-slate-200">
+                                        <tr>
+                                            <td class="p-2"><input type="text" placeholder="Item name or service description" class="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800"></td>
+                                            <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-800"></td>
+                                            <td class="p-2"><input type="number" value="0" oninput="calculateInvoice()" class="inv-price w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-800"></td>
+                                            <td class="p-2 font-bold text-brand-600 inv-row-total">₹0.00</td>
+                                            <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Calculations & Sharing -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-200 items-end">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Notes & Payment Terms</label>
+                                <textarea id="inv-notes" rows="3" placeholder="Enter bank details, UPI ID, or terms..." class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs text-slate-800"></textarea>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                                <div class="flex justify-between text-xs text-slate-600"><span>Subtotal:</span><span id="inv-subtotal" class="font-semibold text-slate-800">₹0.00</span></div>
+                                <div class="flex justify-between text-xs text-slate-600"><span>GST / Tax:</span><span id="inv-tax" class="font-semibold text-slate-800">₹0.00</span></div>
+                                <div class="flex justify-between text-sm font-extrabold text-slate-900 pt-2 border-t border-slate-200"><span>Grand Total:</span><span id="inv-total" class="text-brand-600">₹0.00</span></div>
+                                <div class="flex gap-2 pt-3">
+                                    <button onclick="sendInvoiceToWhatsApp()" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-1"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></button>
+                                    <button onclick="sendInvoiceToEmail()" class="flex-1 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center space-x-1"><i class="fa-solid fa-envelope"></i><span>Email</span></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-base mx-auto">3</div>
-                    <h3 class="font-display font-bold text-white">Automate</h3>
-                    <p class="text-xs text-slate-400">We build your custom dashboards, generators, and document pipelines.</p>
+
+                <!-- GRN GENERATOR TOOL -->
+                <div id="subtool-grn" class="subtool-container hidden space-y-6">
+                    <div class="light-card p-6 sm:p-8 rounded-3xl bg-white space-y-6 shadow-sm" id="grn-printable-area">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                            <div>
+                                <h3 class="font-display font-bold text-xl text-slate-900 flex items-center">
+                                    <i class="fa-solid fa-boxes-packing text-emerald-600 mr-2"></i> Goods Receipt Note (GRN) Generator
+                                </h3>
+                                <p class="text-xs text-slate-500">Record incoming inventory shipments cleanly</p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="resetGrnForm()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold">Reset</button>
+                                <button onclick="generatePDFGRN()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"><i class="fa-solid fa-download mr-1"></i>Download GRN PDF</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase">Supplier Details</h4>
+                                <input type="text" id="grn-supplier" placeholder="Supplier Company Name" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                                <input type="text" id="grn-sup-address" placeholder="Supplier Address" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                            <div class="space-y-3 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase">Receiving Warehouse Details</h4>
+                                <input type="text" id="grn-company" placeholder="Receiving Business Name" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                                <input type="text" id="grn-comp-address" placeholder="Warehouse Address" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="text" id="grn-number" placeholder="GRN Number (e.g. GRN-101)" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            <input type="text" id="grn-po" placeholder="Purchase Order PO #" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            <input type="text" id="grn-vehicle" placeholder="Delivery Vehicle #" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                            <h4 class="text-xs font-bold text-slate-700 uppercase">Shipment Line Item</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                                <input type="text" id="grn-item-name" placeholder="Item Name / SKU" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                                <input type="number" id="grn-qty-ordered" placeholder="Qty Ordered" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                                <input type="number" id="grn-qty-received" placeholder="Qty Received" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                                <input type="text" id="grn-batch" placeholder="Batch No. / QC Status" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base mx-auto">4</div>
-                    <h3 class="font-display font-bold text-white">Connect</h3>
-                    <p class="text-xs text-slate-400">We link WhatsApp, email, and business data for seamless communication.</p>
+
+            </div>
+        </section>
+
+
+        <!-- ================= SOLUTIONS TAB ================= -->
+        <section id="tab-solutions" class="tab-content hidden py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-center">
+                <div class="max-w-2xl mx-auto space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 block">End-To-End Architecture</span>
+                    <h2 class="font-display font-extrabold text-3xl text-slate-900">Complete Business Systems</h2>
+                    <p class="text-slate-600 text-sm">We combine custom websites, analytics dashboards, and workflow automations into a single, cohesive operating layer.</p>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3">
-                    <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base mx-auto">5</div>
-                    <h3 class="font-display font-bold text-white">Improve</h3>
-                    <p class="text-xs text-slate-400">We continuously refine your workflows as your business scales.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="light-card p-8 rounded-2xl space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">1</div>
+                        <h3 class="font-display font-bold text-xl text-slate-900">Digital Presence</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Establish trust with prospects, showcase high-res product catalogs, and capture inbound lead requests.</p>
+                    </div>
+                    <div class="light-card p-8 rounded-2xl space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">2</div>
+                        <h3 class="font-display font-bold text-xl text-slate-900">Data Visibility</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Aggregate sales orders, inventory changes, and vendor bills into live, single-screen management views.</p>
+                    </div>
+                    <div class="light-card p-8 rounded-2xl space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center font-bold">3</div>
+                        <h3 class="font-display font-bold text-xl text-slate-900">Process Automation</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Eliminate repetitive manual entry, trigger instant customer WhatsApp alerts, and dispatch PDF invoices.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT TAB -->
-        <section id="tab-contact" class="tab-content hidden flex-1 p-4 md:p-8 space-y-8 max-w-3xl mx-auto w-full">
-            <div class="text-center space-y-2">
-                <h2 class="font-display font-extrabold text-2xl md:text-3xl text-white">Get in Touch with KVORA</h2>
-                <p class="text-sm text-slate-400">Ready to automate your business? Reach out to our experts today.</p>
-            </div>
 
-            <div class="glass-panel p-8 rounded-3xl border border-slate-800 text-center space-y-6">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-2xl mx-auto shadow-xl"><i class="fa-solid fa-envelope"></i></div>
-                <div>
-                    <h3 class="font-display font-bold text-xl text-white">KVORA AUTOMATIONS</h3>
-                    <p class="text-sm text-cyan-400 mt-1">kvoura.automation@gmail.com</p>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 pt-4">
-                    <a href="mailto:kvoura.automation@gmail.com" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition cursor-pointer"><i class="fa-solid fa-envelope mr-2"></i>Email Us</a>
-                    <button onclick="openModal('custom-request')" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 transition cursor-pointer"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp Us</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="mt-auto border-t border-slate-800 bg-kvora-card py-8 px-6 md:px-12 text-xs text-slate-500">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <!-- ================= CONTACT TAB ================= -->
+        <section id="tab-contact" class="tab-content hidden py-16 bg-slate-50">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-center">
                 <div class="space-y-3">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-7 h-7 rounded-lg bg-cyan-500 text-black font-bold flex items-center justify-center text-sm">K</div>
-                        <span class="font-display font-bold text-white text-base">KVORA</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 block">Get In Touch</span>
+                    <h2 class="font-display font-extrabold text-3xl text-slate-900">Let’s Discuss Your Digital System</h2>
+                    <p class="text-sm text-slate-600">Have questions about building a custom website or dashboard? Contact our development team directly.</p>
+                </div>
+
+                <div class="light-card p-8 rounded-3xl bg-white space-y-6 shadow-sm">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-envelope"></i>
                     </div>
-                    <p class="text-slate-400">“Smart automation for growing businesses.”</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Solutions</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#automations" onclick="navigateTo('automations'); return false;" class="hover:text-cyan-400 cursor-pointer">Automations Marketplace</a></li>
-                        <li><a href="#tools" onclick="navigateTo('tools'); return false;" class="hover:text-cyan-400 cursor-pointer">Free Generators</a></li>
-                        <li><a href="#dashboards" onclick="navigateTo('dashboards'); return false;" class="hover:text-cyan-400 cursor-pointer">Custom Dashboards</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Websites</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">Business Websites</a></li>
-                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">FPO & Agricultural Portals</a></li>
-                        <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-cyan-400 cursor-pointer">B2B Industrial Portals</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white uppercase text-xs mb-3">Legal & Company</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" onclick="showToast('Privacy Policy: KVORA protects all client data securely.', 'info'); return false;" class="hover:text-cyan-400 cursor-pointer">Privacy Policy</a></li>
-                        <li><a href="#" onclick="showToast('Terms of Service: Standard SaaS agreements apply.', 'info'); return false;" class="hover:text-cyan-400 cursor-pointer">Terms of Service</a></li>
-                    </ul>
+                    <div>
+                        <h3 class="font-display font-bold text-xl text-slate-900">KVORA AUTOMATIONS</h3>
+                        <p class="text-sm font-semibold text-brand-600 mt-1">kvoura.automation@gmail.com</p>
+                    </div>
+                    <div class="flex justify-center space-x-4 pt-2">
+                        <a href="mailto:kvoura.automation@gmail.com" class="px-6 py-3 rounded-xl bg-brand-600 text-white font-semibold text-xs hover:bg-brand-700 transition">Email Us</a>
+                        <button onclick="openModal('project-inquiry')" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-700 transition"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp Direct</button>
+                    </div>
                 </div>
             </div>
-            <div class="max-w-7xl mx-auto pt-6 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center">
-                <p>©️ 2026 KVORA AUTOMATIONS. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <span class="text-cyan-400 font-medium">Automate Smarter. Work Faster. Grow Better.</span>
-                </div>
-            </div>
-        </footer>
+        </section>
+
     </main>
 
-    <!-- Floating Action Button -->
-    <button onclick="openModal('custom-request')" class="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-5 py-3.5 rounded-full shadow-2xl shadow-cyan-500/40 font-semibold text-sm flex items-center space-x-2 hover:scale-105 transition cursor-pointer">
-        <i class="fa-solid fa-comments text-lg"></i>
-        <span>Talk to KVORA</span>
-    </button>
 
-    <!-- Generic Modal Window -->
-    <div id="kvora-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-3xl border border-slate-700 p-6 md:p-8 space-y-6 relative">
-            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <div id="modal-content" class="space-y-4">
-                <!-- Populated dynamically -->
+    <!-- PROJECT INQUIRY / GENERAL MODAL -->
+    <div id="kvora-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div id="modal-content" class="space-y-4 text-left">
+                <!-- Dynamically Populated -->
             </div>
         </div>
     </div>
 
-    <!-- Robust JavaScript Engine -->
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 bg-white py-12 px-4 sm:px-6 lg:px-8 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-left">
+            <div class="space-y-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-7 h-7 rounded-lg bg-brand-600 text-white font-bold flex items-center justify-center text-sm">K</div>
+                    <span class="font-display font-bold text-slate-900 text-base">KVORA</span>
+                </div>
+                <p class="text-slate-500">"Websites • Dashboards • Automation"</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 uppercase text-[10px] mb-3">Primary Services</h4>
+                <ul class="space-y-2">
+                    <li><a href="#websites" onclick="navigateTo('websites'); return false;" class="hover:text-brand-600">Custom Business Websites</a></li>
+                    <li><a href="#dashboards" onclick="navigateTo('dashboards'); return false;" class="hover:text-brand-600">Executive Dashboards</a></li>
+                    <li><a href="#automations" onclick="navigateTo('automations'); return false;" class="hover:text-brand-600">Workflow Automation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 uppercase text-[10px] mb-3">Free Tools</h4>
+                <ul class="space-y-2">
+                    <li><a href="#tools" onclick="navigateTo('tools'); switchSubTool('invoice'); return false;" class="hover:text-brand-600">Invoice Generator</a></li>
+                    <li><a href="#tools" onclick="navigateTo('tools'); switchSubTool('grn'); return false;" class="hover:text-brand-600">GRN Generator</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 uppercase text-[10px] mb-3">Contact</h4>
+                <p class="text-slate-600">kvoura.automation@gmail.com</p>
+                <p class="mt-2 text-slate-400">Response within 2 business hours.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-slate-400">
+            <p>© 2026 KVORA AUTOMATIONS. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0 font-medium text-brand-600">Automate Smarter. Work Faster. Grow Better.</p>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT ENGINE -->
     <script>
-        /* FUTURE BACKEND INTEGRATION
-           Connect these functions to production backend API endpoints:
-           - sendInvoiceToEmail() -> SMTP/Email Microservice (kvoura.automation@gmail.com)
-           - sendInvoiceToWhatsApp() -> WhatsApp Cloud API
-           - submitCustomDashboard() -> Secure Backend DB / Formspree / EmailJS Endpoint (kvoura.automation@gmail.com)
-        */
-
-        // Bulletproof Navigation & Tab Switching
+        // Tab Navigation
         function navigateTo(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.add('hidden'));
-
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             const target = document.getElementById('tab-' + tabId);
-            if (target) {
-                target.classList.remove('hidden');
-            }
+            if (target) target.classList.remove('hidden');
 
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => {
-                btn.classList.remove('bg-cyan-500/10', 'border', 'border-cyan-500/30', 'text-cyan-400');
-                btn.classList.add('text-slate-300');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-600', 'font-semibold');
+                btn.classList.add('text-slate-600');
             });
 
             const activeBtn = document.getElementById('nav-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.add('bg-cyan-500/10', 'border', 'border-cyan-500/30', 'text-cyan-400');
-                activeBtn.classList.remove('text-slate-300');
+                activeBtn.classList.add('text-brand-600', 'font-semibold');
+                activeBtn.classList.remove('text-slate-600');
             }
 
             const drawer = document.getElementById('mobile-drawer');
@@ -893,52 +1088,43 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Sub-tool Switching (Invoice vs GRN)
+        // Sub-Tool Switcher
         function switchSubTool(toolName) {
             document.querySelectorAll('.subtool-container').forEach(el => el.classList.add('hidden'));
-            const targetTool = document.getElementById('subtool-' + toolName);
-            if(targetTool) targetTool.classList.remove('hidden');
+            const target = document.getElementById('subtool-' + toolName);
+            if (target) target.classList.remove('hidden');
 
             document.querySelectorAll('.sub-tool-btn').forEach(btn => {
-                btn.classList.remove('bg-cyan-500', 'text-black', 'font-bold', 'shadow-lg', 'shadow-cyan-500/20');
-                btn.classList.add('glass-panel', 'text-white', 'font-medium');
+                btn.classList.remove('bg-brand-600', 'text-white', 'font-bold', 'shadow-sm');
+                btn.classList.add('bg-white', 'border', 'border-slate-300', 'text-slate-700', 'font-medium');
             });
-            const activeSubBtn = document.getElementById('btn-subtool-' + toolName);
-            if(activeSubBtn) {
-                activeSubBtn.classList.remove('glass-panel', 'text-white', 'font-medium');
-                activeSubBtn.classList.add('bg-cyan-500', 'text-black', 'font-bold', 'shadow-lg', 'shadow-cyan-500/20');
+
+            const activeBtn = document.getElementById('btn-subtool-' + toolName);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'border', 'border-slate-300', 'text-slate-700', 'font-medium');
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'font-bold', 'shadow-sm');
             }
         }
 
-        // Mobile Drawer Event Listeners
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileDrawer = document.getElementById('mobile-drawer');
-        const mobileCloseBtn = document.getElementById('mobile-close-btn');
-
-        if(mobileMenuBtn && mobileDrawer) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileDrawer.classList.remove('-translate-x-full');
-            });
-        }
-        if(mobileCloseBtn && mobileDrawer) {
-            mobileCloseBtn.addEventListener('click', () => {
-                mobileDrawer.classList.add('-translate-x-full');
-            });
+        // Website Slider Rotation Logic
+        let currentWebsiteSlide = 0;
+        function rotateWebsiteSlider(direction) {
+            const slides = document.querySelectorAll('.website-slide');
+            if (slides.length === 0) return;
+            
+            slides[currentWebsiteSlide].classList.add('hidden');
+            currentWebsiteSlide = (currentWebsiteSlide + direction + slides.length) % slides.length;
+            slides[currentWebsiteSlide].classList.remove('hidden');
         }
 
-        // Toast Notification System
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if(!container) return;
-            const toast = document.createElement('div');
-            const borderColor = type === 'success' ? 'border-emerald-500/40 text-emerald-300' : 'border-cyan-500/40 text-cyan-300';
-            toast.className = `glass-panel px-5 py-3 rounded-2xl border ${borderColor} text-xs font-semibold shadow-2xl flex items-center space-x-3 pointer-events-auto transition-all duration-300`;
-            toast.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'circle-check' : 'circle-info'} text-base"></i><span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+        // Dashboard Preview Selector
+        function switchDashboardPreview(viewName) {
+            document.getElementById('dash-view-sales')?.classList.add('hidden');
+            document.getElementById('dash-view-inventory')?.classList.add('hidden');
+            document.getElementById('dash-view-purchase')?.classList.add('hidden');
+
+            const activeView = document.getElementById('dash-view-' + viewName);
+            if(activeView) activeView.classList.remove('hidden');
         }
 
         // Invoice Calculator
@@ -949,7 +1135,7 @@
                 const qtyInput = row.querySelector('.inv-qty');
                 const priceInput = row.querySelector('.inv-price');
                 const rowTotalEl = row.querySelector('.inv-row-total');
-                if(qtyInput && priceInput && rowTotalEl) {
+                if (qtyInput && priceInput && rowTotalEl) {
                     const qty = parseFloat(qtyInput.value) || 0;
                     const price = parseFloat(priceInput.value) || 0;
                     const total = qty * price;
@@ -963,25 +1149,21 @@
             const taxAmount = (subtotal * taxRate) / 100;
             const grandTotal = subtotal + taxAmount;
 
-            const subtotalEl = document.getElementById('inv-subtotal');
-            const taxEl = document.getElementById('inv-tax');
-            const totalEl = document.getElementById('inv-total');
-
-            if(subtotalEl) subtotalEl.innerText = '₹' + subtotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
-            if(taxEl) taxEl.innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
-            if(totalEl) totalEl.innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('inv-subtotal').innerText = '₹' + subtotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('inv-tax').innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('inv-total').innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
         }
 
         function addInvoiceItem() {
             const tbody = document.getElementById('invoice-items-body');
-            if(!tbody) return;
+            if (!tbody) return;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td class="p-2"><input type="text" placeholder="Item name or service description" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                <td class="p-2"><input type="number" value="0" oninput="calculateInvoice()" class="inv-price w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                <td class="p-2 text-cyan-400 font-semibold inv-row-total">₹0.00</td>
-                <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2 cursor-pointer"><i class="fa-solid fa-trash"></i></button></td>
+                <td class="p-2"><input type="text" placeholder="Item name or service description" class="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-800"></td>
+                <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-800"></td>
+                <td class="p-2"><input type="number" value="0" oninput="calculateInvoice()" class="inv-price w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-800"></td>
+                <td class="p-2 font-bold text-brand-600 inv-row-total">₹0.00</td>
+                <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button></td>
             `;
             tbody.appendChild(tr);
             calculateInvoice();
@@ -989,7 +1171,7 @@
 
         function removeInvoiceItem(btn) {
             const tr = btn.closest('tr');
-            if(tr) {
+            if (tr) {
                 tr.remove();
                 calculateInvoice();
             }
@@ -999,108 +1181,77 @@
             document.querySelectorAll('#subtool-invoice input:not([type="number"])').forEach(i => i.value = '');
             document.getElementById('inv-tax-rate').value = '18';
             document.getElementById('inv-notes').value = '';
-            const tbody = document.getElementById('invoice-items-body');
-            if(tbody) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td class="p-2"><input type="text" placeholder="Item name or service description" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                        <td class="p-2"><input type="number" value="1" oninput="calculateInvoice()" class="inv-qty w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                        <td class="p-2"><input type="number" value="0" oninput="calculateInvoice()" class="inv-price w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-white text-sm"></td>
-                        <td class="p-2 text-cyan-400 font-semibold inv-row-total">₹0.00</td>
-                        <td class="p-2"><button onclick="removeInvoiceItem(this)" class="text-rose-400 hover:text-rose-300 p-2 cursor-pointer"><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                `;
-            }
             calculateInvoice();
-            showToast('Invoice form reset successfully.', 'info');
+            showToast('Invoice form reset', 'info');
         }
 
         function resetGrnForm() {
             document.querySelectorAll('#subtool-grn input').forEach(i => i.value = '');
-            showToast('GRN form reset successfully.', 'info');
+            showToast('GRN form reset', 'info');
         }
 
-        // WhatsApp & Email Sharing
+        // WhatsApp & Email Routing
         function sendInvoiceToWhatsApp() {
-            const customerPhone = document.getElementById('inv-cust-phone')?.value || '';
-            const customerName = document.getElementById('inv-cust-name')?.value || 'Valued Customer';
-            const invNumber = document.getElementById('inv-number')?.value || 'INV-001';
+            const customerPhone = document.getElementById('inv-cust-phone')?.value.trim();
+            const customerName = document.getElementById('inv-cust-name')?.value.trim() || 'Valued Customer';
+            const invNumber = document.getElementById('inv-number')?.value.trim() || 'INV-001';
             const total = document.getElementById('inv-total')?.innerText || '₹0.00';
 
-            const text = `Hello ${customerName},\n\nPlease find your invoice ${invNumber}.\nInvoice Amount: ${total}\n\nThank you for your business!`;
+            const text = `Hello ${customerName},\n\nPlease find the details for Invoice ${invNumber}.\nTotal Amount: ${total}\n\nThank you for choosing KVORA AUTOMATIONS!`;
             const encoded = encodeURIComponent(text);
-            
-            if(customerPhone) {
-                window.open(`https://wa.me/${customerPhone}?text=${encoded}`, '_blank');
-            } else {
-                window.open(`https://wa.me/?text=${encoded}`, '_blank');
-            }
-            showToast('Redirecting to WhatsApp with pre-filled invoice message...', 'success');
+            const targetUrl = customerPhone ? `https://wa.me/${customerPhone.replace(/[^0-9]/g, '')}?text=${encoded}` : `https://wa.me/?text=${encoded}`;
+            window.open(targetUrl, '_blank');
+            showToast('Opening WhatsApp...', 'success');
         }
 
         function sendInvoiceToEmail() {
             const email = document.getElementById('inv-cust-email')?.value || 'client@example.com';
             const invNumber = document.getElementById('inv-number')?.value || 'INV-001';
             const total = document.getElementById('inv-total')?.innerText || '₹0.00';
-            
             const subject = encodeURIComponent(`Invoice ${invNumber} Statement`);
-            const body = encodeURIComponent(`Hello,\n\nPlease find attached invoice ${invNumber} amounting to ${total}.\n\nRegards,\nKVORA AUTOMATIONS`);
-            
+            const body = encodeURIComponent(`Hello,\n\nPlease find attached details for Invoice ${invNumber} amounting to ${total}.\n\nRegards,\nKVORA AUTOMATIONS`);
             window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-            showToast('Opening email client for document dispatch...', 'success');
+            showToast('Opening Email Client...', 'success');
         }
 
-        // Robust PDF Generation via html2canvas & jsPDF
+        // PDF Generation Helper
         async function generatePDFInvoice() {
             const element = document.getElementById('invoice-printable-area');
-            if(!element) return;
-            showToast('Generating PDF invoice...', 'info');
+            if (!element) return;
+            showToast('Rendering PDF Invoice...', 'info');
             try {
-                const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#0f131f' });
+                const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
                 const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const imgWidth = 210;
-                const pageHeight = 295;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
-
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
                 const invNum = document.getElementById('inv-number')?.value || 'Invoice';
                 pdf.save(`${invNum}.pdf`);
-                showToast('PDF Invoice downloaded successfully!', 'success');
+                showToast('PDF Invoice Downloaded!', 'success');
             } catch (err) {
-                showToast('Error generating PDF. Please try again.', 'error');
+                showToast('Error generating PDF', 'error');
             }
         }
 
         async function generatePDFGRN() {
             const element = document.getElementById('grn-printable-area');
-            if(!element) return;
-            showToast('Generating GRN PDF...', 'info');
+            if (!element) return;
+            showToast('Rendering GRN PDF...', 'info');
             try {
-                const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#0f131f' });
+                const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
                 const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const imgWidth = 210;
-                const pageHeight = 295;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
                 const grnNum = document.getElementById('grn-number')?.value || 'GRN';
                 pdf.save(`${grnNum}.pdf`);
-                showToast('Goods Receipt Note PDF downloaded successfully!', 'success');
+                showToast('GRN PDF Downloaded!', 'success');
             } catch (err) {
-                showToast('Error generating GRN PDF.', 'error');
+                showToast('Error generating GRN PDF', 'error');
             }
         }
 
@@ -1108,117 +1259,97 @@
         function openModal(type, title = '', desc = '') {
             const modal = document.getElementById('kvora-modal');
             const content = document.getElementById('modal-content');
-            if(!modal || !content) return;
+            if (!modal || !content) return;
             
             modal.classList.remove('hidden');
             modal.classList.add('flex');
 
-            if(type === 'custom-request') {
+            if (type === 'project-inquiry') {
                 content.innerHTML = `
-                    <h3 class="font-display font-bold text-xl text-white">Talk to KVORA Experts</h3>
-                    <p class="text-xs text-slate-400">Share your requirements and our automation architects will get back to you within 2 hours.</p>
-                    <form onsubmit="submitModalForm(event)" class="space-y-4 pt-2">
-                        <input type="text" id="m-name" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
-                        <input type="text" id="m-business" required placeholder="Business / Company Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
-                        <input type="text" id="m-whatsapp" required placeholder="WhatsApp Number" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white">
-                        <textarea id="m-req" required rows="3" placeholder="What would you like to automate?" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white"></textarea>
-                        <button type="submit" class="w-full py-3 rounded-xl bg-cyan-500 text-black font-bold text-sm hover:bg-cyan-400 transition cursor-pointer">Start a Conversation</button>
+                    <h3 class="font-display font-bold text-xl text-slate-900">Start a Project with KVORA</h3>
+                    <p class="text-xs text-slate-500">Tell us what you want to build (Website, Dashboard, or Automation).</p>
+                    <form onsubmit="submitModalForm(event)" class="space-y-3 pt-2">
+                        <input type="text" required placeholder="Full Name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                        <input type="text" required placeholder="Business / Company Name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                        <input type="text" required placeholder="WhatsApp / Phone Number" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                        <select class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800">
+                            <option>Custom Website Development</option>
+                            <option>Custom Business Dashboard</option>
+                            <option>Workflow Automation System</option>
+                            <option>Combined Solution</option>
+                        </select>
+                        <textarea required rows="3" placeholder="Describe your project requirements..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800"></textarea>
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 transition">Submit Request</button>
                     </form>
                 `;
-            } else if(type === 'automation-detail') {
+            } else if (type === 'website-demo') {
                 content.innerHTML = `
-                    <h3 class="font-display font-bold text-xl text-white">${title}</h3>
-                    <p class="text-sm text-slate-300 leading-relaxed">${desc}</p>
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-cyan-400">
-                        <i class="fa-solid fa-circle-check mr-2"></i>Fully customizable for your business data and WhatsApp alerts.
+                    <h3 class="font-display font-bold text-lg text-slate-900">${title}</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">${desc}</p>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600">
+                        <span class="font-semibold text-brand-600">Included Features:</span> Fully responsive layout, SEO optimization, speed tuned, and custom lead forms.
                     </div>
-                    <button onclick="closeModal(); navigateTo('dashboards');" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm cursor-pointer">Request This Automation</button>
-                `;
-            } else if(type === 'website-demo') {
-                content.innerHTML = `
-                    <div class="flex items-center space-x-3 pb-2 border-b border-slate-800">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-globe text-lg"></i></div>
-                        <div>
-                            <h3 class="font-display font-bold text-lg text-white">${title}</h3>
-                            <p class="text-[11px] text-emerald-400 font-medium">Live Website Preview Demo</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-slate-300 leading-relaxed">${desc}</p>
-                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-2">
-                        <div class="flex items-center justify-between"><span class="text-slate-400">Status:</span><span class="text-emerald-400 font-semibold">Online & Responsive</span></div>
-                        <div class="flex items-center justify-between"><span class="text-slate-400">Integration:</span><span class="text-cyan-400">WhatsApp / Invoices Linked</span></div>
-                    </div>
-                    <div class="flex space-x-3">
-                        <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 text-white text-xs font-semibold hover:bg-slate-700 cursor-pointer">Close Demo</button>
-                        <button onclick="closeModal(); navigateTo('dashboards');" class="flex-1 py-2.5 rounded-xl bg-emerald-500 text-black font-bold text-xs cursor-pointer">Get Similar Website</button>
-                    </div>
+                    <button onclick="closeModal(); openModal('project-inquiry');" class="w-full py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs">Request Similar Website</button>
                 `;
             }
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('kvora-modal');
-            if(modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        }
-
-        function openAutomationDetail(title, desc) {
-            openModal('automation-detail', title, desc);
         }
 
         function openWebsiteDemo(title, desc) {
             openModal('website-demo', title, desc);
         }
 
-        // Form Submission Handlers with Backend Endpoint Comments
-        function submitCustomDashboard(e) {
-            e.preventDefault();
-            const name = document.getElementById('cd-name')?.value || 'Valued Client';
-            const business = document.getElementById('cd-business')?.value || '';
-            const email = document.getElementById('cd-email')?.value || '';
-            const whatsapp = document.getElementById('cd-whatsapp')?.value || '';
-            const description = document.getElementById('cd-description')?.value || '';
+        function openAutomationDetail(title, desc) {
+            openModal('website-demo', title, desc);
+        }
 
-            /* FUTURE BACKEND INTEGRATION:
-               To receive submissions at kvoura.automation@gmail.com without a custom server,
-               connect this payload to Formspree (https://formspree.io) or EmailJS:
-               
-               fetch('https://formspree.io/f/your_form_id', {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify({ name, business, email, whatsapp, description })
-               });
-            */
-
-            showToast(`Thank you ${name}! Your request has been dispatched to kvoura.automation@gmail.com.`, 'success');
-            const form = document.getElementById('custom-dashboard-form');
-            if(form) form.reset();
+        function closeModal() {
+            const modal = document.getElementById('kvora-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
         }
 
         function submitModalForm(e) {
             e.preventDefault();
-            showToast('Conversation request sent successfully! We will contact you shortly.', 'success');
+            showToast('Request sent to kvoura.automation@gmail.com', 'success');
             closeModal();
+        }
+
+        // Toast System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `bg-white border border-slate-200 px-4 py-3 rounded-2xl text-xs font-semibold shadow-xl text-slate-800 flex items-center space-x-2 pointer-events-auto transition-all duration-300`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-600"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
         }
 
         // Automations Search Filter
         function filterAutomations() {
             const input = document.getElementById('automation-search');
-            if(!input) return;
+            if (!input) return;
             const query = input.value.toLowerCase();
             document.querySelectorAll('.automation-card').forEach(card => {
                 const title = card.getAttribute('data-title').toLowerCase();
-                if(title.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = title.includes(query) ? 'flex' : 'none';
             });
         }
 
-        // Initialize on load
+        // Mobile Menu Event Listeners
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-drawer')?.classList.remove('-translate-x-full');
+        });
+        document.getElementById('mobile-close-btn')?.addEventListener('click', () => {
+            document.getElementById('mobile-drawer')?.classList.add('-translate-x-full');
+        });
+
+        // Initialize On Load
         window.onload = function() {
             calculateInvoice();
         };
